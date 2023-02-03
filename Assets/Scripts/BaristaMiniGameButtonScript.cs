@@ -9,17 +9,21 @@ public class BaristaMiniGameButtonScript : MonoBehaviour
     //Purpose: Holds all of the events for buttons being pressed for the barista mini game
 
     [SerializeField]
+    private Text scoreLabel;
+
+    private int score;
+
+    [SerializeField]
+    private GameObject customer;
+
+    [SerializeField]
     private GameObject servingTable;
 
     private Image servingTableImage;
     void Start()
     {
+        score = 0;
         servingTableImage = servingTable.GetComponent<Image>();
-    }
-
-    void Update()
-    {
-        
     }
 
     public void RedButtonPressed()
@@ -45,5 +49,23 @@ public class BaristaMiniGameButtonScript : MonoBehaviour
         servingTableImage.color = new Color(0, 0, 0, 255);
     }
 
+    public void CustomerPressed()
+    {
+        BaristaCustomerScript customerScript = customer.GetComponent<BaristaCustomerScript>();
 
+        if (customerScript.GetCustomerColor() == servingTableImage.color)
+        {
+            score++;
+        }
+
+        else
+        {
+            score--;
+        }
+
+        customerScript.GetNewCustomer();
+        servingTableImage.color = new Color(0, 0, 0, 255);
+        scoreLabel.text = "Score: " + score;
+
+    }
 }
