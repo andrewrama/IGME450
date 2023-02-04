@@ -57,8 +57,9 @@ public class BaristaCustomerScript : MonoBehaviour
     private IEnumerator NewCustomer()
     {
         //disable the customer's button
+        timer = 5;
         customerButton.enabled = false;
-        customerImage.color = new Color(105, 105, 105);
+        customerImage.color = new Color(1, 1, 1);
         customerDisabled = true;
         timerText.gameObject.SetActive(true);
 

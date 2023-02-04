@@ -14,7 +14,8 @@ public class BaristaMiniGameButtonScript : MonoBehaviour
     private int score;
 
     [SerializeField]
-    private GameObject customer;
+    private List<GameObject> customerList;
+
 
     [SerializeField]
     private GameObject servingTable;
@@ -49,11 +50,11 @@ public class BaristaMiniGameButtonScript : MonoBehaviour
         servingTableImage.color = new Color(0, 0, 0, 255);
     }
 
-    public void CustomerPressed()
+    public void CustomerPressed1()
     {
-        BaristaCustomerScript customerScript = customer.GetComponent<BaristaCustomerScript>();
+        BaristaCustomerScript customerScript = customerList[0].GetComponent<BaristaCustomerScript>();
 
-        if (customerScript.GetCustomerColor() == servingTableImage.color)
+        if (SameColors(customerScript.GetCustomerColor(), servingTableImage.color))
         {
             score++;
         }
@@ -67,5 +68,70 @@ public class BaristaMiniGameButtonScript : MonoBehaviour
         servingTableImage.color = new Color(0, 0, 0, 255);
         scoreLabel.text = "Score: " + score;
 
+    }
+
+    public void CustomerPressed2()
+    {
+        BaristaCustomerScript customerScript = customerList[1].GetComponent<BaristaCustomerScript>();
+
+        if (SameColors(customerScript.GetCustomerColor(), servingTableImage.color))
+        {
+            score++;
+        }
+
+        else
+        {
+            score--;
+        }
+
+        customerScript.GetNewCustomer();
+        servingTableImage.color = new Color(0, 0, 0, 255);
+        scoreLabel.text = "Score: " + score;
+
+    }
+
+    public void CustomerPressed3()
+    {
+        BaristaCustomerScript customerScript = customerList[2].GetComponent<BaristaCustomerScript>();
+
+        if (SameColors(customerScript.GetCustomerColor(), servingTableImage.color))
+        {
+            score++;
+        }
+
+        else
+        {
+            score--;
+        }
+
+        customerScript.GetNewCustomer();
+        servingTableImage.color = new Color(0, 0, 0, 255);
+        scoreLabel.text = "Score: " + score;
+
+    }
+
+    public void CustomerPressed4()
+    {
+        BaristaCustomerScript customerScript = customerList[3].GetComponent<BaristaCustomerScript>();
+
+        if (SameColors(customerScript.GetCustomerColor(), servingTableImage.color))
+        {
+            score++;
+        }
+
+        else
+        {
+            score--;
+        }
+
+        customerScript.GetNewCustomer();
+        servingTableImage.color = new Color(0, 0, 0, 255);
+        scoreLabel.text = "Score: " + score;
+
+    }
+
+    private bool SameColors(Color c1, Color c2)
+    {
+        return c1.r == c2.r && c1.g == c2.g && c1.b == c2.b;
     }
 }
