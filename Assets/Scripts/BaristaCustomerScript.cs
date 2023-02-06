@@ -20,6 +20,7 @@ public class BaristaCustomerScript : MonoBehaviour
         customerImage = transform.gameObject.GetComponent<Image>();
         customerButton = transform.gameObject.GetComponent<Button>();
         timerText = transform.GetChild(0).GetComponent<Text>();
+        timerText.color = Color.white;
         customerDisabled = false;
         timerText.gameObject.SetActive(false);
         GetRandomOrder();
@@ -59,7 +60,7 @@ public class BaristaCustomerScript : MonoBehaviour
         //disable the customer's button
         timer = 5;
         customerButton.enabled = false;
-        customerImage.color = new Color(1, 1, 1);
+        customerImage.color = Color.gray;
         customerDisabled = true;
         timerText.gameObject.SetActive(true);
 
