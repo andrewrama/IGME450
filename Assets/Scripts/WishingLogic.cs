@@ -6,6 +6,7 @@ using UnityEngine.UI;
 public class WishingLogic : MonoBehaviour
 {
     public GameObject wishResult;
+    public GameObject wishButton;
     private GameObject catImage;
     private GameObject catName;
     public Sprite[] catSprites;
@@ -22,6 +23,8 @@ public class WishingLogic : MonoBehaviour
 
     public void Wish()
     {
+        wishButton.SetActive(false);
+
         int random = Random.Range(0, catSprites.Length);
 
         Image sprite = catImage.GetComponent<Image>();
@@ -29,11 +32,17 @@ public class WishingLogic : MonoBehaviour
 
         catName.GetComponent<TMPro.TextMeshProUGUI>().text = catNames[random];
 
+
+        Cat newCat = new Cat(sprite.sprite, sprite.sprite, catNames[random]);
+
+        CatInventory.Instance.AddCatToList(newCat);
+
         wishResult.SetActive(true);
     }
 
     public void WishAccepted()
     {
         wishResult.SetActive(false);
+        wishButton.SetActive(true);
     }
 }
