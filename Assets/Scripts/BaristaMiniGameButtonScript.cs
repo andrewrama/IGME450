@@ -69,9 +69,9 @@ public class BaristaMiniGameButtonScript : MonoBehaviour
         servingTableImage.color = new Color(0, 0, 0, 255);
     }
 
-    public void CustomerPressed1()
-    {
-        BaristaCustomerScript customerScript = GetCustomerScript(customerList[0]);
+    public void CustomerPressed(int i)
+    { 
+        BaristaCustomerScript customerScript = GetCustomerScript(customerList[i]);
 
         if (SameColors(customerScript.GetCustomerColor(), servingTableImage.color))
         {
@@ -84,68 +84,8 @@ public class BaristaMiniGameButtonScript : MonoBehaviour
         }
 
         customerScript.GetNewCustomer();
-        servingTableImage.color = new Color(0, 0, 0, 255);
+        servingTableImage.color = new Color(0, 0, 0, 1);
         scoreLabel.text = "Score: " + score;
-    }
-
-    public void CustomerPressed2()
-    {
-        BaristaCustomerScript customerScript = GetCustomerScript(customerList[1]);
-
-        if (SameColors(customerScript.GetCustomerColor(), servingTableImage.color))
-        {
-            score++;
-        }
-
-        else
-        {
-            score--;
-        }
-
-        customerScript.GetNewCustomer();
-        servingTableImage.color = new Color(0, 0, 0, 255);
-        scoreLabel.text = "Score: " + score;
-
-    }
-
-    public void CustomerPressed3()
-    {
-        BaristaCustomerScript customerScript = GetCustomerScript(customerList[2]);
-
-        if (SameColors(customerScript.GetCustomerColor(), servingTableImage.color))
-        {
-            score++;
-        }
-
-        else
-        {
-            score--;
-        }
-
-        customerScript.GetNewCustomer();
-        servingTableImage.color = new Color(0, 0, 0, 255);
-        scoreLabel.text = "Score: " + score;
-
-    }
-
-    public void CustomerPressed4()
-    {
-        BaristaCustomerScript customerScript = GetCustomerScript(customerList[3]);
-
-        if (SameColors(customerScript.GetCustomerColor(), servingTableImage.color))
-        {
-            score++;
-        }
-
-        else
-        {
-            score--;
-        }
-
-        customerScript.GetNewCustomer();
-        servingTableImage.color = new Color(0, 0, 0, 255);
-        scoreLabel.text = "Score: " + score;
-
     }
 
     public void OpenTutorial()
