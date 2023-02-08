@@ -30,6 +30,14 @@ public class CatInventory : MonoBehaviour
         }
     }
 
+    void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.R))
+        {
+            CatInventory.Instance.ownedCats.Clear();
+        }
+    }
+
     public void SetInventory(List<Cat> inventory)
     {
         CatInventory.Instance.ownedCats = inventory;

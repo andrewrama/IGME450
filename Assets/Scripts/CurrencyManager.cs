@@ -12,6 +12,14 @@ public class CurrencyManager : MonoBehaviour
     {
         currency = PlayerPrefs.GetInt(FishCurrency);
     }
+    void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.R))
+        {
+            currency = 0;
+            UpdateCurrency();
+        }
+    }
 
     public static void UpdateCurrency()
     {
