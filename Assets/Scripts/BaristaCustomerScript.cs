@@ -13,10 +13,13 @@ public class BaristaCustomerScript : MonoBehaviour
     private Text timerText;
     private float timer;
     private bool customerDisabled;
+
+    private bool tutorialEnabled;
     
     // Start is called before the first frame update
     void Start()
     {
+        tutorialEnabled = false;
         customerImage = transform.gameObject.GetComponent<Image>();
         customerButton = transform.gameObject.GetComponent<Button>();
         timerText = transform.GetChild(0).GetComponent<Text>();
@@ -29,10 +32,21 @@ public class BaristaCustomerScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (customerDisabled)
+        if (customerDisabled && !tutorialEnabled)
         {
             timerText.text = "" + (int)timer;
             timer -= Time.deltaTime;
+
+            if (timer <= 0)
+            {
+                //get a new customer
+                GetRandomOrder();
+
+                //enable button agian
+                customerButton.enabled = true;
+                customerDisabled = false;
+                timerText.gameObject.SetActive(false);
+            }
         }
     }
 
@@ -52,32 +66,21 @@ public class BaristaCustomerScript : MonoBehaviour
 
     public void GetNewCustomer()
     {
-        StartCoroutine(NewCustomer());
-    }
-
-    private IEnumerator NewCustomer()
-    {
         //disable the customer's button
-        timer = 5;
+        timer = startingTime;
         customerButton.enabled = false;
         customerImage.color = Color.gray;
         customerDisabled = true;
         timerText.gameObject.SetActive(true);
-
-        //wait for 5 sectionds
-        yield return new WaitForSeconds(startingTime);
-
-        //get a new customer
-        GetRandomOrder();
-
-        //enable button agian
-        customerButton.enabled = true;
-        customerDisabled = false;
-        timerText.gameObject.SetActive(false);
     }
 
     public Color GetCustomerColor()
     {
         return customerImage.color;
+    }
+
+    public void SetTutorialBool(bool b)
+    {
+        tutorialEnabled = b;
     }
 }

@@ -102,6 +102,7 @@ public class BaristaMiniGameButtonScript : MonoBehaviour
         foreach (GameObject customer in customerList)
         {
             customer.GetComponent<Button>().enabled = false;
+            customer.GetComponent<BaristaCustomerScript>().SetTutorialBool(true);
         }
 
         //disable help button
@@ -126,6 +127,8 @@ public class BaristaMiniGameButtonScript : MonoBehaviour
         foreach (GameObject customer in customerList)
         {
             customer.GetComponent<Button>().enabled = true;
+            customer.GetComponent<BaristaCustomerScript>().SetTutorialBool(false);
+
         }
 
         //enable help button
