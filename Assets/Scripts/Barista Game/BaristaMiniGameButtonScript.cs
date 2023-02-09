@@ -8,6 +8,8 @@ public class BaristaMiniGameButtonScript : MonoBehaviour
     //Kovu Bentley
     //Purpose: Holds all of the events for buttons being pressed for the barista mini game
 
+    private GameSceneChanger sceneChanger;
+
     [SerializeField]
     private GameObject gameOverScene;
 
@@ -60,6 +62,7 @@ public class BaristaMiniGameButtonScript : MonoBehaviour
 
     void Start()
     {
+        sceneChanger = transform.GetComponent<GameSceneChanger>();
         servingTableImage = servingTable.GetComponent<Image>();
         servingTableButton = servingTable.GetComponent<Button>();
         gameOverLabel = gameOverScene.transform.GetChild(0).GetComponent<Text>();
@@ -229,7 +232,15 @@ public class BaristaMiniGameButtonScript : MonoBehaviour
             score = 0;
         }
 
+        CurrencyManager.currency += score;
+        CurrencyManager.UpdateCurrency();
+
         gameOverLabel.text = $"Game Over\nYou earned {score} fish";
+    }
+
+    public void GoToMainMenu()
+    { 
+        sceneChanger.BaristaScene();
     }
 
 
