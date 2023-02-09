@@ -690,14 +690,28 @@ MonoBehaviour:
   wishResult: {fileID: 1861013853}
   wishButton: {fileID: 266833582}
   insufficientFunds: {fileID: 1363317481}
-  catSprites:
-  - {fileID: 21300000, guid: bfa9a26c8895cde4297a6ff856d9cd95, type: 3}
+  catSpritesCommon:
   - {fileID: 21300000, guid: e0939bdd332298846ae08505293e3953, type: 3}
-  - {fileID: 21300000, guid: 94f0a77c311137f4fb2b0fd23c2f8007, type: 3}
-  catNames:
-  - Casper
+  - {fileID: 21300000, guid: 8c20dc06f1eeca44b989d243b365e2af, type: 3}
+  - {fileID: 21300000, guid: 7f90c00cb9409e34a8a9d620d6b40852, type: 3}
+  - {fileID: 21300000, guid: 5d2b1696cd9626e4fb9c268e02912f9d, type: 3}
+  catNamesCommon:
   - Maxwell
+  - Melon & Finn
+  - Bumi
+  - Grumpy Cat
+  catSpritesUncommon:
+  - {fileID: 21300000, guid: 94f0a77c311137f4fb2b0fd23c2f8007, type: 3}
+  - {fileID: 21300000, guid: 720608e7073f5dc4790dfd289c61e338, type: 3}
+  - {fileID: 21300000, guid: 8406f5eafd1d9ee4d975c927a273c7da, type: 3}
+  catNamesUncommon:
   - Raymond
+  - Bingus
+  - Azia
+  catSpritesRare:
+  - {fileID: 21300000, guid: bfa9a26c8895cde4297a6ff856d9cd95, type: 3}
+  catNamesRare:
+  - Casper
 --- !u!4 &261636058
 Transform:
   m_ObjectHideFlags: 0
@@ -799,7 +813,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 261636057}
         m_TargetAssemblyTypeName: WishingLogic, Assembly-CSharp
-        m_MethodName: Wish
+        m_MethodName: WishButton
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

@@ -19,6 +19,12 @@ public class CurrencyManager : MonoBehaviour
             currency = 0;
             UpdateCurrency();
         }
+
+        if (Input.GetKeyDown(KeyCode.C))
+        {
+            currency = 10000;
+            UpdateCurrency();
+        }
     }
 
     public static void UpdateCurrency()
