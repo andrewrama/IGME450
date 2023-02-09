@@ -1015,9 +1015,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1828048608}
-        m_TargetAssemblyTypeName: BaristaMiniGameButtonScript, Assembly-CSharp
-        m_MethodName: CloseTutoiral
+      - m_Target: {fileID: 1924567128}
+        m_TargetAssemblyTypeName: GameSceneChanger, Assembly-CSharp
+        m_MethodName: CafeScene
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -2268,7 +2268,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchoredPosition: {x: -1.199997, y: -0.6000004}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1372621324
@@ -2304,7 +2304,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Main Menu
+  m_Text: Back To Cafe
 --- !u!222 &1372621325
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -2892,6 +2892,7 @@ GameObject:
   - component: {fileID: 1924567126}
   - component: {fileID: 1924567125}
   - component: {fileID: 1924567124}
+  - component: {fileID: 1924567128}
   m_Layer: 5
   m_Name: Canvas
   m_TagString: Untagged
@@ -2994,6 +2995,18 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
+--- !u!114 &1924567128
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1924567123}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 51314ef786bda9042ac3f376be4f0293, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1930892932
 GameObject:
   m_ObjectHideFlags: 0
