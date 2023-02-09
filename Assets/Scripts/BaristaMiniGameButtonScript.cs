@@ -9,13 +9,31 @@ public class BaristaMiniGameButtonScript : MonoBehaviour
     //Purpose: Holds all of the events for buttons being pressed for the barista mini game
 
     [SerializeField]
+    private GameObject gameOverScene;
+
+    [SerializeField]
+    private int customerStartingTime;
+
+    [SerializeField]
+    private int gameStartingTime;
+
+    [SerializeField]
+    private Text timeLabel;
+
+    private float timer;
+
+    [SerializeField]
+    private Text scoreLabel;
+
+    private int score;
+
+    private bool tutorialActive;
+
+    [SerializeField]
     private GameObject tutorialDisplay;
 
     [SerializeField]
     private Button helpButton;
-
-    [SerializeField]
-    private Text scoreLabel;
 
     [SerializeField]
     private Button redButton;
@@ -26,42 +44,59 @@ public class BaristaMiniGameButtonScript : MonoBehaviour
     [SerializeField]
     private Button blueButton;
 
-
-    private int score;
-
     [SerializeField]
-    private List<GameObject> customerList;
+    private List<GameObject> customerObjectList;
 
+    private List<BaristaCustomerScript> customerScriptList;
+
+    private bool gameOver;
+
+    private Text gameOverLabel;
 
     [SerializeField]
     private GameObject servingTable;
-
-
     private Button servingTableButton;
     private Image servingTableImage;
+
     void Start()
     {
-        score = 0;
         servingTableImage = servingTable.GetComponent<Image>();
         servingTableButton = servingTable.GetComponent<Button>();
+        gameOverLabel = gameOverScene.transform.GetChild(0).GetComponent<Text>();
+
+        StartGame();
+    }
+
+    private void Update()
+    {
+        if (!tutorialActive  && !gameOver && timer > 0)
+        {
+            timer -= Time.deltaTime;
+            timeLabel.text = "Time: " + (int)timer;
+
+            if (timer <= 0)
+            {
+                SetGameOver();
+            }
+        }
     }
 
     public void RedButtonPressed()
     {
         Color oldColor = servingTableImage.color;
-        servingTableImage.color = new Color(255, oldColor.g, oldColor.b, oldColor.a);
+        servingTableImage.color = new Color(1, oldColor.g, oldColor.b, oldColor.a);
     }
 
     public void GreenButtonPressed()
     {
         Color oldColor = servingTableImage.color;
-        servingTableImage.color = new Color(oldColor.r, 255, oldColor.b, oldColor.a);
+        servingTableImage.color = new Color(oldColor.r, 1, oldColor.b, oldColor.a);
     }
 
     public void BlueButtonPressed()
     {
         Color oldColor = servingTableImage.color;
-        servingTableImage.color = new Color(oldColor.r, oldColor.g, 255, oldColor.a);
+        servingTableImage.color = new Color(oldColor.r, oldColor.g, 1, oldColor.a);
     }
 
     public void TrashButtonPressed()
@@ -71,7 +106,7 @@ public class BaristaMiniGameButtonScript : MonoBehaviour
 
     public void CustomerPressed(int i)
     { 
-        BaristaCustomerScript customerScript = GetCustomerScript(customerList[i]);
+        BaristaCustomerScript customerScript = GetCustomerScript(customerObjectList[i]);
 
         if (SameColors(customerScript.GetCustomerColor(), servingTableImage.color))
         {
@@ -88,52 +123,22 @@ public class BaristaMiniGameButtonScript : MonoBehaviour
         scoreLabel.text = "Score: " + score;
     }
 
+
     public void OpenTutorial()
     {
-        //disable r, g, b
-        redButton.enabled = false;
-        greenButton.enabled = false;
-        blueButton.enabled = false;
+        DisableGame();
 
-        //disable trash button
-        servingTableButton.enabled = false;
-
-        //disable customers (pause customers if possible)
-        foreach (GameObject customer in customerList)
-        {
-            customer.GetComponent<Button>().enabled = false;
-            customer.GetComponent<BaristaCustomerScript>().SetTutorialBool(true);
-        }
-
-        //disable help button
-        helpButton.enabled = false;
+        tutorialActive = true;
 
         //display tutorial object
         tutorialDisplay.SetActive(true);
-
     }
 
     public void CloseTutoiral()
     {
-        //enable r, g, b
-        redButton.enabled = true;
-        greenButton.enabled = true;
-        blueButton.enabled = true;
+        EnableGame();
 
-        //enable trash button
-        servingTableButton.enabled = true;
-
-        //enable customers (unpause customers if possible)
-        foreach (GameObject customer in customerList)
-        {
-            customer.GetComponent<Button>().enabled = true;
-            customer.GetComponent<BaristaCustomerScript>().SetTutorialBool(false);
-
-        }
-
-        //enable help button
-        helpButton.enabled = true;
-
+        tutorialActive = false;
 
         //hide tutorial object
         tutorialDisplay.SetActive(false);
@@ -147,6 +152,84 @@ public class BaristaMiniGameButtonScript : MonoBehaviour
     private BaristaCustomerScript GetCustomerScript(GameObject obj)
     {
         return obj.GetComponent<BaristaCustomerScript>();
+    }
+
+    private void EnableGame()
+    {
+        //enable r, g, b
+        redButton.enabled = true;
+        greenButton.enabled = true;
+        blueButton.enabled = true;
+
+        //enable trash button
+        servingTableButton.enabled = true;
+
+        //enable customers (unpause customers if possible)
+        for (int i = 0; i < customerObjectList.Count; i++)
+        {
+            customerObjectList[i].GetComponent<Button>().enabled = true;
+            customerScriptList[i].SetGamePaused(false);
+        }
+
+        //enable help button
+        helpButton.enabled = true;
+    }
+
+    private void DisableGame()
+    {
+        //disable r, g, b
+        redButton.enabled = false;
+        greenButton.enabled = false;
+        blueButton.enabled = false;
+
+        //disable trash button
+        servingTableButton.enabled = false;
+
+        //disable customers (pause customers if possible)
+        for (int i = 0; i < customerObjectList.Count; i++)
+        {
+            customerObjectList[i].GetComponent<Button>().enabled = false;
+            customerScriptList[i].SetGamePaused(true);
+        }
+
+        //disable help button
+        helpButton.enabled = false;
+    }
+
+    private void StartGame()
+    {
+        gameOverScene.SetActive(false);
+        tutorialDisplay.SetActive(false);
+
+        tutorialActive = false;
+        gameOver = false;
+
+        timer = gameStartingTime;
+
+        timeLabel.text = "Time: " + (int)timer;
+
+        score = 0;
+
+        customerScriptList = new List<BaristaCustomerScript>();
+
+        for (int i = 0; i < customerObjectList.Count; i++)
+        {
+            customerScriptList.Add(customerObjectList[i].GetComponent<BaristaCustomerScript>());
+            customerScriptList[i].SetStartingTime(customerStartingTime);
+        }
+    }
+
+    private void SetGameOver()
+    {
+        gameOver = true;
+        gameOverScene.SetActive(true);
+
+        if (score < 0)
+        {
+            score = 0;
+        }
+
+        gameOverLabel.text = $"Game Over\nYou earned {score} fish";
     }
 
 
