@@ -5,34 +5,41 @@ using UnityEngine.UI;
 
 public class BaristaCustomerScript : MonoBehaviour
 {
-    [SerializeField]
     private int startingTime;
 
     private Button customerButton;
     private Image customerImage;
     private Text timerText;
     private float timer;
-    private bool customerDisabled;
+    private bool customerEnabled;
+    private bool gamePaused;
 
-    private bool tutorialEnabled;
     
     // Start is called before the first frame update
     void Start()
     {
-        tutorialEnabled = false;
         customerImage = transform.gameObject.GetComponent<Image>();
         customerButton = transform.gameObject.GetComponent<Button>();
         timerText = transform.GetChild(0).GetComponent<Text>();
+
+        IniitalizeCustomer();
+    }
+
+    public void IniitalizeCustomer()
+    {
+        customerEnabled = true;
+        gamePaused = false;
+
         timerText.color = Color.white;
-        customerDisabled = false;
         timerText.gameObject.SetActive(false);
+
         GetRandomOrder();
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (customerDisabled && !tutorialEnabled)
+        if (!customerEnabled && !gamePaused)
         {
             timerText.text = "" + (int)timer;
             timer -= Time.deltaTime;
@@ -44,7 +51,7 @@ public class BaristaCustomerScript : MonoBehaviour
 
                 //enable button agian
                 customerButton.enabled = true;
-                customerDisabled = false;
+                customerEnabled = true;
                 timerText.gameObject.SetActive(false);
             }
         }
@@ -61,7 +68,7 @@ public class BaristaCustomerScript : MonoBehaviour
 
     private int ActivateColor(bool activate)
     {
-        return activate ? 255 : 0;
+        return activate ? 1 : 0;
     }
 
     public void GetNewCustomer()
@@ -70,7 +77,7 @@ public class BaristaCustomerScript : MonoBehaviour
         timer = startingTime;
         customerButton.enabled = false;
         customerImage.color = Color.gray;
-        customerDisabled = true;
+        customerEnabled = false;
         timerText.gameObject.SetActive(true);
     }
 
@@ -79,8 +86,15 @@ public class BaristaCustomerScript : MonoBehaviour
         return customerImage.color;
     }
 
-    public void SetTutorialBool(bool b)
+    public void SetGamePaused(bool b)
     {
-        tutorialEnabled = b;
+        gamePaused = b;
     }
+
+    public void SetStartingTime(int num)
+    {
+        startingTime = num;
+    }
+
+
 }
