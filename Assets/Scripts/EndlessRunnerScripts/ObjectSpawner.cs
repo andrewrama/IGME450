@@ -4,15 +4,26 @@ using UnityEngine;
 
 public class ObjectSpawner : MonoBehaviour
 {
+    GameObject spawnedObject;
+    public Vector2 screenBounds;
+
+    // timer variables
+    public float spawnRate = 2;
+    public float timer = 0;
+
     // Start is called before the first frame update
     void Start()
     {
-        
+        screenBounds = Camera.main.ScreenToWorldPoint(new Vector3(Screen.width, Screen.height, Camera.main.transform.position.z));
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+        // location will be random in between both edges of the screen
+        // get bounds of screen, clamp spawn position to x*2 and x*6
+        // random number of boxes will be spawned each time: either 2 or 3
+
+        //Instantiate(spawnedObject, new Vector3(Random.Range(screenBounds.x*2,));
     }
 }
