@@ -44,7 +44,7 @@ public class playerScript : MonoBehaviour
     {
         // clamping to screen
         Vector3 viewPos = transform.position; // used to alter x and y
-        viewPos.x = Mathf.Clamp(viewPos.x, screenBounds.x, screenBounds.x - 1);
+        viewPos.x = Mathf.Clamp(viewPos.x, screenBounds.x*2, screenBounds.x*6);
         transform.position = viewPos;
     }
 }
