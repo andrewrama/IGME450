@@ -64,15 +64,15 @@ public class WishingLogic : MonoBehaviour
 
         if (random < 50)
         {
-            GetCatOfRarity(catSpritesCommon, catNamesCommon);
+            GetCatOfRarity(catSpritesCommon, catNamesCommon, "Common");
         }
         else if (random >= 50 && random < 90)
         {
-            GetCatOfRarity(catSpritesUncommon, catNamesUncommon);
+            GetCatOfRarity(catSpritesUncommon, catNamesUncommon, "Uncommon");
         }
         else
         {
-            GetCatOfRarity(catSpritesRare, catNamesRare);
+            GetCatOfRarity(catSpritesRare, catNamesRare, "Rare");
         }
 
 
@@ -84,7 +84,7 @@ public class WishingLogic : MonoBehaviour
     /// </summary>
     /// <param name="spriteArr">the array of sprites for the cats of that rarity</param>
     /// <param name="nameArr">the array of names of cats of that rarity</param>
-    private void GetCatOfRarity(Sprite[] spriteArr, string[] nameArr)
+    private void GetCatOfRarity(Sprite[] spriteArr, string[] nameArr, string rarity)
     {
         int random = Random.Range(0, spriteArr.Length);
 
@@ -93,7 +93,7 @@ public class WishingLogic : MonoBehaviour
 
         catName.GetComponent<TMPro.TextMeshProUGUI>().text = nameArr[random];
 
-        CatInventory.Instance.AddCatToList(new Cat(sprite.sprite, sprite.sprite, nameArr[random]));
+        CatInventory.Instance.AddCatToList(new Cat(sprite.sprite, sprite.sprite, nameArr[random], rarity));
     }
 
     public void WishAccepted()
