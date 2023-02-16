@@ -11,6 +11,21 @@ public class BaristaMiniGameButtonScript : MonoBehaviour
     private GameSceneChanger sceneChanger;
 
     [SerializeField]
+    private Text recipeTimerLabel;
+
+    [SerializeField]
+    private Text recipeScoreLabel;
+
+    [SerializeField]
+    private Button trashButton;
+
+    [SerializeField]
+    private GameObject gamePanel;
+
+    [SerializeField]
+    private GameObject recipePanel;
+
+    [SerializeField]
     private GameObject gameOverScene;
 
     [SerializeField]
@@ -32,7 +47,7 @@ public class BaristaMiniGameButtonScript : MonoBehaviour
     private bool tutorialActive;
 
     [SerializeField]
-    private GameObject tutorialDisplay;
+    private GameObject tutorialPanel;
 
     [SerializeField]
     private Button helpButton;
@@ -53,20 +68,18 @@ public class BaristaMiniGameButtonScript : MonoBehaviour
 
     private bool gameOver;
 
+    [SerializeField]
     private Text gameOverLabel;
 
     [SerializeField]
     private GameObject servingTable;
-    private Button servingTableButton;
     private Image servingTableImage;
 
     void Start()
     {
+        recipePanel.SetActive(false);
         sceneChanger = transform.GetComponent<GameSceneChanger>();
         servingTableImage = servingTable.GetComponent<Image>();
-        servingTableButton = servingTable.GetComponent<Button>();
-        gameOverLabel = gameOverScene.transform.GetChild(0).GetComponent<Text>();
-
         StartGame();
     }
 
@@ -76,6 +89,7 @@ public class BaristaMiniGameButtonScript : MonoBehaviour
         {
             timer -= Time.deltaTime;
             timeLabel.text = "Time: " + (int)timer;
+            recipeTimerLabel.text = "Time: " + (int)timer;
 
             if (timer <= 0)
             {
@@ -126,25 +140,28 @@ public class BaristaMiniGameButtonScript : MonoBehaviour
         scoreLabel.text = "Score: " + score;
     }
 
-
     public void OpenTutorial()
     {
-        DisableGame();
+        DisableGame(false);
 
         tutorialActive = true;
 
+        gamePanel.SetActive(false);
+
         //display tutorial object
-        tutorialDisplay.SetActive(true);
+        tutorialPanel.SetActive(true);
     }
 
     public void CloseTutoiral()
     {
-        EnableGame();
+        EnableGame(false);
 
         tutorialActive = false;
 
         //hide tutorial object
-        tutorialDisplay.SetActive(false);
+        tutorialPanel.SetActive(false);
+
+        gamePanel.SetActive(true);
     }
 
     private bool SameColors(Color c1, Color c2)
@@ -157,7 +174,7 @@ public class BaristaMiniGameButtonScript : MonoBehaviour
         return obj.GetComponent<BaristaCustomerScript>();
     }
 
-    private void EnableGame()
+    private void EnableGame(bool lookingAtRecipies)
     {
         //enable r, g, b
         redButton.enabled = true;
@@ -165,20 +182,23 @@ public class BaristaMiniGameButtonScript : MonoBehaviour
         blueButton.enabled = true;
 
         //enable trash button
-        servingTableButton.enabled = true;
+        trashButton.enabled = true;
 
         //enable customers (unpause customers if possible)
         for (int i = 0; i < customerObjectList.Count; i++)
         {
             customerObjectList[i].GetComponent<Button>().enabled = true;
-            customerScriptList[i].SetGamePaused(false);
+            if (!lookingAtRecipies)
+            { 
+                customerScriptList[i].SetGamePaused(false);
+            }
         }
 
         //enable help button
         helpButton.enabled = true;
     }
 
-    private void DisableGame()
+    private void DisableGame(bool lookingAtRecipies)
     {
         //disable r, g, b
         redButton.enabled = false;
@@ -186,23 +206,49 @@ public class BaristaMiniGameButtonScript : MonoBehaviour
         blueButton.enabled = false;
 
         //disable trash button
-        servingTableButton.enabled = false;
+        trashButton.enabled = false;
 
         //disable customers (pause customers if possible)
         for (int i = 0; i < customerObjectList.Count; i++)
         {
             customerObjectList[i].GetComponent<Button>().enabled = false;
-            customerScriptList[i].SetGamePaused(true);
+            if (!lookingAtRecipies)
+            {
+                customerScriptList[i].SetGamePaused(true);
+            }
         }
 
         //disable help button
         helpButton.enabled = false;
     }
 
+    public void ShowRecipie()
+    {
+        //Have the player not interact with the game, but kee the timer showing and running
+        DisableGame(true);
+
+        recipeScoreLabel.text = "Score: " + score;
+
+        gamePanel.SetActive(false);
+
+        recipePanel.SetActive(true);
+    }
+
+    public void HideRecipie()
+    {
+        //Enable interactions of all buttons
+        EnableGame(true);
+
+        gamePanel.SetActive(true);
+
+        recipePanel.SetActive(false);
+    }
+
+
     private void StartGame()
     {
         gameOverScene.SetActive(false);
-        tutorialDisplay.SetActive(false);
+        tutorialPanel.SetActive(false);
 
         tutorialActive = false;
         gameOver = false;
@@ -222,11 +268,20 @@ public class BaristaMiniGameButtonScript : MonoBehaviour
         }
     }
 
+    public void QuitGame()
+    {
+        score = 0;
+        SetGameOver();
+    }
+
     private void SetGameOver()
     {
+        gamePanel.SetActive(false);
+        tutorialPanel.SetActive(false);
+        recipePanel.SetActive(false);
+
         gameOver = true;
         gameOverScene.SetActive(true);
-
         if (score < 0)
         {
             score = 0;
