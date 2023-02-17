@@ -7,7 +7,7 @@ public class moveScript : MonoBehaviour
     // Start is called before the first frame update
 
     public float moveSpeed = 50;
-    Vector2 screenBounds;
+    public Vector2 screenBounds;
 
 
     void Start()
@@ -20,9 +20,10 @@ public class moveScript : MonoBehaviour
     {
         transform.position += (Vector3.down * moveSpeed) * Time.deltaTime;
 
-        if (transform.position.y > screenBounds.y)
+        // destroying when offscreen
+        if (transform.position.y < -(screenBounds.y*2))
         {
-
+            Destroy(gameObject);
         }
     }
 }
