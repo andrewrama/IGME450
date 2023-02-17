@@ -23,7 +23,7 @@ public class DisplayInventory : MonoBehaviour
             listItem.GetComponentsInChildren<TMPro.TextMeshProUGUI>()[1].text = currentCat.rarity;
 
             listItem.transform.SetParent(contentContainer);
-            listItem.transform.localScale = Vector2.one;
+            listItem.GetComponentInChildren<Canvas>().transform.position = new Vector3(Screen.width/5, 0, 0);
         }
 
         

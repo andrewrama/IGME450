@@ -2,20 +2,16 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class playerScript : MonoBehaviour
+public class PlayerScript : MonoBehaviour
 
 {
     public int velocity;
-    public Canvas gameScreen;
-    float screenHeight;
-    float screenWidth;
+    public Vector2 screenBounds;
 
     // Start is called before the first frame update
     void Start()
     {
-        gameScreen = FindObjectOfType<Canvas>();
-        screenWidth = gameScreen.GetComponent<RectTransform>().rect.width;
-        screenHeight = gameScreen.GetComponent<RectTransform>().rect.height;
+        screenBounds = Camera.main.ScreenToWorldPoint(new Vector3(Screen.width, Screen.height, Camera.main.transform.position.z)); //gives us half the screen width and half the screen height (but they're negative values!)
     }
 
     // Update is called once per frame
@@ -24,14 +20,23 @@ public class playerScript : MonoBehaviour
         // check if player has clicked 'A' or 'D'
         // move left or right
 
-        if (Input.GetKey(KeyCode.A) && transform.position.x >= 0 )
+
+        if (Input.GetKey(KeyCode.A))
         {
             transform.position -= new Vector3(velocity, 0, 0);
         }
-        if (Input.GetKey(KeyCode.D) && transform.position.x <= screenWidth)
+        if (Input.GetKey(KeyCode.D))
         {
             transform.position += new Vector3(velocity, 0, 0);
         }
 
+    }
+
+    private void LateUpdate()
+    {
+        // clamping to screen
+        Vector3 viewPos = transform.position; // used to alter x and y
+        viewPos.x = Mathf.Clamp(viewPos.x, screenBounds.x*2, screenBounds.x*6);
+        transform.position = viewPos;
     }
 }
