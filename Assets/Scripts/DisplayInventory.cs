@@ -24,6 +24,7 @@ public class DisplayInventory : MonoBehaviour
 
             listItem.transform.SetParent(contentContainer);
             listItem.GetComponentInChildren<Canvas>().transform.position = new Vector3(Screen.width/5, 0, 0);
+            listItem.transform.localScale = Vector2.one;
         }
 
         
