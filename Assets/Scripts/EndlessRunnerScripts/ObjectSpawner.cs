@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class ObjectSpawner : MonoBehaviour
 {
-    GameObject spawnedObject;
+    public GameObject spawnedObject;
     public Vector2 screenBounds;
 
     // timer variables
@@ -24,6 +24,17 @@ public class ObjectSpawner : MonoBehaviour
         // get bounds of screen, clamp spawn position to x*2 and x*6
         // random number of boxes will be spawned each time: either 2 or 3
 
-        //Instantiate(spawnedObject, new Vector3(Random.Range(screenBounds.x*2,));
+        if (timer < spawnRate)
+        {
+
+            timer += Time.deltaTime;
+
+        }
+        else
+        {
+            Instantiate(spawnedObject, new Vector3(Random.Range(screenBounds.x * 2, screenBounds.x * 6), transform.position.y, 0), transform.rotation);
+            timer = 0;
+        }
+
     }
 }
