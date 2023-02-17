@@ -17,6 +17,9 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/BaristaGameScene.unity
     guid: 5b4426e05f901d04f8c807a75b8e6911
+  - enabled: 1
+    path: Assets/Scenes/EndlessRunner.unity
+    guid: 6dc740ccbd7f4de43a0ce8dd50094341
   m_configObjects:
     com.unity.adaptiveperformance.simulator.provider_settings: {fileID: 11400000,
       guid: 3e168e040a6553540956f110a3beaeeb, type: 2}

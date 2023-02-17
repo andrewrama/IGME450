@@ -23,4 +23,9 @@ public class GameSceneChanger : MonoBehaviour
     {
         SceneManager.LoadScene(3);
     }
+
+    public void RunnerScene()
+    {
+        SceneManager.LoadScene(4);
+    }
 }
