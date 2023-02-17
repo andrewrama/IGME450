@@ -77,6 +77,7 @@ public class BaristaMiniGameButtonScript : MonoBehaviour
 
     void Start()
     {
+        gamePanel.SetActive(true);
         recipePanel.SetActive(false);
         sceneChanger = transform.GetComponent<GameSceneChanger>();
         servingTableImage = servingTable.GetComponent<Image>();

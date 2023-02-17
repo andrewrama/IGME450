@@ -2310,10 +2310,10 @@ RectTransform:
   m_Father: {fileID: 517376505}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 590.3346, y: -56.862488}
+  m_SizeDelta: {x: 419.33087, y: 113.724976}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &567339293
 MonoBehaviour:
@@ -2814,10 +2814,10 @@ RectTransform:
   m_Father: {fileID: 517376505}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 190.33458, y: -56.862488}
+  m_SizeDelta: {x: 380.66916, y: 113.724976}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &776085055
 MonoBehaviour:
@@ -3727,7 +3727,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1110103493
 RectTransform:
   m_ObjectHideFlags: 0
@@ -5070,10 +5070,10 @@ RectTransform:
   m_Father: {fileID: 837564117}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 240, y: -71.078064}
+  m_SizeDelta: {x: 480, y: 142.15613}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1708332265
 MonoBehaviour:
@@ -5202,10 +5202,10 @@ RectTransform:
   m_Father: {fileID: 466586570}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 320, y: -142.1561}
+  m_SizeDelta: {x: 640, y: 284.3122}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1715920844
 MonoBehaviour:
