@@ -8,16 +8,43 @@ public class BaristaMiniGameButtonScript : MonoBehaviour
     //Kovu Bentley
     //Purpose: Holds all of the events for buttons being pressed for the barista mini game
 
+    #region Buttons
+    [SerializeField]
+    private Button hotCupButton;
+
+    [SerializeField]
+    private Button coldCupButton;
+
+    [SerializeField]
+    private Button coffeeButton;
+
+    [SerializeField]
+    private Button milkButton;
+
+    [SerializeField]
+    private Button trashButton;
+
+    [SerializeField]
+    private Button helpButton;
+    #endregion
+
     private GameSceneChanger sceneChanger;
+
+    public enum Ingrediant
+    { 
+        HotCup,
+        ColdCup,
+        Coffee,
+        Milk
+    }
+
+    private List<Ingrediant> ingrediantList;
 
     [SerializeField]
     private Text recipeTimerLabel;
 
     [SerializeField]
     private Text recipeScoreLabel;
-
-    [SerializeField]
-    private Button trashButton;
 
     [SerializeField]
     private GameObject gamePanel;
@@ -48,18 +75,6 @@ public class BaristaMiniGameButtonScript : MonoBehaviour
 
     [SerializeField]
     private GameObject tutorialPanel;
-
-    [SerializeField]
-    private Button helpButton;
-
-    [SerializeField]
-    private Button redButton;
-
-    [SerializeField]
-    private Button greenButton;
-    
-    [SerializeField]
-    private Button blueButton;
 
     [SerializeField]
     private List<GameObject> customerObjectList;
@@ -99,22 +114,125 @@ public class BaristaMiniGameButtonScript : MonoBehaviour
         }
     }
 
-    public void RedButtonPressed()
+    public void HotCupButtonPressed()
     {
-        Color oldColor = servingTableImage.color;
-        servingTableImage.color = new Color(1, oldColor.g, oldColor.b, oldColor.a);
+        HandleServingTable(Ingrediant.HotCup);
     }
 
-    public void GreenButtonPressed()
+    public void ColdCupButtonPressed()
     {
-        Color oldColor = servingTableImage.color;
-        servingTableImage.color = new Color(oldColor.r, 1, oldColor.b, oldColor.a);
+        HandleServingTable(Ingrediant.HotCup);
     }
 
-    public void BlueButtonPressed()
+    public void CoffeeButtonPressed()
     {
-        Color oldColor = servingTableImage.color;
-        servingTableImage.color = new Color(oldColor.r, oldColor.g, 1, oldColor.a);
+        HandleServingTable(Ingrediant.Coffee);
+    }
+
+    public void MilkButtonPressed()
+    {
+        HandleServingTable(Ingrediant.Milk);
+    }
+
+    public void HandleServingTable(Ingrediant ingrediant)
+    {
+        int ingrediantCount = ingrediantList.Count;
+        if (ingrediantCount == 0 && (ingrediant == Ingrediant.ColdCup || ingrediant == Ingrediant.HotCup))
+        {
+            ingrediantList.Add(ingrediant);
+        }
+
+        else if (!ingrediantList.Contains(ingrediant))
+        {
+            bool addIngrediant = false;
+
+            if (ingrediantCount == 1)
+            {
+
+                Ingrediant firstIngrediant = ingrediantList[0];
+
+
+                //Hot cup + coffee = black coffee
+                //Hot cup + coffee = hot cup with milk
+                if (firstIngrediant == Ingrediant.HotCup && ingrediant != Ingrediant.ColdCup)
+                {
+                    addIngrediant = true;
+                }
+
+                //coldCup + coffee = iced coffee
+                //coldCup + milk = cold cup with milk
+                else if (firstIngrediant == Ingrediant.ColdCup && ingrediant != Ingrediant.HotCup)
+                {
+                    addIngrediant = true;
+                }
+            }
+
+            else if (ingrediantCount == 2)
+            {
+                //black coffee + milk = latte
+                if (ingrediantList.Contains(Ingrediant.HotCup) &&
+                    ingrediantList.Contains(Ingrediant.Coffee) &&
+                    ingrediant == Ingrediant.Milk)
+                {
+                    addIngrediant = true;
+
+                }
+
+                //hot cup with milk + coffee = latte
+                else if (ingrediantList.Contains(Ingrediant.HotCup) &&
+                         ingrediantList.Contains(Ingrediant.Milk) &&
+                         ingrediant == Ingrediant.Coffee)
+                { 
+                    addIngrediant = true;
+                }
+
+                //iced black coffee + milk = iced latte
+                else if (ingrediantList.Contains(Ingrediant.ColdCup) &&
+                    ingrediantList.Contains(Ingrediant.Coffee) &&
+                    ingrediant == Ingrediant.Milk)
+                {
+                    addIngrediant = true;
+                }
+
+                //cold cup with milk + coffee = iced latte
+                else if (ingrediantList.Contains(Ingrediant.ColdCup) &&
+                         ingrediantList.Contains(Ingrediant.Milk) &&
+                         ingrediant == Ingrediant.Coffee)
+                {
+                    addIngrediant = true;
+                }
+            }
+
+            if (addIngrediant)
+            {
+                ingrediantList.Add(ingrediant);
+                UpdateTableDrawing();
+            }
+        }
+    }
+
+    private void UpdateTableDrawing()
+    { 
+        //0 ingrediants
+        //-nothing
+
+        //1 ingrediant
+        //- hot cup
+        //- cold cup
+
+        //2 ingrediants
+        
+        //- hot cup + coffee = black coffee
+        //- hot cup + cofee = hot cup with milk
+        //- cold cup + coffee = inced coffee
+        //- cold cup + milk = cold cup with milk
+
+        //3 ingrediants
+
+        //- hot cup + coffee + milk = latte
+        //- cold cup + coffee + milk = iced latte
+
+
     }
 
     public void TrashButtonPressed()
@@ -177,10 +295,11 @@ public class BaristaMiniGameButtonScript : MonoBehaviour
 
     private void EnableGame(bool lookingAtRecipies)
     {
-        //enable r, g, b
-        redButton.enabled = true;
-        greenButton.enabled = true;
-        blueButton.enabled = true;
+        //enable ingrediants buttons
+        hotCupButton.enabled = true;
+        coldCupButton.enabled = true;
+        coffeeButton.enabled = true;
+        milkButton.enabled = true;
 
         //enable trash button
         trashButton.enabled = true;
@@ -201,10 +320,11 @@ public class BaristaMiniGameButtonScript : MonoBehaviour
 
     private void DisableGame(bool lookingAtRecipies)
     {
-        //disable r, g, b
-        redButton.enabled = false;
-        greenButton.enabled = false;
-        blueButton.enabled = false;
+        //disable ingrediants buttons
+        hotCupButton.enabled = true;
+        coldCupButton.enabled = true;
+        coffeeButton.enabled = true;
+        milkButton.enabled = true;
 
         //disable trash button
         trashButton.enabled = false;
@@ -267,6 +387,8 @@ public class BaristaMiniGameButtonScript : MonoBehaviour
             customerScriptList.Add(customerObjectList[i].GetComponent<BaristaCustomerScript>());
             customerScriptList[i].SetStartingTime(customerStartingTime);
         }
+
+        ingrediantList = new List<Ingrediant>();
     }
 
     public void QuitGame()
