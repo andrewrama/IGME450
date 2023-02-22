@@ -74,10 +74,6 @@ public class BaristaCustomerScript : MonoBehaviour
         List<Sprite> orderList = new List<Sprite>()
         {
             coffeeImage,
-            coldCupWithMilkImage,
-            coldCupImage,
-            hotCupWithMilkImage,
-            hotCupImage,
             icedCoffeeImage,
             icedLatteImage,
             latteImage
@@ -130,6 +126,11 @@ public class BaristaCustomerScript : MonoBehaviour
         this.icedCoffeeImage = icedCoffeeImage;
         this.icedLatteImage = icedLatteImage;
         this.latteImage = latteImage;
+    }
+
+    public Image GetCustomerImage()
+    {
+        return customerImage;
     }
 
 
