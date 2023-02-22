@@ -5,20 +5,32 @@ using UnityEngine.UI;
 
 public class BaristaCustomerScript : MonoBehaviour
 {
+
+    #region Images
+    private Sprite coffeeImage;
+    private Sprite coldCupWithMilkImage;
+    private Sprite coldCupImage;
+    private Sprite hotCupWithMilkImage;
+    private Sprite hotCupImage;
+    private Sprite icedCoffeeImage;
+    private Sprite icedLatteImage;
+    private Sprite latteImage;
+    #endregion
+
     private int startingTime;
 
-    private Button customerButton;
     private Image customerImage;
+
+    private Button customerButton;
     private Text timerText;
     private float timer;
     private bool customerEnabled;
     private bool gamePaused;
 
-    
     // Start is called before the first frame update
     void Start()
     {
-        customerImage = transform.gameObject.GetComponent<Image>();
+        customerImage = transform.GetChild(1).gameObject.GetComponent<Image>();
         customerButton = transform.gameObject.GetComponent<Button>();
         timerText = transform.GetChild(0).GetComponent<Text>();
 
@@ -59,16 +71,21 @@ public class BaristaCustomerScript : MonoBehaviour
 
     private void GetRandomOrder()
     {
-        bool red = Random.Range(0, 2) == 1;
-        bool green = Random.Range(0, 2) == 1;
-        bool blue = Random.Range(0, 2) == 1;
+        List<Sprite> orderList = new List<Sprite>()
+        {
+            coffeeImage,
+            coldCupWithMilkImage,
+            coldCupImage,
+            hotCupWithMilkImage,
+            hotCupImage,
+            icedCoffeeImage,
+            icedLatteImage,
+            latteImage
+        };
 
-        customerImage.color = new Color(ActivateColor(red), ActivateColor(green), ActivateColor(blue));
-    }
-
-    private int ActivateColor(bool activate)
-    {
-        return activate ? 1 : 0;
+        int index = Random.Range(0, orderList.Count);
+        Sprite order = orderList[index];
+        customerImage.sprite = order;
     }
 
     public void GetNewCustomer()
@@ -94,6 +111,25 @@ public class BaristaCustomerScript : MonoBehaviour
     public void SetStartingTime(int num)
     {
         startingTime = num;
+    }
+
+    public void SetImages(Sprite coffeeImage, 
+                          Sprite coldCupWithMilkImage, 
+                          Sprite coldCupImage, 
+                          Sprite hotCupWithMilkImage, 
+                          Sprite hotCupImage, 
+                          Sprite icedCoffeeImage, 
+                          Sprite icedLatteImage, 
+                          Sprite latteImage)
+    {
+        this.coffeeImage = coffeeImage;
+        this.coldCupWithMilkImage = coldCupWithMilkImage;
+        this.coldCupImage = coldCupImage;
+        this.hotCupWithMilkImage = hotCupWithMilkImage;
+        this.hotCupImage = hotCupImage;
+        this.icedCoffeeImage = icedCoffeeImage;
+        this.icedLatteImage = icedLatteImage;
+        this.latteImage = latteImage;
     }
 
 

@@ -126,13 +126,18 @@ public class BaristaMiniGameButtonScript : MonoBehaviour
     private GameObject servingTable;
     private Image servingTableImage;
 
-    void Start()
+    void Awake()
     {
         gamePanel.SetActive(true);
         recipePanel.SetActive(false);
         sceneChanger = transform.GetComponent<GameSceneChanger>();
         servingTableImage = servingTable.GetComponent<Image>();
         StartGame();
+    }
+
+    void Start()
+    {
+        
     }
 
     private void Update()
@@ -249,38 +254,87 @@ public class BaristaMiniGameButtonScript : MonoBehaviour
 
     private void UpdateTableDrawing()
     {
-        //0 ingrediants
-        //-nothing
-
         switch (ingrediantList.Count)
         {
+            //0 ingrediants
+            //-nothing
             case 0:
-                servingTableImage = defaultImage;
+                servingTableImage.sprite = defaultImage;
+                break;
+
+            //1 ingrediant
+            //- hot cup
+            //- cold cup
+            case 1:
+                if (ingrediantList.Contains(Ingrediant.HotCup))
+                {
+                    servingTableImage.sprite = hotCupImage;
+
+                }
+                else
+                { 
+                    servingTableImage.sprite = coldCupImage;
+                }
+                break;
+
+            case 2:
+
+                //- hot cup + coffee = black coffee
+                if (ingrediantList.Contains(Ingrediant.HotCup) &&
+                   ingrediantList.Contains(Ingrediant.Coffee))
+                { 
+                    servingTableImage.sprite = blackCoffeeImage;
+                }
+
+                //- hot cup + milk = hot cup with milk
+                else if (
+                   ingrediantList.Contains(Ingrediant.HotCup) &&
+                   ingrediantList.Contains(Ingrediant.Milk))
+                {
+                    servingTableImage.sprite = hotCupWithMilkImage;
+                }
+
+                //- cold cup + coffee = iced coffee
+                else if (ingrediantList.Contains(Ingrediant.ColdCup) &&
+                  ingrediantList.Contains(Ingrediant.Coffee))
+                {
+                    servingTableImage.sprite = icedCoffeeImage;
+                }
+
+                //- cold cup + milk = cold cup with milk
+                else if (
+                   ingrediantList.Contains(Ingrediant.ColdCup) &&
+                   ingrediantList.Contains(Ingrediant.Milk))
+                {
+                    servingTableImage.sprite = coldCupWithMilkImage;
+                }
+
+                break;
+
+            case 3:
+                //3 ingrediants
+
+                //- hot cup + coffee + milk = latte
+                if (ingrediantList.Contains(Ingrediant.HotCup) &&
+                    ingrediantList.Contains(Ingrediant.Coffee) &&
+                    ingrediantList.Contains(Ingrediant.Milk))
+                { 
+                    servingTableImage.sprite = latteImage;
+                }
+
+                //- cold cup + coffee + milk = iced latte
+                else
+                {
+                    servingTableImage.sprite = icedLatteImage;
+                }
                 break;
         }
-
-        //1 ingrediant
-        //- hot cup
-        //- cold cup
-
-        //2 ingrediants
-        
-        //- hot cup + coffee = black coffee
-        //- hot cup + cofee = hot cup with milk
-        //- cold cup + coffee = iced coffee
-        //- cold cup + milk = cold cup with milk
-
-        //3 ingrediants
-
-        //- hot cup + coffee + milk = latte
-        //- cold cup + coffee + milk = iced latte
-
-
     }
 
     public void TrashButtonPressed()
     {
-        servingTableImage.color = new Color(0, 0, 0, 255);
+        ingrediantList.Clear();
+        UpdateTableDrawing();
     }
 
     public void CustomerPressed(int i)
@@ -429,9 +483,11 @@ public class BaristaMiniGameButtonScript : MonoBehaviour
         {
             customerScriptList.Add(customerObjectList[i].GetComponent<BaristaCustomerScript>());
             customerScriptList[i].SetStartingTime(customerStartingTime);
+            customerScriptList[i].SetImages(coffeeImage, coldCupWithMilkImage, coldCupImage, hotCupWithMilkImage, hotCupImage, icedCoffeeImage, icedLatteImage, latteImage);
         }
 
         ingrediantList = new List<Ingrediant>();
+        UpdateTableDrawing();
     }
 
     public void QuitGame()
