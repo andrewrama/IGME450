@@ -28,6 +28,42 @@ public class BaristaMiniGameButtonScript : MonoBehaviour
     private Button helpButton;
     #endregion
 
+    #region Images
+
+    [SerializeField]
+    private Sprite defaultImage;
+
+    [SerializeField]
+    private Sprite blackCoffeeImage;
+
+    [SerializeField]
+    private Sprite coffeeImage;
+
+    [SerializeField]
+    private Sprite coldCupWithMilkImage;
+
+    [SerializeField]
+    private Sprite coldCupImage;
+
+    [SerializeField]
+    private Sprite hotCupWithMilkImage;
+
+    [SerializeField]
+    private Sprite hotCupImage;
+
+    [SerializeField]
+    private Sprite icedCoffeeImage;
+
+    [SerializeField]
+    private Sprite icedLatteImage;
+
+    [SerializeField]
+    private Sprite latteImage;
+
+    [SerializeField]
+    private Sprite milkImage;
+    #endregion
+
     private GameSceneChanger sceneChanger;
 
     public enum Ingrediant
@@ -212,9 +248,16 @@ public class BaristaMiniGameButtonScript : MonoBehaviour
     }
 
     private void UpdateTableDrawing()
-    { 
+    {
         //0 ingrediants
         //-nothing
+
+        switch (ingrediantList.Count)
+        {
+            case 0:
+                servingTableImage = defaultImage;
+                break;
+        }
 
         //1 ingrediant
         //- hot cup
@@ -224,7 +267,7 @@ public class BaristaMiniGameButtonScript : MonoBehaviour
         
         //- hot cup + coffee = black coffee
         //- hot cup + cofee = hot cup with milk
-        //- cold cup + coffee = inced coffee
+        //- cold cup + coffee = iced coffee
         //- cold cup + milk = cold cup with milk
 
         //3 ingrediants

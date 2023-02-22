@@ -438,8 +438,7 @@ GameObject:
   m_Component:
   - component: {fileID: 129077610}
   - component: {fileID: 129077613}
-  - component: {fileID: 129077612}
-  - component: {fileID: 129077611}
+  - component: {fileID: 129077614}
   m_Layer: 5
   m_Name: ServingTable
   m_TagString: Untagged
@@ -467,51 +466,15 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &129077611
-MonoBehaviour:
+--- !u!222 &129077613
+CanvasRenderer:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 129077609}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Navigation:
-    m_Mode: 3
-    m_WrapAround: 0
-    m_SelectOnUp: {fileID: 0}
-    m_SelectOnDown: {fileID: 0}
-    m_SelectOnLeft: {fileID: 0}
-    m_SelectOnRight: {fileID: 0}
-  m_Transition: 1
-  m_Colors:
-    m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
-    m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
-    m_PressedColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 1}
-    m_SelectedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
-    m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
-    m_ColorMultiplier: 1
-    m_FadeDuration: 0.1
-  m_SpriteState:
-    m_HighlightedSprite: {fileID: 0}
-    m_PressedSprite: {fileID: 0}
-    m_SelectedSprite: {fileID: 0}
-    m_DisabledSprite: {fileID: 0}
-  m_AnimationTriggers:
-    m_NormalTrigger: Normal
-    m_HighlightedTrigger: Highlighted
-    m_PressedTrigger: Pressed
-    m_SelectedTrigger: Selected
-    m_DisabledTrigger: Disabled
-  m_Interactable: 1
-  m_TargetGraphic: {fileID: 129077612}
-  m_OnClick:
-    m_PersistentCalls:
-      m_Calls: []
---- !u!114 &129077612
+  m_CullTransparentMesh: 1
+--- !u!114 &129077614
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -524,15 +487,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0, g: 0, b: 0, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 10905, guid: 0000000000000000f000000000000000, type: 0}
-  m_Type: 1
+  m_Sprite: {fileID: 21300000, guid: b0fa21c003254324f92e293de2f88ead, type: 3}
+  m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
   m_FillMethod: 4
@@ -541,14 +504,6 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
---- !u!222 &129077613
-CanvasRenderer:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 129077609}
-  m_CullTransparentMesh: 1
 --- !u!1 &136745209
 GameObject:
   m_ObjectHideFlags: 0
@@ -1613,7 +1568,6 @@ GameObject:
   m_Component:
   - component: {fileID: 340860872}
   - component: {fileID: 340860875}
-  - component: {fileID: 340860874}
   - component: {fileID: 340860873}
   m_Layer: 5
   m_Name: Serving Table Panel
@@ -1630,7 +1584,7 @@ RectTransform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 340860871}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: -75.41395}
+  m_LocalPosition: {x: 0, y: 0, z: -75.413956}
   m_LocalScale: {x: 0.33625, y: 0.33625, z: 0.33625}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -1638,10 +1592,10 @@ RectTransform:
   m_Father: {fileID: 1214501871}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.2, y: 0.3}
-  m_AnchorMax: {x: 0.8, y: 0.45}
-  m_AnchoredPosition: {x: 42.006775, y: 49.075607}
-  m_SizeDelta: {x: 480, y: 213.23416}
+  m_AnchorMin: {x: 0.26, y: 0.27}
+  m_AnchorMax: {x: 0.76, y: 0.45}
+  m_AnchoredPosition: {x: 44.696774, y: 41.881718}
+  m_SizeDelta: {x: 400, y: 255.97238}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &340860873
 MonoBehaviour:
@@ -1669,36 +1623,6 @@ MonoBehaviour:
   m_ChildScaleWidth: 0
   m_ChildScaleHeight: 0
   m_ReverseArrangement: 0
---- !u!114 &340860874
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 340860871}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 0.392}
-  m_RaycastTarget: 1
-  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
-  m_Maskable: 1
-  m_OnCullStateChanged:
-    m_PersistentCalls:
-      m_Calls: []
-  m_Sprite: {fileID: 10907, guid: 0000000000000000f000000000000000, type: 0}
-  m_Type: 1
-  m_PreserveAspect: 0
-  m_FillCenter: 1
-  m_FillMethod: 4
-  m_FillAmount: 1
-  m_FillClockwise: 1
-  m_FillOrigin: 0
-  m_UseSpriteMesh: 0
-  m_PixelsPerUnitMultiplier: 1
 --- !u!222 &340860875
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -5413,9 +5337,27 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8806e380577ca3e4bb82ab5a071f2bfa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  hotCupButton: {fileID: 927683931}
+  coldCupButton: {fileID: 881733771}
+  coffeeButton: {fileID: 1606151450}
+  milkButton: {fileID: 1739750444}
+  trashButton: {fileID: 1153916841}
+  helpButton: {fileID: 1617649966}
+  defaultImage: {fileID: 21300000, guid: b0fa21c003254324f92e293de2f88ead, type: 3}
+  blackCoffeeImage: {fileID: 21300000, guid: 7776835b0bddc284d8f153f5a6f033e5, type: 3}
+  coffeeImage: {fileID: 21300000, guid: b916c60579cd8e546bd63ca38873fbb8, type: 3}
+  coldCupWithMilkImage: {fileID: 21300000, guid: a67dc33aa8cc2f24aa22523cc811da82,
+    type: 3}
+  coldCupImage: {fileID: 21300000, guid: 49a3ac8a6024e7a4f98794af1f34212c, type: 3}
+  hotCupWithMilkImage: {fileID: 21300000, guid: 3ee1fbdffee63b844bc42986dda8b999,
+    type: 3}
+  hotCupImage: {fileID: 21300000, guid: e3c20b3424f035b44b0fa97c5c645417, type: 3}
+  icedCoffeeImage: {fileID: 21300000, guid: 57ec35b22947eb44f804489eeb78d90d, type: 3}
+  icedLatteImage: {fileID: 21300000, guid: 3bdb24adc9c0aa747a0b1cb0bcdfc0b2, type: 3}
+  latteImage: {fileID: 21300000, guid: 67305a2bddd117c4c8e3c2ecc10ef920, type: 3}
+  milkImage: {fileID: 21300000, guid: 61f2d7f6fb5ae91478f2e91783149392, type: 3}
   recipeTimerLabel: {fileID: 776085055}
   recipeScoreLabel: {fileID: 567339293}
-  trashButton: {fileID: 1153916841}
   gamePanel: {fileID: 1214501870}
   recipePanel: {fileID: 1110103492}
   gameOverScene: {fileID: 2018537738}
@@ -5424,10 +5366,6 @@ MonoBehaviour:
   timeLabel: {fileID: 1931254335}
   scoreLabel: {fileID: 710646416}
   tutorialPanel: {fileID: 1981881815}
-  helpButton: {fileID: 1617649966}
-  redButton: {fileID: 927683931}
-  greenButton: {fileID: 881733771}
-  blueButton: {fileID: 1606151450}
   customerObjectList:
   - {fileID: 265778333}
   - {fileID: 535702893}
