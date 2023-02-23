@@ -7,6 +7,9 @@ public class CurrencyManager : MonoBehaviour
     public const string FishCurrency = "Currency";
     public static int currency = 0;
 
+    public const string  showBaristaGameTutorial =  "BaristaTutorial";
+    public static int showBaristaTuorial = 1;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -18,6 +21,9 @@ public class CurrencyManager : MonoBehaviour
         {
             currency = 0;
             UpdateCurrency();
+
+            showBaristaTuorial = 1;
+            UpdateBaristaGameTutoiral();
         }
 
         if (Input.GetKeyDown(KeyCode.C))
@@ -31,6 +37,13 @@ public class CurrencyManager : MonoBehaviour
     {
         PlayerPrefs.SetInt(FishCurrency, currency);
         currency = PlayerPrefs.GetInt(FishCurrency);
+        PlayerPrefs.Save();
+    }
+
+    public static void UpdateBaristaGameTutoiral()
+    {
+        PlayerPrefs.SetInt(showBaristaGameTutorial, showBaristaTuorial);
+        showBaristaTuorial = PlayerPrefs.GetInt(showBaristaGameTutorial);
         PlayerPrefs.Save();
     }
 

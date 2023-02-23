@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class BaristaMiniGameButtonScript : MonoBehaviour
 {
@@ -140,6 +141,27 @@ public class BaristaMiniGameButtonScript : MonoBehaviour
     void Start()
     {
         
+    }
+
+    void OnEnable()
+    {
+        SceneManager.sceneLoaded += OnSceneLoaded;
+    }
+
+    private void OnDisable()
+    {
+        SceneManager.sceneLoaded -= OnSceneLoaded;
+    }
+
+    void OnSceneLoaded(Scene scene, LoadSceneMode mode)
+    {
+        if (CurrencyManager.showBaristaTuorial == 1)
+        {
+            CurrencyManager.showBaristaTuorial = 0;
+            CurrencyManager.UpdateBaristaGameTutoiral();
+            
+            OpenTutorial();
+        }
     }
 
     private void Update()
@@ -374,9 +396,6 @@ public class BaristaMiniGameButtonScript : MonoBehaviour
         scoreLabel.text = "Score: " + score;
     }
     #endregion
-
-
-
 
     public void OpenTutorial()
     {
