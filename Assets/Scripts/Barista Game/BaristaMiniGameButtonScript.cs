@@ -356,7 +356,9 @@ public class BaristaMiniGameButtonScript : MonoBehaviour
         //latte
         //iced latte
 
-        if (customerScript.GetCustomerImage() == servingTableImage)
+        Sprite customerImageSprite = customerScript.GetCustomerImage().sprite;
+
+        if (customerImageSprite == servingTableImage.sprite)
         {
             score++;
         }
