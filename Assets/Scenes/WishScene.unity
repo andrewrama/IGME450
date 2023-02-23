@@ -559,14 +559,12 @@ MonoBehaviour:
   insufficientFunds: {fileID: 1363317481}
   catSpritesCommon:
   - {fileID: 21300000, guid: e0939bdd332298846ae08505293e3953, type: 3}
-  - {fileID: 21300000, guid: 8c20dc06f1eeca44b989d243b365e2af, type: 3}
   - {fileID: 21300000, guid: 7f90c00cb9409e34a8a9d620d6b40852, type: 3}
   - {fileID: 21300000, guid: 5d2b1696cd9626e4fb9c268e02912f9d, type: 3}
   - {fileID: 21300000, guid: 25f8eac6efecb094694dd44d17067812, type: 3}
   - {fileID: 21300000, guid: 2547e3bc91f70ee4e8d03f97c70dd06d, type: 3}
   catNamesCommon:
   - Maxwell
-  - Melon & Finn
   - Bumi
   - Grumpy Cat
   - Carl

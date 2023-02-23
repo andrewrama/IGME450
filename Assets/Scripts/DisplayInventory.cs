@@ -18,7 +18,7 @@ public class DisplayInventory : MonoBehaviour
             Cat currentCat = CatInventory.Instance.ownedCats[i];
             var listItem = Instantiate(inventoryItem);
 
-            listItem.GetComponentsInChildren<Image>()[2].sprite = currentCat.imageSprite;
+            listItem.GetComponentsInChildren<Image>()[1].sprite = currentCat.imageSprite;
             listItem.GetComponentsInChildren<TMPro.TextMeshProUGUI>()[0].text = currentCat.catName;
             listItem.GetComponentsInChildren<TMPro.TextMeshProUGUI>()[1].text = currentCat.rarity;
 

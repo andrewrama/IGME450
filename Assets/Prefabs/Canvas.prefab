@@ -244,7 +244,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 0}
-  m_AnchoredPosition: {x: -0.000061035156, y: -1.000061}
+  m_AnchoredPosition: {x: 0, y: -1}
   m_SizeDelta: {x: 80.3999, y: 100}
   m_Pivot: {x: 0.5, y: 0}
 --- !u!222 &9074932306565574370
@@ -1729,7 +1729,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   contentContainer: {fileID: 9074932306795787160}
-  inventoryItem: {fileID: 2712348441568616065, guid: d62df542eb4a0ec40b2917a68ba4c09c,
+  inventoryItem: {fileID: 2163801023805797583, guid: 6da58730660246348a671ebf925f05c0,
     type: 3}
 --- !u!1 &9074932307974244196
 GameObject:
