@@ -12,7 +12,7 @@ public class DisplayInventory : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-
+        //contentContainer.GetComponent<VerticalLayoutGroup>().spacing = 5;
         for (int i = 0; i < CatInventory.Instance.ownedCats.Count; i++)
         {
             Cat currentCat = CatInventory.Instance.ownedCats[i];
@@ -23,11 +23,14 @@ public class DisplayInventory : MonoBehaviour
             listItem.GetComponentsInChildren<TMPro.TextMeshProUGUI>()[1].text = currentCat.rarity;
 
             listItem.transform.SetParent(contentContainer);
-            listItem.GetComponentInChildren<Canvas>().transform.position = new Vector3(Screen.width/5, 0, 0);
-            listItem.transform.localScale = Vector2.one;
+            //listItem.GetComponent<LayoutElement>().preferredWidth = Screen.width / 2;
+            listItem.transform.position = new Vector3(0, contentContainer.position.y, 0);
+
+            //listItem.transform.localScale = Vector2.one;
         }
 
-        
+
+
     }
 
 }
