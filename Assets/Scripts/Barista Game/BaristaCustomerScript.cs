@@ -7,11 +7,7 @@ public class BaristaCustomerScript : MonoBehaviour
 {
 
     #region Images
-    private Sprite coffeeImage;
-    private Sprite coldCupWithMilkImage;
-    private Sprite coldCupImage;
-    private Sprite hotCupWithMilkImage;
-    private Sprite hotCupImage;
+    private Sprite blackCoffeeImage;
     private Sprite icedCoffeeImage;
     private Sprite icedLatteImage;
     private Sprite latteImage;
@@ -42,7 +38,7 @@ public class BaristaCustomerScript : MonoBehaviour
         customerEnabled = true;
         gamePaused = false;
 
-        timerText.color = Color.white;
+        timerText.color = Color.black;
         timerText.gameObject.SetActive(false);
 
         GetRandomOrder();
@@ -62,6 +58,7 @@ public class BaristaCustomerScript : MonoBehaviour
                 GetRandomOrder();
 
                 //enable button agian
+                ToggleImageAplha(true);
                 customerButton.enabled = true;
                 customerEnabled = true;
                 timerText.gameObject.SetActive(false);
@@ -73,7 +70,7 @@ public class BaristaCustomerScript : MonoBehaviour
     {
         List<Sprite> orderList = new List<Sprite>()
         {
-            coffeeImage,
+            blackCoffeeImage,
             icedCoffeeImage,
             icedLatteImage,
             latteImage
@@ -89,9 +86,24 @@ public class BaristaCustomerScript : MonoBehaviour
         //disable the customer's button
         timer = startingTime;
         customerButton.enabled = false;
-        customerImage.color = Color.gray;
+
+        ToggleImageAplha(false);
+
         customerEnabled = false;
+
+        
         timerText.gameObject.SetActive(true);
+    }
+
+    public void ToggleImageAplha(bool on)
+    {
+        Color oldColor = customerImage.color;
+
+        float a = on ? 1f : 0f;
+
+        oldColor.a = a;
+
+        customerImage.color = oldColor;
     }
 
     public Color GetCustomerColor()
@@ -109,20 +121,12 @@ public class BaristaCustomerScript : MonoBehaviour
         startingTime = num;
     }
 
-    public void SetImages(Sprite coffeeImage, 
-                          Sprite coldCupWithMilkImage, 
-                          Sprite coldCupImage, 
-                          Sprite hotCupWithMilkImage, 
-                          Sprite hotCupImage, 
+    public void SetImages(Sprite blackCoffeeImage, 
                           Sprite icedCoffeeImage, 
                           Sprite icedLatteImage, 
                           Sprite latteImage)
     {
-        this.coffeeImage = coffeeImage;
-        this.coldCupWithMilkImage = coldCupWithMilkImage;
-        this.coldCupImage = coldCupImage;
-        this.hotCupWithMilkImage = hotCupWithMilkImage;
-        this.hotCupImage = hotCupImage;
+        this.blackCoffeeImage = blackCoffeeImage;
         this.icedCoffeeImage = icedCoffeeImage;
         this.icedLatteImage = icedLatteImage;
         this.latteImage = latteImage;

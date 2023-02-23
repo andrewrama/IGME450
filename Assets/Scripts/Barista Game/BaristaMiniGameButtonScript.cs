@@ -334,7 +334,7 @@ public class BaristaMiniGameButtonScript : MonoBehaviour
 
     public void ColdCupButtonPressed()
     {
-        HandleServingTable(Ingrediant.HotCup);
+        HandleServingTable(Ingrediant.ColdCup);
     }
 
     public void CoffeeButtonPressed()
@@ -365,8 +365,10 @@ public class BaristaMiniGameButtonScript : MonoBehaviour
             score--;
         }
 
+        ingrediantList.Clear();
+        UpdateTableDrawing();
+
         customerScript.GetNewCustomer();
-        servingTableImage.color = new Color(0, 0, 0, 1);
         scoreLabel.text = "Score: " + score;
     }
     #endregion
@@ -496,7 +498,7 @@ public class BaristaMiniGameButtonScript : MonoBehaviour
         {
             customerScriptList.Add(customerObjectList[i].GetComponent<BaristaCustomerScript>());
             customerScriptList[i].SetStartingTime(customerStartingTime);
-            customerScriptList[i].SetImages(coffeeImage, coldCupWithMilkImage, coldCupImage, hotCupWithMilkImage, hotCupImage, icedCoffeeImage, icedLatteImage, latteImage);
+            customerScriptList[i].SetImages(blackCoffeeImage, icedCoffeeImage, icedLatteImage, latteImage);
         }
 
         ingrediantList = new List<Ingrediant>();
