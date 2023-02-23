@@ -476,7 +476,7 @@ RectTransform:
   m_GameObject: {fileID: 194826179}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 3.8144414, y: 7.033299, z: 2.0282319}
+  m_LocalScale: {x: 5.230362, y: 9.644059, z: 2.7811115}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1861013854}
@@ -484,7 +484,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 223.39}
+  m_AnchoredPosition: {x: 0, y: 363}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &194826181
@@ -562,23 +562,33 @@ MonoBehaviour:
   - {fileID: 21300000, guid: 8c20dc06f1eeca44b989d243b365e2af, type: 3}
   - {fileID: 21300000, guid: 7f90c00cb9409e34a8a9d620d6b40852, type: 3}
   - {fileID: 21300000, guid: 5d2b1696cd9626e4fb9c268e02912f9d, type: 3}
+  - {fileID: 21300000, guid: 25f8eac6efecb094694dd44d17067812, type: 3}
+  - {fileID: 21300000, guid: 2547e3bc91f70ee4e8d03f97c70dd06d, type: 3}
   catNamesCommon:
   - Maxwell
   - Melon & Finn
   - Bumi
   - Grumpy Cat
+  - Carl
+  - Shiloh
   catSpritesUncommon:
   - {fileID: 21300000, guid: 94f0a77c311137f4fb2b0fd23c2f8007, type: 3}
   - {fileID: 21300000, guid: 720608e7073f5dc4790dfd289c61e338, type: 3}
   - {fileID: 21300000, guid: 8406f5eafd1d9ee4d975c927a273c7da, type: 3}
+  - {fileID: 21300000, guid: 7438c22cc70140a46a1908125a67c1ff, type: 3}
+  - {fileID: 21300000, guid: c72c134a035375b438c39b53e477b385, type: 3}
   catNamesUncommon:
   - Raymond
   - Bingus
   - Azia
+  - Shelby
+  - Carson
   catSpritesRare:
   - {fileID: 21300000, guid: bfa9a26c8895cde4297a6ff856d9cd95, type: 3}
+  - {fileID: 21300000, guid: fef5c50af0331094786a2dcd4cde9661, type: 3}
   catNamesRare:
   - Casper
+  - Teddy
 --- !u!4 &261636058
 Transform:
   m_ObjectHideFlags: 0
@@ -957,7 +967,7 @@ RectTransform:
   m_GameObject: {fileID: 553095787}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1.1465415, y: 2.0625339, z: 1.1465415}
+  m_LocalScale: {x: 2.129586, y: 3.8309503, z: 2.129586}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1861013854}
