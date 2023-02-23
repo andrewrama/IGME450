@@ -5,20 +5,28 @@ using UnityEngine.UI;
 
 public class BaristaCustomerScript : MonoBehaviour
 {
+
+    #region Images
+    private Sprite blackCoffeeImage;
+    private Sprite icedCoffeeImage;
+    private Sprite icedLatteImage;
+    private Sprite latteImage;
+    #endregion
+
     private int startingTime;
 
-    private Button customerButton;
     private Image customerImage;
+
+    private Button customerButton;
     private Text timerText;
     private float timer;
     private bool customerEnabled;
     private bool gamePaused;
 
-    
     // Start is called before the first frame update
     void Start()
     {
-        customerImage = transform.gameObject.GetComponent<Image>();
+        customerImage = transform.GetChild(1).gameObject.GetComponent<Image>();
         customerButton = transform.gameObject.GetComponent<Button>();
         timerText = transform.GetChild(0).GetComponent<Text>();
 
@@ -30,7 +38,7 @@ public class BaristaCustomerScript : MonoBehaviour
         customerEnabled = true;
         gamePaused = false;
 
-        timerText.color = Color.white;
+        timerText.color = Color.black;
         timerText.gameObject.SetActive(false);
 
         GetRandomOrder();
@@ -50,6 +58,7 @@ public class BaristaCustomerScript : MonoBehaviour
                 GetRandomOrder();
 
                 //enable button agian
+                ToggleImageAplha(true);
                 customerButton.enabled = true;
                 customerEnabled = true;
                 timerText.gameObject.SetActive(false);
@@ -59,16 +68,17 @@ public class BaristaCustomerScript : MonoBehaviour
 
     private void GetRandomOrder()
     {
-        bool red = Random.Range(0, 2) == 1;
-        bool green = Random.Range(0, 2) == 1;
-        bool blue = Random.Range(0, 2) == 1;
+        List<Sprite> orderList = new List<Sprite>()
+        {
+            blackCoffeeImage,
+            icedCoffeeImage,
+            icedLatteImage,
+            latteImage
+        };
 
-        customerImage.color = new Color(ActivateColor(red), ActivateColor(green), ActivateColor(blue));
-    }
-
-    private int ActivateColor(bool activate)
-    {
-        return activate ? 1 : 0;
+        int index = Random.Range(0, orderList.Count);
+        Sprite order = orderList[index];
+        customerImage.sprite = order;
     }
 
     public void GetNewCustomer()
@@ -76,9 +86,24 @@ public class BaristaCustomerScript : MonoBehaviour
         //disable the customer's button
         timer = startingTime;
         customerButton.enabled = false;
-        customerImage.color = Color.gray;
+
+        ToggleImageAplha(false);
+
         customerEnabled = false;
+
+        
         timerText.gameObject.SetActive(true);
+    }
+
+    public void ToggleImageAplha(bool on)
+    {
+        Color oldColor = customerImage.color;
+
+        float a = on ? 1f : 0f;
+
+        oldColor.a = a;
+
+        customerImage.color = oldColor;
     }
 
     public Color GetCustomerColor()
@@ -94,6 +119,22 @@ public class BaristaCustomerScript : MonoBehaviour
     public void SetStartingTime(int num)
     {
         startingTime = num;
+    }
+
+    public void SetImages(Sprite blackCoffeeImage, 
+                          Sprite icedCoffeeImage, 
+                          Sprite icedLatteImage, 
+                          Sprite latteImage)
+    {
+        this.blackCoffeeImage = blackCoffeeImage;
+        this.icedCoffeeImage = icedCoffeeImage;
+        this.icedLatteImage = icedLatteImage;
+        this.latteImage = latteImage;
+    }
+
+    public Image GetCustomerImage()
+    {
+        return customerImage;
     }
 
 

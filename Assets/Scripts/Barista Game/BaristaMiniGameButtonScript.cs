@@ -8,17 +8,63 @@ public class BaristaMiniGameButtonScript : MonoBehaviour
     //Kovu Bentley
     //Purpose: Holds all of the events for buttons being pressed for the barista mini game
 
-    private GameSceneChanger sceneChanger;
+    #region Buttons
+    [SerializeField]
+    private Button hotCupButton;
 
     [SerializeField]
-    private Text recipeTimerLabel;
+    private Button coldCupButton;
 
     [SerializeField]
-    private Text recipeScoreLabel;
+    private Button coffeeButton;
+
+    [SerializeField]
+    private Button milkButton;
 
     [SerializeField]
     private Button trashButton;
 
+    [SerializeField]
+    private Button helpButton;
+    #endregion
+
+    #region Images
+
+    [SerializeField]
+    private Sprite defaultImage;
+
+    [SerializeField]
+    private Sprite blackCoffeeImage;
+
+    [SerializeField]
+    private Sprite coffeeImage;
+
+    [SerializeField]
+    private Sprite coldCupWithMilkImage;
+
+    [SerializeField]
+    private Sprite coldCupImage;
+
+    [SerializeField]
+    private Sprite hotCupWithMilkImage;
+
+    [SerializeField]
+    private Sprite hotCupImage;
+
+    [SerializeField]
+    private Sprite icedCoffeeImage;
+
+    [SerializeField]
+    private Sprite icedLatteImage;
+
+    [SerializeField]
+    private Sprite latteImage;
+
+    [SerializeField]
+    private Sprite milkImage;
+    #endregion
+
+    #region Panels
     [SerializeField]
     private GameObject gamePanel;
 
@@ -26,7 +72,29 @@ public class BaristaMiniGameButtonScript : MonoBehaviour
     private GameObject recipePanel;
 
     [SerializeField]
-    private GameObject gameOverScene;
+    private GameObject tutorialPanel;
+
+    [SerializeField]
+    private GameObject gameOverPanel;
+    #endregion
+
+    private GameSceneChanger sceneChanger;
+
+    public enum Ingrediant
+    { 
+        HotCup,
+        ColdCup,
+        Coffee,
+        Milk
+    }
+
+    private List<Ingrediant> ingrediantList;
+
+    [SerializeField]
+    private Text recipeTimerLabel;
+
+    [SerializeField]
+    private Text recipeScoreLabel;
 
     [SerializeField]
     private int customerStartingTime;
@@ -47,21 +115,6 @@ public class BaristaMiniGameButtonScript : MonoBehaviour
     private bool tutorialActive;
 
     [SerializeField]
-    private GameObject tutorialPanel;
-
-    [SerializeField]
-    private Button helpButton;
-
-    [SerializeField]
-    private Button redButton;
-
-    [SerializeField]
-    private Button greenButton;
-    
-    [SerializeField]
-    private Button blueButton;
-
-    [SerializeField]
     private List<GameObject> customerObjectList;
 
     private List<BaristaCustomerScript> customerScriptList;
@@ -75,13 +128,18 @@ public class BaristaMiniGameButtonScript : MonoBehaviour
     private GameObject servingTable;
     private Image servingTableImage;
 
-    void Start()
+    void Awake()
     {
         gamePanel.SetActive(true);
         recipePanel.SetActive(false);
         sceneChanger = transform.GetComponent<GameSceneChanger>();
         servingTableImage = servingTable.GetComponent<Image>();
         StartGame();
+    }
+
+    void Start()
+    {
+        
     }
 
     private void Update()
@@ -99,47 +157,226 @@ public class BaristaMiniGameButtonScript : MonoBehaviour
         }
     }
 
-    public void RedButtonPressed()
+   
+
+    public void HandleServingTable(Ingrediant ingrediant)
     {
-        Color oldColor = servingTableImage.color;
-        servingTableImage.color = new Color(1, oldColor.g, oldColor.b, oldColor.a);
+        bool addIngrediant = false;
+
+        int ingrediantCount = ingrediantList.Count;
+        if (ingrediantCount == 0 && (ingrediant == Ingrediant.ColdCup || ingrediant == Ingrediant.HotCup))
+        {
+            addIngrediant = true;
+        }
+
+        else if (!ingrediantList.Contains(ingrediant))
+        {
+
+            if (ingrediantCount == 1)
+            {
+
+                Ingrediant firstIngrediant = ingrediantList[0];
+
+
+                //Hot cup + coffee = black coffee
+                //Hot cup + coffee = hot cup with milk
+                if (firstIngrediant == Ingrediant.HotCup && ingrediant != Ingrediant.ColdCup)
+                {
+                    addIngrediant = true;
+                }
+
+                //coldCup + coffee = iced coffee
+                //coldCup + milk = cold cup with milk
+                else if (firstIngrediant == Ingrediant.ColdCup && ingrediant != Ingrediant.HotCup)
+                {
+                    addIngrediant = true;
+                }
+            }
+
+            else if (ingrediantCount == 2)
+            {
+                //black coffee + milk = latte
+                if (ingrediantList.Contains(Ingrediant.HotCup) &&
+                    ingrediantList.Contains(Ingrediant.Coffee) &&
+                    ingrediant == Ingrediant.Milk)
+                {
+                    addIngrediant = true;
+
+                }
+
+                //hot cup with milk + coffee = latte
+                else if (ingrediantList.Contains(Ingrediant.HotCup) &&
+                         ingrediantList.Contains(Ingrediant.Milk) &&
+                         ingrediant == Ingrediant.Coffee)
+                { 
+                    addIngrediant = true;
+                }
+
+                //iced black coffee + milk = iced latte
+                else if (ingrediantList.Contains(Ingrediant.ColdCup) &&
+                    ingrediantList.Contains(Ingrediant.Coffee) &&
+                    ingrediant == Ingrediant.Milk)
+                {
+                    addIngrediant = true;
+                }
+
+                //cold cup with milk + coffee = iced latte
+                else if (ingrediantList.Contains(Ingrediant.ColdCup) &&
+                         ingrediantList.Contains(Ingrediant.Milk) &&
+                         ingrediant == Ingrediant.Coffee)
+                {
+                    addIngrediant = true;
+                }
+            }
+
+           
+        }
+
+        if (addIngrediant)
+        {
+            ingrediantList.Add(ingrediant);
+            Debug.Log($"Current Ingrediants on the table: {string.Join(",", ingrediantList)}");
+            UpdateTableDrawing();
+        }
     }
 
-    public void GreenButtonPressed()
+    private void UpdateTableDrawing()
     {
-        Color oldColor = servingTableImage.color;
-        servingTableImage.color = new Color(oldColor.r, 1, oldColor.b, oldColor.a);
+        switch (ingrediantList.Count)
+        {
+            //0 ingrediants
+            //-nothing
+            case 0:
+                servingTableImage.sprite = defaultImage;
+                break;
+
+            //1 ingrediant
+            //- hot cup
+            //- cold cup
+            case 1:
+                if (ingrediantList.Contains(Ingrediant.HotCup))
+                {
+                    servingTableImage.sprite = hotCupImage;
+                }
+                else
+                { 
+                    servingTableImage.sprite = coldCupImage;
+                }
+                break;
+
+            case 2:
+
+                //- hot cup + coffee = black coffee
+                if (ingrediantList.Contains(Ingrediant.HotCup) &&
+                   ingrediantList.Contains(Ingrediant.Coffee))
+                { 
+                    servingTableImage.sprite = blackCoffeeImage;
+                }
+
+                //- hot cup + milk = hot cup with milk
+                else if (
+                   ingrediantList.Contains(Ingrediant.HotCup) &&
+                   ingrediantList.Contains(Ingrediant.Milk))
+                {
+                    servingTableImage.sprite = hotCupWithMilkImage;
+                }
+
+                //- cold cup + coffee = iced coffee
+                else if (ingrediantList.Contains(Ingrediant.ColdCup) &&
+                  ingrediantList.Contains(Ingrediant.Coffee))
+                {
+                    servingTableImage.sprite = icedCoffeeImage;
+                }
+
+                //- cold cup + milk = cold cup with milk
+                else if (
+                   ingrediantList.Contains(Ingrediant.ColdCup) &&
+                   ingrediantList.Contains(Ingrediant.Milk))
+                {
+                    servingTableImage.sprite = coldCupWithMilkImage;
+                }
+
+                break;
+
+            case 3:
+                //3 ingrediants
+
+                //- hot cup + coffee + milk = latte
+                if (ingrediantList.Contains(Ingrediant.HotCup) &&
+                    ingrediantList.Contains(Ingrediant.Coffee) &&
+                    ingrediantList.Contains(Ingrediant.Milk))
+                { 
+                    servingTableImage.sprite = latteImage;
+                }
+
+                //- cold cup + coffee + milk = iced latte
+                else
+                {
+                    servingTableImage.sprite = icedLatteImage;
+                }
+                break;
+        }
+
+        Debug.Log($"Current Spirte being displayed: " + servingTableImage.sprite);
     }
 
-    public void BlueButtonPressed()
-    {
-        Color oldColor = servingTableImage.color;
-        servingTableImage.color = new Color(oldColor.r, oldColor.g, 1, oldColor.a);
-    }
-
+    #region Button Press Events
     public void TrashButtonPressed()
     {
-        servingTableImage.color = new Color(0, 0, 0, 255);
+        ingrediantList.Clear();
+        UpdateTableDrawing();
+    }
+
+    public void HotCupButtonPressed()
+    {
+        HandleServingTable(Ingrediant.HotCup);
+    }
+
+    public void ColdCupButtonPressed()
+    {
+        HandleServingTable(Ingrediant.ColdCup);
+    }
+
+    public void CoffeeButtonPressed()
+    {
+        HandleServingTable(Ingrediant.Coffee);
+    }
+
+    public void MilkButtonPressed()
+    {
+        HandleServingTable(Ingrediant.Milk);
     }
 
     public void CustomerPressed(int i)
-    { 
+    {
         BaristaCustomerScript customerScript = GetCustomerScript(customerObjectList[i]);
 
-        if (SameColors(customerScript.GetCustomerColor(), servingTableImage.color))
+        //coffee
+        //iced coffee
+        //latte
+        //iced latte
+
+        Sprite customerImageSprite = customerScript.GetCustomerImage().sprite;
+
+        if (customerImageSprite == servingTableImage.sprite)
         {
             score++;
         }
-
         else
         {
             score--;
         }
 
+        ingrediantList.Clear();
+        UpdateTableDrawing();
+
         customerScript.GetNewCustomer();
-        servingTableImage.color = new Color(0, 0, 0, 1);
         scoreLabel.text = "Score: " + score;
     }
+    #endregion
+
+
+
 
     public void OpenTutorial()
     {
@@ -165,11 +402,6 @@ public class BaristaMiniGameButtonScript : MonoBehaviour
         gamePanel.SetActive(true);
     }
 
-    private bool SameColors(Color c1, Color c2)
-    {
-        return c1.r == c2.r && c1.g == c2.g && c1.b == c2.b;
-    }
-
     private BaristaCustomerScript GetCustomerScript(GameObject obj)
     {
         return obj.GetComponent<BaristaCustomerScript>();
@@ -177,10 +409,11 @@ public class BaristaMiniGameButtonScript : MonoBehaviour
 
     private void EnableGame(bool lookingAtRecipies)
     {
-        //enable r, g, b
-        redButton.enabled = true;
-        greenButton.enabled = true;
-        blueButton.enabled = true;
+        //enable ingrediants buttons
+        hotCupButton.enabled = true;
+        coldCupButton.enabled = true;
+        coffeeButton.enabled = true;
+        milkButton.enabled = true;
 
         //enable trash button
         trashButton.enabled = true;
@@ -201,10 +434,11 @@ public class BaristaMiniGameButtonScript : MonoBehaviour
 
     private void DisableGame(bool lookingAtRecipies)
     {
-        //disable r, g, b
-        redButton.enabled = false;
-        greenButton.enabled = false;
-        blueButton.enabled = false;
+        //disable ingrediants buttons
+        hotCupButton.enabled = true;
+        coldCupButton.enabled = true;
+        coffeeButton.enabled = true;
+        milkButton.enabled = true;
 
         //disable trash button
         trashButton.enabled = false;
@@ -248,7 +482,7 @@ public class BaristaMiniGameButtonScript : MonoBehaviour
 
     private void StartGame()
     {
-        gameOverScene.SetActive(false);
+        gameOverPanel.SetActive(false);
         tutorialPanel.SetActive(false);
 
         tutorialActive = false;
@@ -266,7 +500,11 @@ public class BaristaMiniGameButtonScript : MonoBehaviour
         {
             customerScriptList.Add(customerObjectList[i].GetComponent<BaristaCustomerScript>());
             customerScriptList[i].SetStartingTime(customerStartingTime);
+            customerScriptList[i].SetImages(blackCoffeeImage, icedCoffeeImage, icedLatteImage, latteImage);
         }
+
+        ingrediantList = new List<Ingrediant>();
+        UpdateTableDrawing();
     }
 
     public void QuitGame()
@@ -282,7 +520,7 @@ public class BaristaMiniGameButtonScript : MonoBehaviour
         recipePanel.SetActive(false);
 
         gameOver = true;
-        gameOverScene.SetActive(true);
+        gameOverPanel.SetActive(true);
         if (score < 0)
         {
             score = 0;
