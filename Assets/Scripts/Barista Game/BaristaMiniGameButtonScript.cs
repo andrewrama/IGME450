@@ -288,10 +288,9 @@ public class BaristaMiniGameButtonScript : MonoBehaviour
             score = 0;
         }
 
-        CurrencyManager.currency += score;
-        CurrencyManager.UpdateCurrency();
+        int fishEarned = CurrencyManager.ScoreToCurrency(score, 3);
 
-        gameOverLabel.text = $"Game Over\nYou earned {score} fish";
+        gameOverLabel.text = $"Game Over\nYou earned {fishEarned} fish";
     }
 
     public void GoToMainMenu()

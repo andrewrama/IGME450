@@ -33,4 +33,19 @@ public class CurrencyManager : MonoBehaviour
         currency = PlayerPrefs.GetInt(FishCurrency);
         PlayerPrefs.Save();
     }
+
+    /// <summary>
+    /// Allows for easy scaling of score to currency after completion of minigames.
+    /// Calls CurrencyManager.UpdateCurrency();
+    /// Returns fish gained.
+    /// </summary>
+    /// <param name="score">The score the player earned in the minigame</param>
+    /// <param name="multiplier">The game's currency multiplier</param>
+    public static int ScoreToCurrency(int score, int multiplier)
+    {
+        int currencyGain = score * multiplier;
+        currency += currencyGain;
+        UpdateCurrency();
+        return currencyGain;
+    }
 }
