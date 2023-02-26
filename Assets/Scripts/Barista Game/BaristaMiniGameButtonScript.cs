@@ -257,7 +257,6 @@ public class BaristaMiniGameButtonScript : MonoBehaviour
         if (addIngrediant)
         {
             ingrediantList.Add(ingrediant);
-            Debug.Log($"Current Ingrediants on the table: {string.Join(",", ingrediantList)}");
             UpdateTableDrawing();
         }
     }
@@ -339,7 +338,6 @@ public class BaristaMiniGameButtonScript : MonoBehaviour
                 break;
         }
 
-        Debug.Log($"Current Spirte being displayed: " + servingTableImage.sprite);
     }
 
     #region Button Press Events
