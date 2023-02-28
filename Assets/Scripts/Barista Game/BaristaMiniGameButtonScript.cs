@@ -66,6 +66,13 @@ public class BaristaMiniGameButtonScript : MonoBehaviour
     #endregion
 
     #region Panels
+
+    [SerializeField]
+    private GameObject cupButtonPanal;
+
+    [SerializeField]
+    private GameObject drinkButtonPanal;
+
     [SerializeField]
     private GameObject gamePanel;
 
@@ -283,6 +290,8 @@ public class BaristaMiniGameButtonScript : MonoBehaviour
                 { 
                     servingTableImage.sprite = coldCupImage;
                 }
+
+                ShowDrinks();
                 break;
 
             case 2:
@@ -343,6 +352,7 @@ public class BaristaMiniGameButtonScript : MonoBehaviour
     #region Button Press Events
     public void TrashButtonPressed()
     {
+        ShowCups();
         ingrediantList.Clear();
         UpdateTableDrawing();
     }
@@ -387,6 +397,7 @@ public class BaristaMiniGameButtonScript : MonoBehaviour
             score--;
         }
 
+        ShowCups();
         ingrediantList.Clear();
         UpdateTableDrawing();
 
@@ -502,6 +513,8 @@ public class BaristaMiniGameButtonScript : MonoBehaviour
         gameOverPanel.SetActive(false);
         tutorialPanel.SetActive(false);
 
+        ShowCups();
+
         tutorialActive = false;
         gameOver = false;
 
@@ -551,6 +564,18 @@ public class BaristaMiniGameButtonScript : MonoBehaviour
     public void GoToMainMenu()
     { 
         sceneChanger.BaristaScene();
+    }
+
+    private void ShowCups()
+    {
+        cupButtonPanal.SetActive(true);
+        drinkButtonPanal.SetActive(false);
+    }
+
+    private void ShowDrinks()
+    {
+        cupButtonPanal.SetActive(false);
+        drinkButtonPanal.SetActive(true);
     }
 
 
