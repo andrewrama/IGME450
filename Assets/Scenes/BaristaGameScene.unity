@@ -1407,7 +1407,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &158642215
 RectTransform:
   m_ObjectHideFlags: 0
@@ -3335,10 +3335,10 @@ RectTransform:
   m_Father: {fileID: 44047478}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 319.99997, y: -177.8404}
+  m_SizeDelta: {x: 639.99994, y: 355.6808}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &382523855
 MonoBehaviour:
@@ -6621,8 +6621,8 @@ RectTransform:
   - {fileID: 158642215}
   - {fileID: 888706757}
   - {fileID: 1981881816}
-  - {fileID: 2018537739}
   - {fileID: 1793435085}
+  - {fileID: 2018537739}
   - {fileID: 1110103493}
   m_Father: {fileID: 1924567127}
   m_RootOrder: 0
@@ -7498,10 +7498,10 @@ RectTransform:
   m_Father: {fileID: 31996752}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 79.999985, y: -35.568085}
+  m_SizeDelta: {x: 159.99997, y: 71.13617}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1087323252
 MonoBehaviour:
@@ -10247,10 +10247,10 @@ RectTransform:
   m_Father: {fileID: 31996752}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 239.99995, y: -35.568085}
+  m_SizeDelta: {x: 159.99997, y: 71.13617}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1454911872
 MonoBehaviour:
@@ -12680,7 +12680,7 @@ RectTransform:
   - {fileID: 1808762802}
   - {fileID: 1410837040}
   m_Father: {fileID: 932927076}
-  m_RootOrder: 8
+  m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
@@ -13001,14 +13001,14 @@ MonoBehaviour:
   trashButton: {fileID: 1153916841}
   helpButton: {fileID: 1617649966}
   defaultImage: {fileID: 21300000, guid: b0fa21c003254324f92e293de2f88ead, type: 3}
-  blackCoffeeImage: {fileID: 21300000, guid: 7776835b0bddc284d8f153f5a6f033e5, type: 3}
-  coffeeImage: {fileID: 21300000, guid: b916c60579cd8e546bd63ca38873fbb8, type: 3}
+  blackCoffeeImage: {fileID: 21300000, guid: b916c60579cd8e546bd63ca38873fbb8, type: 3}
+  coffeeImage: {fileID: 21300000, guid: edd7f739790e72a419e79778566daef9, type: 3}
   coldCupWithMilkImage: {fileID: 21300000, guid: a67dc33aa8cc2f24aa22523cc811da82,
     type: 3}
-  coldCupImage: {fileID: 21300000, guid: 49a3ac8a6024e7a4f98794af1f34212c, type: 3}
+  coldCupImage: {fileID: 21300000, guid: 7e524765775432b43ac6dcc55f394074, type: 3}
   hotCupWithMilkImage: {fileID: 21300000, guid: 3ee1fbdffee63b844bc42986dda8b999,
     type: 3}
-  hotCupImage: {fileID: 21300000, guid: e3c20b3424f035b44b0fa97c5c645417, type: 3}
+  hotCupImage: {fileID: 21300000, guid: 02bc7977b3eb42d4697291c770ed2ceb, type: 3}
   icedCoffeeImage: {fileID: 21300000, guid: 57ec35b22947eb44f804489eeb78d90d, type: 3}
   icedLatteImage: {fileID: 21300000, guid: 3bdb24adc9c0aa747a0b1cb0bcdfc0b2, type: 3}
   latteImage: {fileID: 21300000, guid: 67305a2bddd117c4c8e3c2ecc10ef920, type: 3}
@@ -13584,7 +13584,7 @@ GameObject:
   - component: {fileID: 1981881818}
   - component: {fileID: 1981881817}
   m_Layer: 5
-  m_Name: Tutorial Panel
+  m_Name: Tutorial Panel (OLD)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -13919,7 +13919,7 @@ RectTransform:
   - {fileID: 334512947}
   - {fileID: 1453966061}
   m_Father: {fileID: 932927076}
-  m_RootOrder: 7
+  m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
