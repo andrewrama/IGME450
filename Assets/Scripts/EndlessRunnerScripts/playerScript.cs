@@ -1,19 +1,21 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class PlayerScript : MonoBehaviour
-
 {
     public int velocity;
     public Vector2 screenBounds;
     public LogicScript logic;
+    float centerPoint;
 
     // Start is called before the first frame update
     void Start()
     {
         screenBounds = Camera.main.ScreenToWorldPoint(new Vector3(Screen.width, Screen.height, Camera.main.transform.position.z)); //gives us half the screen width and half the screen height (but they're negative values!)
         logic = GameObject.FindGameObjectWithTag("Logic").GetComponent<LogicScript>();
+        centerPoint = transform.position.x;
     }
 
     // Update is called once per frame
@@ -22,13 +24,14 @@ public class PlayerScript : MonoBehaviour
         // check if player has clicked 'A' or 'D'
         // move left or right
 
-
-        if (Input.GetKey(KeyCode.A))
+        if (Input.GetKey(KeyCode.A)) // || gesture
         {
+            Debug.Log("A pressed");
             transform.position -= new Vector3(velocity, 0, 0);
         }
         if (Input.GetKey(KeyCode.D))
         {
+            Debug.Log("D pressed");
             transform.position += new Vector3(velocity, 0, 0);
         }
 
@@ -42,26 +45,28 @@ public class PlayerScript : MonoBehaviour
         transform.position = viewPos;
     }
 
-    private void OnTriggerEnter2D(Collider2D collision)
+    private void OnCollisionEnter(Collision collision)
     {
-        Debug.Log("COLLISION");
-        if(collision.gameObject.CompareTag("treat"))
+        Debug.Log("collision");
+        if (collision.gameObject.CompareTag("treatPickup"))
         {
-            Debug.Log("Collided with a treat!");
+            Debug.Log("collided with a treat!");
         }
-        else if(collision.gameObject.CompareTag("box"))
+        else if (collision.gameObject.CompareTag("boxObstacle"))
         {
-            Debug.Log("Collided with a box!");
+            Debug.Log("collided with a box!");
         }
 
-        //if (collision.gameObject.layer == 7)
+        //if (collision.gameobject.layer == 7)
         //{
-        //    Debug.Log("Collided with a treat!");
-        //    logic.getTreat();
+        //    debug.log("collided with a treat!");
+        //    logic.gettreat();
         //}
-        //if (collision.gameObject.layer == 6)
+        //if (collision.gameobject.layer == 6)
         //{
-        //    Debug.Log("Collided with a box!");
+        //    debug.log("collided with a box!");
+
         //}
     }
+
 }

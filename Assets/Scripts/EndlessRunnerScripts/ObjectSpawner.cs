@@ -32,7 +32,7 @@ public class ObjectSpawner : MonoBehaviour
         }
         else
         {
-            Instantiate(spawnedObject, new Vector3(Random.Range(screenBounds.x * 2, screenBounds.x * 6), transform.position.y, -62.8f), transform.rotation);
+            Instantiate(spawnedObject, new Vector3(Random.Range(screenBounds.x * 2, screenBounds.x * 6), transform.position.y, 0), transform.rotation);
             //Instantiate(spawnedObject, new Vector3(Random.Range(10, transform.position.x+10), transform.position.y, 0), transform.rotation);
             timer = 0;
         }
