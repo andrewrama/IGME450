@@ -13009,10 +13009,10 @@ MonoBehaviour:
   hotCupWithMilkImage: {fileID: 21300000, guid: 3ee1fbdffee63b844bc42986dda8b999,
     type: 3}
   hotCupImage: {fileID: 21300000, guid: 02bc7977b3eb42d4697291c770ed2ceb, type: 3}
-  icedCoffeeImage: {fileID: 21300000, guid: 57ec35b22947eb44f804489eeb78d90d, type: 3}
-  icedLatteImage: {fileID: 21300000, guid: 3bdb24adc9c0aa747a0b1cb0bcdfc0b2, type: 3}
+  icedCoffeeImage: {fileID: 21300000, guid: 960cfa396cd420c4490d9c1206190f8b, type: 3}
+  icedLatteImage: {fileID: 21300000, guid: 97b4924f740e0684d8222a25f9a8be69, type: 3}
   latteImage: {fileID: 21300000, guid: 67305a2bddd117c4c8e3c2ecc10ef920, type: 3}
-  milkImage: {fileID: 21300000, guid: 61f2d7f6fb5ae91478f2e91783149392, type: 3}
+  milkImage: {fileID: 21300000, guid: 9b1c96a1150daf54798c6d0c48dfb5cf, type: 3}
   cupButtonPanal: {fileID: 1808762801}
   drinkButtonPanal: {fileID: 1410837039}
   gamePanel: {fileID: 1793435084}
