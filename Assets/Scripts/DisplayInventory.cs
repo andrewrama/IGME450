@@ -24,7 +24,6 @@ public class DisplayInventory : MonoBehaviour
 
             listItem.transform.SetParent(contentContainer);
             //listItem.GetComponent<LayoutElement>().preferredWidth = Screen.width / 2;
-            listItem.transform.position = new Vector3(0, contentContainer.position.y, 0);
 
             //listItem.transform.localScale = Vector2.one;
         }

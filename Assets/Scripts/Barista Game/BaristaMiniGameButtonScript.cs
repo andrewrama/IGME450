@@ -66,6 +66,13 @@ public class BaristaMiniGameButtonScript : MonoBehaviour
     #endregion
 
     #region Panels
+
+    [SerializeField]
+    private GameObject cupButtonPanal;
+
+    [SerializeField]
+    private GameObject drinkButtonPanal;
+
     [SerializeField]
     private GameObject gamePanel;
 
@@ -76,13 +83,16 @@ public class BaristaMiniGameButtonScript : MonoBehaviour
     private GameObject tutorialPanel;
 
     [SerializeField]
+    private List<GameObject> firstTutorialPages;
+
+    [SerializeField]
     private GameObject gameOverPanel;
     #endregion
 
     private GameSceneChanger sceneChanger;
 
     public enum Ingrediant
-    { 
+    {
         HotCup,
         ColdCup,
         Coffee,
@@ -140,7 +150,7 @@ public class BaristaMiniGameButtonScript : MonoBehaviour
 
     void Start()
     {
-        
+
     }
 
     void OnEnable()
@@ -159,14 +169,14 @@ public class BaristaMiniGameButtonScript : MonoBehaviour
         {
             CurrencyManager.showBaristaTuorial = 0;
             CurrencyManager.UpdateBaristaGameTutoiral();
-            
-            OpenTutorial();
+
+            OpenFirstTutorial();
         }
     }
 
     private void Update()
     {
-        if (!tutorialActive  && !gameOver && timer > 0)
+        if (!tutorialActive && !gameOver && timer > 0)
         {
             timer -= Time.deltaTime;
             timeLabel.text = "Time: " + (int)timer;
@@ -179,7 +189,7 @@ public class BaristaMiniGameButtonScript : MonoBehaviour
         }
     }
 
-   
+
 
     public void HandleServingTable(Ingrediant ingrediant)
     {
@@ -230,7 +240,7 @@ public class BaristaMiniGameButtonScript : MonoBehaviour
                 else if (ingrediantList.Contains(Ingrediant.HotCup) &&
                          ingrediantList.Contains(Ingrediant.Milk) &&
                          ingrediant == Ingrediant.Coffee)
-                { 
+                {
                     addIngrediant = true;
                 }
 
@@ -251,13 +261,12 @@ public class BaristaMiniGameButtonScript : MonoBehaviour
                 }
             }
 
-           
+
         }
 
         if (addIngrediant)
         {
             ingrediantList.Add(ingrediant);
-            Debug.Log($"Current Ingrediants on the table: {string.Join(",", ingrediantList)}");
             UpdateTableDrawing();
         }
     }
@@ -281,9 +290,11 @@ public class BaristaMiniGameButtonScript : MonoBehaviour
                     servingTableImage.sprite = hotCupImage;
                 }
                 else
-                { 
+                {
                     servingTableImage.sprite = coldCupImage;
                 }
+
+                ShowDrinks();
                 break;
 
             case 2:
@@ -291,7 +302,7 @@ public class BaristaMiniGameButtonScript : MonoBehaviour
                 //- hot cup + coffee = black coffee
                 if (ingrediantList.Contains(Ingrediant.HotCup) &&
                    ingrediantList.Contains(Ingrediant.Coffee))
-                { 
+                {
                     servingTableImage.sprite = blackCoffeeImage;
                 }
 
@@ -327,7 +338,7 @@ public class BaristaMiniGameButtonScript : MonoBehaviour
                 if (ingrediantList.Contains(Ingrediant.HotCup) &&
                     ingrediantList.Contains(Ingrediant.Coffee) &&
                     ingrediantList.Contains(Ingrediant.Milk))
-                { 
+                {
                     servingTableImage.sprite = latteImage;
                 }
 
@@ -339,12 +350,25 @@ public class BaristaMiniGameButtonScript : MonoBehaviour
                 break;
         }
 
-        Debug.Log($"Current Spirte being displayed: " + servingTableImage.sprite);
     }
 
     #region Button Press Events
+
+    public void NextTutorial(int currentPage)
+    {
+        firstTutorialPages[currentPage].SetActive(false);
+        firstTutorialPages[currentPage + 1].SetActive(true);
+    }
+
+    public void PastTutoiral(int currentPage)
+    {
+        firstTutorialPages[currentPage].SetActive(false);
+        firstTutorialPages[currentPage - 1].SetActive(true);
+    }
+
     public void TrashButtonPressed()
     {
+        ShowCups();
         ingrediantList.Clear();
         UpdateTableDrawing();
     }
@@ -389,6 +413,7 @@ public class BaristaMiniGameButtonScript : MonoBehaviour
             score--;
         }
 
+        ShowCups();
         ingrediantList.Clear();
         UpdateTableDrawing();
 
@@ -396,6 +421,31 @@ public class BaristaMiniGameButtonScript : MonoBehaviour
         scoreLabel.text = "Score: " + score;
     }
     #endregion
+
+    public void OpenFirstTutorial()
+    {
+        DisableGame(false);
+
+        tutorialActive = true;
+
+        gamePanel.SetActive(false);
+
+        //display tutorial object
+        for (int i = 0; i < firstTutorialPages.Count; i++)
+        {
+            GameObject panel = firstTutorialPages[i];
+
+            if (i == 0)
+            {
+                panel.SetActive(true);
+            }
+
+            else
+            {
+                panel.SetActive(false);
+            }
+        }
+    }
 
     public void OpenTutorial()
     {
@@ -417,6 +467,18 @@ public class BaristaMiniGameButtonScript : MonoBehaviour
 
         //hide tutorial object
         tutorialPanel.SetActive(false);
+
+        gamePanel.SetActive(true);
+    }
+
+    public void CloseFirstTutoiral()
+    {
+        EnableGame(false);
+
+        tutorialActive = false;
+
+        //hide tutorial object
+        firstTutorialPages[5].SetActive(false);
 
         gamePanel.SetActive(true);
     }
@@ -504,6 +566,8 @@ public class BaristaMiniGameButtonScript : MonoBehaviour
         gameOverPanel.SetActive(false);
         tutorialPanel.SetActive(false);
 
+        ShowCups();
+
         tutorialActive = false;
         gameOver = false;
 
@@ -553,6 +617,18 @@ public class BaristaMiniGameButtonScript : MonoBehaviour
     public void GoToMainMenu()
     { 
         sceneChanger.BaristaScene();
+    }
+
+    private void ShowCups()
+    {
+        cupButtonPanal.SetActive(true);
+        drinkButtonPanal.SetActive(false);
+    }
+
+    private void ShowDrinks()
+    {
+        cupButtonPanal.SetActive(false);
+        drinkButtonPanal.SetActive(true);
     }
 
 
