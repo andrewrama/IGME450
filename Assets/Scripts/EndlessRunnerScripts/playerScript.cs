@@ -1,19 +1,24 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class PlayerScript : MonoBehaviour
-
 {
     public int velocity;
     public Vector2 screenBounds;
     public LogicScript logic;
+
+    // center is 108
+    // furthest left side is 54 
+    // furthest right side is 162
 
     // Start is called before the first frame update
     void Start()
     {
         screenBounds = Camera.main.ScreenToWorldPoint(new Vector3(Screen.width, Screen.height, Camera.main.transform.position.z)); //gives us half the screen width and half the screen height (but they're negative values!)
         logic = GameObject.FindGameObjectWithTag("Logic").GetComponent<LogicScript>();
+        //centerPoint = transform.position.x;
     }
 
     // Update is called once per frame
@@ -22,14 +27,37 @@ public class PlayerScript : MonoBehaviour
         // check if player has clicked 'A' or 'D'
         // move left or right
 
+        // left
+        if (Input.GetKeyDown(KeyCode.A)) // || gesture
+        {
+            Debug.Log("A pressed");
+            //transform.position -= new Vector3(velocity, 0, 0);
+            if (transform.position.x == logic.centerPoint)
+            {
+                transform.position = new Vector3(logic.leftEdge, 194, 0);
+            }
+            else if (transform.position.x > logic.centerPoint)
+            {
+                transform.position = new Vector3(logic.centerPoint, 194, 0);
+            }
 
-        if (Input.GetKey(KeyCode.A))
-        {
-            transform.position -= new Vector3(velocity, 0, 0);
         }
-        if (Input.GetKey(KeyCode.D))
+
+        // right
+        if (Input.GetKeyDown(KeyCode.D))
         {
-            transform.position += new Vector3(velocity, 0, 0);
+            Debug.Log("D pressed");
+            //transform.position += new Vector3(velocity, 0, 0);
+            if (transform.position.x == logic.centerPoint)
+            {
+                transform.position = new Vector3(logic.rightEdge, 194, 0);
+            }
+            else if (transform.position.x < logic.centerPoint)
+            {
+                transform.position = new Vector3(logic.centerPoint, 194, 0);
+            }
+
+
         }
 
     }
@@ -42,26 +70,20 @@ public class PlayerScript : MonoBehaviour
         transform.position = viewPos;
     }
 
-    private void OnTriggerEnter2D(Collider2D collision)
+    private void OnCollisionEnter(Collision collision)
     {
-        Debug.Log("COLLISION");
-        if(collision.gameObject.CompareTag("treat"))
+        // increase score when treat is collected, remove treat from screen
+        if (collision.gameObject.CompareTag("treatPickup"))
         {
-            Debug.Log("Collided with a treat!");
-        }
-        else if(collision.gameObject.CompareTag("box"))
-        {
-            Debug.Log("Collided with a box!");
-        }
+            logic.GetTreat();
+            Destroy(collision.gameObject);
 
-        //if (collision.gameObject.layer == 7)
-        //{
-        //    Debug.Log("Collided with a treat!");
-        //    logic.getTreat();
-        //}
-        //if (collision.gameObject.layer == 6)
-        //{
-        //    Debug.Log("Collided with a box!");
-        //}
+        }
+        // end the game on collision with a box
+        else if (collision.gameObject.CompareTag("boxObstacle"))
+        {
+            logic.GameOver();
+        }
     }
+
 }
