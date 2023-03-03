@@ -47,26 +47,18 @@ public class PlayerScript : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
-        Debug.Log("collision");
         if (collision.gameObject.CompareTag("treatPickup"))
         {
             Debug.Log("collided with a treat!");
+            logic.GetTreat();
+            Destroy(collision.gameObject);
+
         }
         else if (collision.gameObject.CompareTag("boxObstacle"))
         {
-            Debug.Log("collided with a box!");
+            Debug.Log("Holy crap Lois! You hit a box!");
+            Destroy(gameObject);
         }
-
-        //if (collision.gameobject.layer == 7)
-        //{
-        //    debug.log("collided with a treat!");
-        //    logic.gettreat();
-        //}
-        //if (collision.gameobject.layer == 6)
-        //{
-        //    debug.log("collided with a box!");
-
-        //}
     }
 
 }

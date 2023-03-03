@@ -9,11 +9,17 @@ public class LogicScript : MonoBehaviour
     public TextMeshProUGUI scoreText;
     public string text;
 
-    //text = scoreText.GetComponent<TMPro.TextMeshProUGUI>().text;
     [ContextMenu("Increase Score")]
-    public void getTreat()
+    public void GetTreat()
     {
         treatsCollected += 1;
-        scoreText.GetComponent<TMPro.TextMeshProUGUI>().text = treatsCollected.ToString() ;
+        scoreText.GetComponent<TMPro.TextMeshProUGUI>().text = treatsCollected.ToString();
+    }
+
+    public void GameOver()
+    {
+        // display final score
+        // stop da game
+
     }
 }
