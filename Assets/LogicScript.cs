@@ -5,10 +5,13 @@ using UnityEngine;
 using UnityEngine.UI;
 public class LogicScript : MonoBehaviour
 {
+    #region Variables
     public int treatsCollected;
+
     public TextMeshProUGUI scoreText;
     public TextMeshProUGUI finalScoreText;
     public string text;
+
     public GameObject gameOverScreen;
     public GameObject treatSpawn;
     public GameObject boxSpawn;
@@ -17,13 +20,30 @@ public class LogicScript : MonoBehaviour
     private GameObject[] boxesLeft;
     private GameObject[] treatsLeft;
 
-    [ContextMenu("Increase Score")]
+    public float centerPoint;
+    public float leftEdge;
+    public float rightEdge;
+    #endregion
+
+    void Start()
+    {
+        centerPoint = player.transform.position.x;
+        leftEdge = centerPoint - 54;
+        rightEdge = centerPoint + 54;
+    }
+
+    /// <summary>
+    /// increases number of treats collected, updates text on screen
+    /// </summary>
     public void GetTreat()
     {
         treatsCollected += 1;
         scoreText.GetComponent<TMPro.TextMeshProUGUI>().text = treatsCollected.ToString();
     }
 
+    /// <summary>
+    /// clears game screen and moves to game over screen
+    /// </summary>
     public void GameOver()
     {
         // stop the game
@@ -31,6 +51,7 @@ public class LogicScript : MonoBehaviour
         boxSpawn.SetActive(false);
         player.SetActive(false);
 
+        // clear the screen
         CleanUp();
 
         // display game over screen
@@ -40,6 +61,9 @@ public class LogicScript : MonoBehaviour
         finalScoreText.GetComponent<TMPro.TextMeshProUGUI>().text = scoreText.GetComponent<TMPro.TextMeshProUGUI>().text;        
     }
 
+    /// <summary>
+    /// clears game over screen and moves to game, restarts game
+    /// </summary>
     public void StartGame()
     {
         // reset the score
@@ -55,16 +79,19 @@ public class LogicScript : MonoBehaviour
 
         // restart player
         player.SetActive(true);
-        player.transform.position = new Vector3(109, 194, 0);
+        player.transform.position = new Vector3(108, 194, 0);
     }
 
     // helper methods
+
+    /// <summary>
+    /// cleans up leftover GameObjects on screen
+    /// </summary>
     private void CleanUp()
     {
         boxesLeft = GameObject.FindGameObjectsWithTag("boxObstacle");
         treatsLeft = GameObject.FindGameObjectsWithTag("treatPickup");
 
-        // clear the screen
         foreach (GameObject item in boxesLeft)
         {
             Destroy(item);
