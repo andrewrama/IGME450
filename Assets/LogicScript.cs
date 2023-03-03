@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.SocialPlatforms.Impl;
 using UnityEngine.UI;
 public class LogicScript : MonoBehaviour
 {
@@ -61,7 +62,10 @@ public class LogicScript : MonoBehaviour
         gameOverScreen.SetActive(true);
 
         // set final score
-        finalScoreText.GetComponent<TMPro.TextMeshProUGUI>().text = scoreText.GetComponent<TMPro.TextMeshProUGUI>().text;        
+        finalScoreText.GetComponent<TMPro.TextMeshProUGUI>().text = (treatsCollected * 2).ToString(); ;
+
+        // add to currency
+        CurrencyManager.ScoreToCurrency(treatsCollected, 2);
     }
 
     /// <summary>
