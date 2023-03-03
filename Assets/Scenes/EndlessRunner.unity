@@ -139,7 +139,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &5634826
 Transform:
   m_ObjectHideFlags: 0
@@ -167,20 +167,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1e8ee3fc005a6634d8c856cf6c2d3cb6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  boxPrefab: {fileID: 3915528327930444545, guid: 3efc2196f127fa54baabe256b9d3193c,
+  spawnedObject: {fileID: 3915528327930444545, guid: 3efc2196f127fa54baabe256b9d3193c,
     type: 3}
-  treatPrefab: {fileID: 6449011501340267929, guid: 673300a87742eda40aaf5aae00bdd904,
-    type: 3}
-  screenBounds: {x: 0, y: 0}
   logic: {fileID: 548679826}
-  posOptions:
-  - 108
-  - 54
-  - 162
-  boxSpawnRate: 1.3
-  treatSpawnRate: 3
+  spawnRate: 1.4
   timer: 0
-  boxTime: 0
 --- !u!1 &72384113
 GameObject:
   m_ObjectHideFlags: 0
@@ -371,6 +362,7 @@ MonoBehaviour:
   centerPoint: 0
   leftEdge: 0
   rightEdge: 0
+  posOptions: []
 --- !u!1 &587939416
 GameObject:
   m_ObjectHideFlags: 0
@@ -416,17 +408,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1e8ee3fc005a6634d8c856cf6c2d3cb6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  boxPrefab: {fileID: 3915528327930444545, guid: 3efc2196f127fa54baabe256b9d3193c,
+  spawnedObject: {fileID: 6449011501340267929, guid: 673300a87742eda40aaf5aae00bdd904,
     type: 3}
-  treatPrefab: {fileID: 6449011501340267929, guid: 673300a87742eda40aaf5aae00bdd904,
-    type: 3}
-  screenBounds: {x: 0, y: 0}
   logic: {fileID: 548679826}
-  posOptions: []
-  boxSpawnRate: 2
-  treatSpawnRate: 3
+  spawnRate: 3
   timer: 0
-  boxTime: 0
 --- !u!114 &587939419
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -23,6 +23,8 @@ public class LogicScript : MonoBehaviour
     public float centerPoint;
     public float leftEdge;
     public float rightEdge;
+
+    public float[] posOptions;
     #endregion
 
     void Start()
@@ -30,6 +32,7 @@ public class LogicScript : MonoBehaviour
         centerPoint = player.transform.position.x;
         leftEdge = centerPoint - 54;
         rightEdge = centerPoint + 54;
+        posOptions = new float[3] { centerPoint, leftEdge, rightEdge };
     }
 
     /// <summary>
