@@ -57,7 +57,7 @@ public class PlayerScript : MonoBehaviour
         else if (collision.gameObject.CompareTag("boxObstacle"))
         {
             Debug.Log("Holy crap Lois! You hit a box!");
-            Destroy(gameObject);
+            logic.GameOver();
         }
     }
 
