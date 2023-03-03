@@ -172,6 +172,25 @@ public class BaristaMiniGameButtonScript : MonoBehaviour
 
             OpenFirstTutorial();
         }
+
+        else
+        {
+            //close all pages besdies the game
+            foreach (GameObject g in firstTutorialPages)
+            {
+                g.SetActive(false);
+            }
+
+            recipePanel.SetActive(false);
+
+            tutorialPanel.SetActive(false);
+
+            gameOverPanel.SetActive(false);
+
+            gamePanel.SetActive(true);
+
+
+        }
     }
 
     private void Update()
@@ -482,6 +501,7 @@ public class BaristaMiniGameButtonScript : MonoBehaviour
 
         gamePanel.SetActive(true);
     }
+    
 
     private BaristaCustomerScript GetCustomerScript(GameObject obj)
     {
