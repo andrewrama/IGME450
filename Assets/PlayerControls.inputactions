@@ -59,6 +59,54 @@
                     "isPartOfComposite": false
                 }
             ]
+        },
+        {
+            "name": "Dev Tools",
+            "id": "058c66b2-6f86-47f0-9a5c-7db4a555dafd",
+            "actions": [
+                {
+                    "name": "Reset",
+                    "type": "Button",
+                    "id": "0e8354a0-52b6-4444-9199-7e630b3b2ac9",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "Give Currency",
+                    "type": "Button",
+                    "id": "5e88764c-ff74-4623-b483-647fb912f345",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "16040727-260d-4219-bdba-2f7c0b27f044",
+                    "path": "<Keyboard>/#(R)",
+                    "interactions": "Tap",
+                    "processors": "",
+                    "groups": "Keyboard",
+                    "action": "Reset",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "c83e9af9-cf31-4262-a421-734b20bb27d3",
+                    "path": "<Keyboard>/#(C)",
+                    "interactions": "Tap",
+                    "processors": "",
+                    "groups": "Keyboard",
+                    "action": "Give Currency",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
         }
     ],
     "controlSchemes": [

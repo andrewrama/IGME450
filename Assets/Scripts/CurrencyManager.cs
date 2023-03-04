@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class CurrencyManager : MonoBehaviour
 {
@@ -17,20 +18,25 @@ public class CurrencyManager : MonoBehaviour
     }
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.R))
-        {
-            currency = 0;
-            UpdateCurrency();
 
-            showBaristaTuorial = 1;
-            UpdateBaristaGameTutoiral();
-        }
 
-        if (Input.GetKeyDown(KeyCode.C))
-        {
-            currency = 10000;
-            UpdateCurrency();
-        }
+    }
+
+    public void Reset(InputAction.CallbackContext context)
+    {
+        currency = 0;
+        UpdateCurrency();
+
+        showBaristaTuorial = 1;
+        UpdateBaristaGameTutoiral();
+
+        CatInventory.Instance.ownedCats.Clear();
+    }
+
+    public void GiveCurrency(InputAction.CallbackContext context)
+    {
+        currency = 10000;
+        UpdateCurrency();
     }
 
     public static void UpdateCurrency()
