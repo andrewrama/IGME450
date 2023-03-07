@@ -15,6 +15,6 @@ public class MoveCats : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        cats[0].transform.position = new Vector3(80 * Mathf.Sin(Time.realtimeSinceStartup/5), 0, -108);
+        cats[0].transform.position = new Vector3(80 * Mathf.Sin(Time.realtimeSinceStartup/5), 0, -160 - 20 * Mathf.Cos(Time.realtimeSinceStartup / 5));
     }
 }
