@@ -5,27 +5,86 @@ using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
 {
-    // Start is called before the first frame update
     [SerializeField]
+    private Text fishText;
+
+    [SerializeField]
+    //the image of the bar
     private Image filledProgressBar;
 
+    
     [SerializeField]
+    //the value of which the bar will increase/decrese
     private float increment;
 
-    RectTransform progressBarRectTransform;
+    private RectTransform progressBarRectTransform;
 
-    private float num;
+    //the progress the player has so far to catch to fish
+    private float progressVal;
+
+    //the target the player needs to hit in order to catch the fish
+    private int target = 5;
+
+    //the timer until the player can catch a fish
+    [SerializeField]
+    private float fishingTimer;
+
+    private float currentFishTimer;
+
+
+    bool fishCaught = false;
     void Start()
     {
         progressBarRectTransform = filledProgressBar.rectTransform;
-        num = 0;
+        progressVal = 100;
+        fishCaught = false; 
+        currentFishTimer = fishingTimer;
     }
 
     // Update is called once per frame
     void Update()
     {
-        num = (num + increment * Time.deltaTime) % 101;
-        progressBarRectTransform.anchorMax = new Vector2(num / 100f, 1);
-        Debug.Log(num);
+        if (!fishCaught)
+        {
+            currentFishTimer -= Time.deltaTime;
+
+            if(currentFishTimer <= 0)
+            {
+                PickRandomNumber();
+                currentFishTimer = fishingTimer;
+            }
+        }
+        /*
+        DecreaseProgress();
+        Debug.Log(progressVal);
+        UpdateBar();
+        */
+    }
+
+
+    private void IncreseProgress()
+    { 
+        progressVal = (progressVal + increment * Time.deltaTime);
+    }
+
+    private void DecreaseProgress()
+    {
+        progressVal = (progressVal - increment * Time.deltaTime);
+    }
+
+    private void UpdateBar()
+    { 
+        progressBarRectTransform.anchorMax = new Vector2(progressVal / 100f, 1);
+    }
+
+    private void PullFish()
+    { 
+        
+
+    }
+
+    private void PickRandomNumber()
+    {
+        fishText.text = "" + Random.Range(1, 10);
     }
 }
