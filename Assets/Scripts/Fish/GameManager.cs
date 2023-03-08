@@ -17,6 +17,9 @@ public class GameManager : MonoBehaviour
     //the value of which the bar will increase/decrese
     private float increment;
 
+    [SerializeField]
+    private Text scoreLabel;
+
     private RectTransform progressBarRectTransform;
 
     //the progress the player has so far to catch to fish
@@ -31,6 +34,9 @@ public class GameManager : MonoBehaviour
 
     private float currentFishTimer;
 
+    //the score of the player
+    int score;
+
 
     bool fishCaught = false;
     void Start()
@@ -39,21 +45,22 @@ public class GameManager : MonoBehaviour
         progressVal = 100;
         fishCaught = false; 
         currentFishTimer = fishingTimer;
+        score = 0;
+        UpdateScore();
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (!fishCaught)
-        {
-            currentFishTimer -= Time.deltaTime;
 
-            if(currentFishTimer <= 0)
-            {
-                PickRandomNumber();
-                currentFishTimer = fishingTimer;
-            }
+        currentFishTimer -= Time.deltaTime;
+
+        if(currentFishTimer <= 0)
+        {
+            PickRandomNumber();
+            currentFishTimer = fishingTimer;
         }
+        
         /*
         DecreaseProgress();
         Debug.Log(progressVal);
@@ -77,14 +84,30 @@ public class GameManager : MonoBehaviour
         progressBarRectTransform.anchorMax = new Vector2(progressVal / 100f, 1);
     }
 
-    private void PullFish()
-    { 
-        
+    public void PullFish()
+    {
+        Debug.Log("score");
+        if (fishText.text == "" + target)
+        {
+            score++;
+
+            UpdateScore();
+        }
+
+        else
+        { 
+            //punish player in some way
+        }
 
     }
 
     private void PickRandomNumber()
     {
         fishText.text = "" + Random.Range(1, 10);
+    }
+
+    private void UpdateScore()
+    {
+        scoreLabel.text = "Score: " + score;
     }
 }
