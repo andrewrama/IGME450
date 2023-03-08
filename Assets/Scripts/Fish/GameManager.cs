@@ -7,21 +7,24 @@ public class GameManager : MonoBehaviour
 {
     // Start is called before the first frame update
     [SerializeField]
-    Image progressBar;
+    private Image filledProgressBar;
+
+    [SerializeField]
+    private float increment;
 
     RectTransform progressBarRectTransform;
 
-    private int num;
+    private float num;
     void Start()
     {
-        progressBarRectTransform = progressBar.rectTransform;
+        progressBarRectTransform = filledProgressBar.rectTransform;
         num = 0;
     }
 
     // Update is called once per frame
     void Update()
     {
-        num = (num + 1) % 101;
+        num = (num + increment * Time.deltaTime) % 101;
         progressBarRectTransform.anchorMax = new Vector2(num / 100f, 1);
         Debug.Log(num);
     }
