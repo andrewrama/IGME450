@@ -6,6 +6,8 @@ using UnityEngine.SceneManagement;
 
 public class DisplayInventory : MonoBehaviour
 {
+    public GameObject inventoryDisplay;
+
     public Transform contentContainer;
     public GameObject inventoryItem;
 
@@ -28,8 +30,18 @@ public class DisplayInventory : MonoBehaviour
             //listItem.transform.localScale = Vector2.one;
         }
 
+    }
 
-
+    public void ToggleVisibility()
+    {
+        if (inventoryDisplay.activeInHierarchy)
+        {
+            inventoryDisplay.SetActive(false);
+        }
+        else
+        {
+            inventoryDisplay.SetActive(true);
+        }
     }
 
 }

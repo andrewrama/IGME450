@@ -2,12 +2,15 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.InputSystem;
+
 
 public class PlayerScript : MonoBehaviour
 {
     public int velocity;
     public Vector2 screenBounds;
     public LogicScript logic;
+    public float currentX;
 
     // center is 108
     // furthest left side is 54 
@@ -18,12 +21,12 @@ public class PlayerScript : MonoBehaviour
     {
         screenBounds = Camera.main.ScreenToWorldPoint(new Vector3(Screen.width, Screen.height, Camera.main.transform.position.z)); //gives us half the screen width and half the screen height (but they're negative values!)
         logic = GameObject.FindGameObjectWithTag("Logic").GetComponent<LogicScript>();
-        //centerPoint = transform.position.x;
     }
 
     // Update is called once per frame
     void Update()
     {
+        currentX = transform.position.x;
         // check if player has clicked 'A' or 'D'
         // move left or right
 
@@ -31,12 +34,12 @@ public class PlayerScript : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.A)) // || gesture
         {
             Debug.Log("A pressed");
-            //transform.position -= new Vector3(velocity, 0, 0);
             if (transform.position.x == logic.centerPoint)
             {
                 transform.position = new Vector3(logic.leftEdge, 194, 0);
             }
             else if (transform.position.x > logic.centerPoint)
+            //else if(transform.position.x == logic.rightEdge)
             {
                 transform.position = new Vector3(logic.centerPoint, 194, 0);
             }
@@ -47,12 +50,12 @@ public class PlayerScript : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.D))
         {
             Debug.Log("D pressed");
-            //transform.position += new Vector3(velocity, 0, 0);
             if (transform.position.x == logic.centerPoint)
             {
                 transform.position = new Vector3(logic.rightEdge, 194, 0);
             }
             else if (transform.position.x < logic.centerPoint)
+            //else if (transform.position.x == logic.leftEdge)
             {
                 transform.position = new Vector3(logic.centerPoint, 194, 0);
             }
@@ -62,12 +65,30 @@ public class PlayerScript : MonoBehaviour
 
     }
 
-    private void LateUpdate()
+    public void MoveLeft(InputAction.CallbackContext context)
     {
-        // clamping to screen
-        Vector3 viewPos = transform.position; // used to alter x and y
-        viewPos.x = Mathf.Clamp(viewPos.x, screenBounds.x*2, screenBounds.x*6);
-        transform.position = viewPos;
+        if (transform.position.x == logic.centerPoint)
+        {
+            transform.position = new Vector3(logic.leftEdge, 194, 0);
+        }
+        else if (transform.position.x > logic.centerPoint)
+        //else if(transform.position.x == logic.rightEdge)
+        {
+            transform.position = new Vector3(logic.centerPoint, 194, 0);
+        }
+    }
+
+    public void MoveRight(InputAction.CallbackContext context)
+    {
+        if (transform.position.x == logic.centerPoint)
+        {
+            transform.position = new Vector3(logic.rightEdge, 194, 0);
+        }
+        else if (transform.position.x < logic.centerPoint)
+        //else if (transform.position.x == logic.leftEdge)
+        {
+            transform.position = new Vector3(logic.centerPoint, 194, 0);
+        }
     }
 
     private void OnCollisionEnter(Collision collision)
@@ -85,5 +106,4 @@ public class PlayerScript : MonoBehaviour
             logic.GameOver();
         }
     }
-
 }

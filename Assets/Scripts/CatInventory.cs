@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class CatInventory : MonoBehaviour
 {
@@ -32,11 +33,9 @@ public class CatInventory : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.R))
-        {
-            CatInventory.Instance.ownedCats.Clear();
-        }
+
     }
+
 
     public void SetInventory(List<Cat> inventory)
     {
