@@ -8,6 +8,7 @@ public class Cat
     public Sprite drawnSprite;
     public string catName;
     public string rarity;
+    public GameObject model;
 
 
     public Cat()
@@ -15,11 +16,12 @@ public class Cat
         catName = "Eggnog";
     }
 
-    public Cat(Sprite image, Sprite drawn, string newName, string rarity)
+    public Cat(Sprite image, Sprite drawn, string newName, string rarity, GameObject model)
     {
         imageSprite = image;
         drawnSprite = drawn;
         catName = newName;
         this.rarity = rarity;
+        this.model = model;
     }
 }

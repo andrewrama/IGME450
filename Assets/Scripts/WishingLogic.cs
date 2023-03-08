@@ -23,6 +23,8 @@ public class WishingLogic : MonoBehaviour
     public Sprite[] catSpritesRare;
     public string[] catNamesRare;
 
+    public GameObject catModel;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -30,6 +32,9 @@ public class WishingLogic : MonoBehaviour
         insufficientFunds.SetActive(false);
         catImage = wishResult.transform.GetChild(0).gameObject;
         catName = wishResult.transform.GetChild(1).gameObject;
+        catModel = new GameObject();
+        catModel.AddComponent<MeshRenderer>();
+        
     }
 
     /// <summary>
@@ -93,7 +98,7 @@ public class WishingLogic : MonoBehaviour
 
         catName.GetComponent<TMPro.TextMeshProUGUI>().text = nameArr[random];
 
-        CatInventory.Instance.AddCatToList(new Cat(sprite.sprite, sprite.sprite, nameArr[random], rarity));
+        CatInventory.Instance.AddCatToList(new Cat(sprite.sprite, sprite.sprite, nameArr[random], rarity, catModel));
     }
 
     public void WishAccepted()
