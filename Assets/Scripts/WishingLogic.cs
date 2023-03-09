@@ -32,9 +32,7 @@ public class WishingLogic : MonoBehaviour
         insufficientFunds.SetActive(false);
         catImage = wishResult.transform.GetChild(0).gameObject;
         catName = wishResult.transform.GetChild(1).gameObject;
-        catModel = new GameObject();
-        catModel.AddComponent<MeshRenderer>();
-        
+
     }
 
     /// <summary>
@@ -97,6 +95,14 @@ public class WishingLogic : MonoBehaviour
         sprite.sprite = spriteArr[random];
 
         catName.GetComponent<TMPro.TextMeshProUGUI>().text = nameArr[random];
+
+        //catModel = GameObject.Instantiate<Mesh>(Resources.Load<Mesh>("Assets/dingus-the-cat/source/Maxwell"));
+
+        Instantiate(catModel, new Vector3(0, 0, 0), transform.rotation);
+
+        catModel.AddComponent<MeshFilter>();
+        catModel.GetComponent<MeshFilter>().mesh = Resources.Load<Mesh>("Assets/Prefabs/dingus-the-cat/source/Maxwell");
+        catModel.transform.localScale *= 200f;
 
         CatInventory.Instance.AddCatToList(new Cat(sprite.sprite, sprite.sprite, nameArr[random], rarity, catModel));
     }
