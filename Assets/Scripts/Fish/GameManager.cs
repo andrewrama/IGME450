@@ -6,13 +6,39 @@ using UnityEngine.UI;
 public class GameManager : MonoBehaviour
 {
     [SerializeField]
+    private int easyStrength;
+
+    [SerializeField]
+    private int mediumStrength;
+
+    [SerializeField]
+    private int hardStrength;
+
+    [SerializeField]
+    private int easyFishAmount;
+
+    [SerializeField]
+    private int mediumFishAmount;
+
+    [SerializeField]
+    private int hardFishAmount;
+
+    private int currentStrength;
+
+    [SerializeField]
+    private Text buttonLabel;
+
+    [SerializeField]
     private Text fishText;
+
+    [SerializeField]
+    private Image baseProgressBar;
 
     [SerializeField]
     //the image of the bar
     private Image filledProgressBar;
 
-    
+
     [SerializeField]
     //the value of which the bar will increase/decrese
     private float increment;
@@ -37,35 +63,46 @@ public class GameManager : MonoBehaviour
     //the score of the player
     int score;
 
-
     bool fishCaught = false;
     void Start()
     {
+
+        WaitForFish();
         progressBarRectTransform = filledProgressBar.rectTransform;
         progressVal = 100;
         fishCaught = false; 
         currentFishTimer = fishingTimer;
         score = 0;
         UpdateScore();
+        PickRandomNumber();
     }
 
     // Update is called once per frame
     void Update()
     {
-
-        currentFishTimer -= Time.deltaTime;
-
-        if(currentFishTimer <= 0)
+        if (!fishCaught)
         {
-            PickRandomNumber();
-            currentFishTimer = fishingTimer;
+            currentFishTimer -= Time.deltaTime;
+
+            if (currentFishTimer <= 0)
+            {
+                PickRandomNumber();
+                currentFishTimer = fishingTimer;
+                currentStrength = getRandomDifficulty();
+            }
         }
-        
-        /*
-        DecreaseProgress();
-        Debug.Log(progressVal);
-        UpdateBar();
-        */
+
+        else
+        {
+            DecreaseProgress();
+            UpdateBar();
+
+            if (progressVal <= 0)
+            {
+                //go back to waiting for a fish
+                WaitForFish();
+            }
+        }
     }
 
 
@@ -86,17 +123,44 @@ public class GameManager : MonoBehaviour
 
     public void PullFish()
     {
-        Debug.Log("score");
-        if (fishText.text == "" + target)
+        if (!fishCaught)
         {
-            score++;
+            if (fishText.text == "" + target)
+            {
+                CatchFish();
+            }
 
-            UpdateScore();
+            else
+            {
+                //punish player in some way
+            }
         }
 
         else
-        { 
-            //punish player in some way
+        {
+            progressVal += currentStrength;
+            UpdateBar();
+
+            if (progressVal >= 100)
+            {
+
+                if (currentStrength == easyStrength)
+                {
+                    score += easyFishAmount;
+                }
+
+                else if (currentStrength == mediumStrength)
+                {
+                    score += mediumFishAmount;
+                }
+
+                else
+                {
+                    score += hardFishAmount;
+                }
+                UpdateScore();
+                WaitForFish();
+            }
         }
 
     }
@@ -109,5 +173,67 @@ public class GameManager : MonoBehaviour
     private void UpdateScore()
     {
         scoreLabel.text = "Score: " + score;
+    }
+
+    /// <summary>
+    /// When the player is wait to get a fish
+    /// </summary>
+    private void WaitForFish()
+    {
+        PickRandomNumber();
+        fishCaught = false;
+
+        //hide the progress bar
+        baseProgressBar.gameObject.SetActive(false);
+        filledProgressBar.gameObject.SetActive(false);
+
+        //show the random number generator
+        fishText.gameObject.SetActive(true);
+
+        //change the button text to catch
+        buttonLabel.text = "Catch";
+
+        currentFishTimer = fishingTimer;
+    }
+
+    /// <summary>
+    /// When the player gets a bite
+    /// </summary>
+    private void CatchFish()
+    {
+        fishCaught = true;
+        progressVal = 10;
+        UpdateBar();
+
+        //show the progress bar 
+        baseProgressBar.gameObject.SetActive(true);
+        filledProgressBar.gameObject.SetActive(true);
+
+
+        //hide the random number generator
+        fishText.gameObject.SetActive(false);
+
+        //change the button text to pull
+        buttonLabel.text = "Pull";
+
+    }
+
+    
+    /// <summary>
+    /// this will set the difficulty of the how to get the fish
+    /// </summary>
+    /// <returns></returns>
+    private int getRandomDifficulty()
+    {
+        int rng = Random.Range(1, 12) / 4;
+
+        return rng == 0 ? easyStrength : rng == 1 ? mediumStrength : hardStrength;
+    }
+
+    public void QuitButton()
+    {
+        //add the currency
+
+        //go to the main menu
     }
 }
