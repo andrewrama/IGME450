@@ -30,38 +30,38 @@ public class PlayerScript : MonoBehaviour
         // check if player has clicked 'A' or 'D'
         // move left or right
 
-        // left
-        if (Input.GetKeyDown(KeyCode.A)) // || gesture
-        {
-            Debug.Log("A pressed");
-            if (transform.position.x == logic.centerPoint)
-            {
-                transform.position = new Vector3(logic.leftEdge, 194, 0);
-            }
-            else if (transform.position.x > logic.centerPoint)
-            //else if(transform.position.x == logic.rightEdge)
-            {
-                transform.position = new Vector3(logic.centerPoint, 194, 0);
-            }
+        //// left
+        //if (Input.GetKeyDown(KeyCode.A)) // || gesture
+        //{
+        //    Debug.Log("A pressed");
+        //    if (transform.position.x == logic.centerPoint)
+        //    {
+        //        transform.position = new Vector3(logic.leftEdge, 194, 0);
+        //    }
+        //    else if (transform.position.x > logic.centerPoint)
+        //    //else if(transform.position.x == logic.rightEdge)
+        //    {
+        //        transform.position = new Vector3(logic.centerPoint, 194, 0);
+        //    }
+        //
+        //}
 
-        }
-
-        // right
-        if (Input.GetKeyDown(KeyCode.D))
-        {
-            Debug.Log("D pressed");
-            if (transform.position.x == logic.centerPoint)
-            {
-                transform.position = new Vector3(logic.rightEdge, 194, 0);
-            }
-            else if (transform.position.x < logic.centerPoint)
-            //else if (transform.position.x == logic.leftEdge)
-            {
-                transform.position = new Vector3(logic.centerPoint, 194, 0);
-            }
-
-
-        }
+        //// right
+        //if (Input.GetKeyDown(KeyCode.D))
+        //{
+        //    Debug.Log("D pressed");
+        //    if (transform.position.x == logic.centerPoint)
+        //    {
+        //        transform.position = new Vector3(logic.rightEdge, 194, 0);
+        //    }
+        //    else if (transform.position.x < logic.centerPoint)
+        //    //else if (transform.position.x == logic.leftEdge)
+        //    {
+        //        transform.position = new Vector3(logic.centerPoint, 194, 0);
+        //    }
+        //
+        //
+        //}
 
     }
 
