@@ -11,7 +11,7 @@
                     "id": "f41e5205-5e7f-4aee-8adc-a8089fef6821",
                     "expectedControlType": "Button",
                     "processors": "",
-                    "interactions": "",
+                    "interactions": "Tap",
                     "initialStateCheck": false
                 },
                 {
@@ -29,7 +29,7 @@
                     "name": "",
                     "id": "80d90c02-7a5a-45ec-83e1-8d67635b02c4",
                     "path": "<Keyboard>/a",
-                    "interactions": "Press(behavior=2)",
+                    "interactions": "Press(behavior=1)",
                     "processors": "",
                     "groups": "Keyboard",
                     "action": "Move Left",
@@ -51,7 +51,7 @@
                     "name": "",
                     "id": "182a8a54-da72-4fbe-a8ef-313ed0117723",
                     "path": "<Keyboard>/d",
-                    "interactions": "Press(pressPoint=1.401298E-45,behavior=2)",
+                    "interactions": "Press(pressPoint=1.401298E-45,behavior=1)",
                     "processors": "",
                     "groups": "Keyboard",
                     "action": "Move Right",
