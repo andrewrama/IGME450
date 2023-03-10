@@ -10,9 +10,9 @@ public class GameSceneChanger : MonoBehaviour
         SceneManager.LoadScene(0);
     }
 
-    public void ClickerScene()
+    public void FishScene()
     {
-        SceneManager.LoadScene(1);
+        SceneManager.LoadScene(5);
     }
 
     public void WishScene()

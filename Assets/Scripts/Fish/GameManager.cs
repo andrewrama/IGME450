@@ -1,10 +1,23 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
 {
+    [SerializeField]
+    private Text gameOverLabel;
+
+    [SerializeField]
+    private GameObject gamePanel;
+
+    [SerializeField]
+    private GameObject gameOverPanel;
+
+    [SerializeField]
+    private GameObject tutorialPanel;
+
     [SerializeField]
     private int easyStrength;
 
@@ -38,6 +51,8 @@ public class GameManager : MonoBehaviour
     //the image of the bar
     private Image filledProgressBar;
 
+    int pityCounter;
+
 
     [SerializeField]
     //the value of which the bar will increase/decrese
@@ -64,17 +79,12 @@ public class GameManager : MonoBehaviour
     int score;
 
     bool fishCaught = false;
+
+    bool gameOver;
+
     void Start()
     {
-
-        WaitForFish();
         progressBarRectTransform = filledProgressBar.rectTransform;
-        progressVal = 100;
-        fishCaught = false; 
-        currentFishTimer = fishingTimer;
-        score = 0;
-        UpdateScore();
-        PickRandomNumber();
     }
 
     // Update is called once per frame
@@ -103,6 +113,22 @@ public class GameManager : MonoBehaviour
                 WaitForFish();
             }
         }
+    }
+
+    void OnEnable()
+    {
+        SceneManager.sceneLoaded += OnSceneLoaded;
+    }
+
+    private void OnDisable()
+    {
+        SceneManager.sceneLoaded -= OnSceneLoaded;
+    }
+
+    private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
+    {
+        gameOver = true;
+        OpenTutoiralPanel();
     }
 
 
@@ -167,7 +193,18 @@ public class GameManager : MonoBehaviour
 
     private void PickRandomNumber()
     {
-        fishText.text = "" + Random.Range(1, 10);
+        int num = Random.Range(1, 10);
+
+        pityCounter++;
+
+        if (num == 5 || pityCounter == 5)
+        {
+            pityCounter = 0;
+            num = 5;
+
+        }
+
+        fishText.text = "" + num;
     }
 
     private void UpdateScore()
@@ -215,7 +252,6 @@ public class GameManager : MonoBehaviour
 
         //change the button text to pull
         buttonLabel.text = "Pull";
-
     }
 
     
@@ -232,8 +268,54 @@ public class GameManager : MonoBehaviour
 
     public void QuitButton()
     {
-        //add the currency
+        OpenGameOverPanel();
 
-        //go to the main menu
+        gameOver = true;
+
+        if (score < 0)
+        {
+            score = 0;
+        }
+
+        int fishEarned = CurrencyManager.ScoreToCurrency(score, 3);
+
+        gameOverLabel.text = $"Game Over\nYou earned {fishEarned} fish";
+    }
+
+    public void OpenTutoiralPanel()
+    {
+        tutorialPanel.SetActive(true);
+        gamePanel.SetActive(false);
+        gameOverPanel.SetActive(false);
+    }
+
+    public void OpenGamePanel()
+    {
+        tutorialPanel.SetActive(false);
+        gamePanel.SetActive(true);
+        gameOverPanel.SetActive(false);
+    }
+
+    public void OpenGameOverPanel()
+    {
+        tutorialPanel.SetActive(false);
+        gamePanel.SetActive(false);
+        gameOverPanel.SetActive(true);
+    }
+
+    public void StartGame()
+    {
+        OpenGamePanel();
+        WaitForFish();
+        progressVal = 10;
+        fishCaught = false;
+        score = 0;
+        UpdateScore();
+        pityCounter = 0;
+    }
+
+    public void GoToCafe()
+    {
+        SceneManager.LoadScene(0);
     }
 }

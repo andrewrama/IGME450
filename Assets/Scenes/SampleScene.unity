@@ -919,6 +919,11 @@ PrefabInstance:
       propertyPath: m_CullTransparentMesh
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 9074932307693090992, guid: a9598ac18e0d35c43b68565d2d9c97c3,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: FishScene
+      objectReference: {fileID: 0}
     - target: {fileID: 9074932307693090995, guid: a9598ac18e0d35c43b68565d2d9c97c3,
         type: 3}
       propertyPath: m_AnchorMax.y

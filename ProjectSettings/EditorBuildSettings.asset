@@ -20,6 +20,9 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/EndlessRunner.unity
     guid: 6dc740ccbd7f4de43a0ce8dd50094341
+  - enabled: 1
+    path: Assets/Scenes/FishGame.unity
+    guid: 54329323dd660d14fbbed3c79489fb9a
   m_configObjects:
     com.unity.adaptiveperformance.simulator.provider_settings: {fileID: 11400000,
       guid: 3e168e040a6553540956f110a3beaeeb, type: 2}
