@@ -91,6 +91,8 @@ public class BaristaMiniGameButtonScript : MonoBehaviour
 
     private GameSceneChanger sceneChanger;
 
+    private JSONReader jsonScript;
+
     public enum Ingrediant
     {
         HotCup,
@@ -141,6 +143,7 @@ public class BaristaMiniGameButtonScript : MonoBehaviour
 
     void Awake()
     {
+        jsonScript = transform.Find("/Reader").GetComponent<JSONReader>();
         gamePanel.SetActive(true);
         recipePanel.SetActive(false);
         sceneChanger = transform.GetComponent<GameSceneChanger>();
@@ -150,7 +153,7 @@ public class BaristaMiniGameButtonScript : MonoBehaviour
 
     void Start()
     {
-
+        
     }
 
     void OnEnable()
@@ -165,10 +168,9 @@ public class BaristaMiniGameButtonScript : MonoBehaviour
 
     void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
-        if (CurrencyManager.showBaristaTuorial == 1)
+        if (jsonScript.ShowBaristaTutorial)
         {
-            CurrencyManager.showBaristaTuorial = 0;
-            CurrencyManager.UpdateBaristaGameTutoiral();
+            jsonScript.ShowBaristaTutorial = false;
 
             OpenFirstTutorial();
         }
@@ -629,9 +631,12 @@ public class BaristaMiniGameButtonScript : MonoBehaviour
             score = 0;
         }
 
-        int fishEarned = CurrencyManager.ScoreToCurrency(score, 3);
+        int fishEarned = score * 3;
+
+        jsonScript.Currency += fishEarned;
 
         gameOverLabel.text = $"Game Over\nYou earned {fishEarned} fish";
+
     }
 
     public void GoToMainMenu()

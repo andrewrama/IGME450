@@ -20,6 +20,8 @@ public class JSONReader : MonoBehaviour
     //all of the cats the player owns
     public List<Cat> ownedCats;
 
+    public bool ShowBaristaTutorial;
+
     private JsonData json;
 
     [System.Serializable]
@@ -28,6 +30,7 @@ public class JSONReader : MonoBehaviour
         public string name;
         public string imgPath;
         public string rarity;
+        public bool showBaristaTuorial;
 
         public JsonCat(string name, string imgPath, string rarity)
         {
@@ -43,6 +46,7 @@ public class JSONReader : MonoBehaviour
         public int currency;
         public List<JsonCat> allCats;
         public List<JsonCat> ownedCats;
+        public bool showBaristaTutorial;
 
         public void PrintAllCatsCount()
         {
@@ -57,6 +61,11 @@ public class JSONReader : MonoBehaviour
         public void PrintCurrency()
         {
             Debug.Log(currency);
+        }
+
+        public void PrintShowBaristaTutorial()
+        {
+            Debug.Log(showBaristaTutorial);
         }
     }
 
@@ -77,7 +86,6 @@ public class JSONReader : MonoBehaviour
     {
         json.currency = Currency;
 
-
         //convert all cats
         json.allCats.Clear();
 
@@ -90,7 +98,10 @@ public class JSONReader : MonoBehaviour
 
         //convert currency
         json.currency = Currency;
-        
+
+        //show barista tutorial
+        json.showBaristaTutorial = ShowBaristaTutorial;
+
         string s = JsonUtility.ToJson(json);
         File.WriteAllText(Application.dataPath + "/info.json", s);
     }
@@ -106,6 +117,7 @@ public class JSONReader : MonoBehaviour
         json.PrintCurrency();
         json.PrintAllCatsCount();
         json.PrintOwnedCatsCount();
+        json.PrintShowBaristaTutorial();
 
         //get all the possible cats
         for (int i = 0; i < json.allCats.Count; i++)
@@ -118,6 +130,8 @@ public class JSONReader : MonoBehaviour
 
         }
 
+
+
         //get a list of all the owned cats
         for (int i = 0; i < json.ownedCats.Count; i++)
         {
@@ -127,6 +141,9 @@ public class JSONReader : MonoBehaviour
             Cat ownedCat = new Cat(image, o.imgPath, o.name, o.rarity);
             ownedCats.Add(ownedCat);
         }
+
+        //showBarsitaTutorial
+        ShowBaristaTutorial = json.showBaristaTutorial;
 
         //get the currecny
         Currency = json.currency;
