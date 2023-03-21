@@ -1,54 +1,54 @@
 
 {
-	"cats": [{
+	"allCats": [{
 		"name": "Maxwell",
 		"imgPath": "/Sprites/maxwell.png",
-		"rarity": "Commen"
+		"rarity": "Common"
 	},
     {
         "name": "Bumi",
 		"imgPath": "/Sprites/Bumi.png",
-		"rarity": "Commen"
+		"rarity": "Common"
     },
     {
         "name": "Grumpy Cat",
 		"imgPath": "/Sprites/GrumpyCat.jpg",
-		"rarity": "Commen"
+		"rarity": "Common"
     },
     {
         "name": "Carl",
 		"imgPath": "/Sprites/Carl.jpg",
-		"rarity": "Commen"
+		"rarity": "Common"
     },
     {
         "name": "Shiloh",
 		"imgPath": "/Sprites/Shiloh.jpg",
-		"rarity": "Commen"
+		"rarity": "Common"
     },
     {
         "name": "Raymond",
 		"imgPath": "/Sprites/raymond.png",
-		"rarity": "Uncommen"
+		"rarity": "Uncommon"
     },
     {
         "name": "Bingus",
 		"imgPath": "/Sprites/Hi_Bingus.png",
-		"rarity": "Uncommen"
+		"rarity": "Uncommon"
     },
     {
         "name": "Azia",
 		"imgPath": "/Sprites/Azia.jpg",
-		"rarity": "Uncommen"
+		"rarity": "Uncommon"
     },
     {
         "name": "Shelby",
 		"imgPath": "/Sprites/Shelby.jpg",
-		"rarity": "Uncommen"
+		"rarity": "Uncommon"
     },
     {
         "name": "Carson",
 		"imgPath": "/Sprites/Carson.jpg",
-		"rarity": "Uncommen"
+		"rarity": "Uncommon"
     },
     {
         "name": "Casper",

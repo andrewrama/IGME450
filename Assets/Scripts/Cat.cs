@@ -29,4 +29,10 @@ public class Cat
         catName = newName;
         this.rarity = rarity;
     }
+
+    public void Print()
+    {
+        Debug.Log($"Name: {catName}, Rarirty: {rarity}");
+    }
+
 }

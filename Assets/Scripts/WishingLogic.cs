@@ -11,18 +11,6 @@ public class WishingLogic : MonoBehaviour
     public GameObject insufficientFunds;
     private GameObject catImage;
     private GameObject catName;
-
-    [SerializeField]
-    private string jsonPath;
-
-    private void LoadQuestions()
-    {
-        using (StreamReader stream = new StreamReader(jsonPath))
-        {
-            string json = stream.ReadToEnd();
-
-        }
-    }
     /*
     // Common
     public Sprite[] catSpritesCommon;
