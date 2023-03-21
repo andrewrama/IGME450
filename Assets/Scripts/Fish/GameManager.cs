@@ -82,8 +82,6 @@ public class GameManager : MonoBehaviour
 
     bool fishCaught = false;
 
-    bool gameOver;
-
     void Start()
     {
         progressBarRectTransform = filledProgressBar.rectTransform;
@@ -131,7 +129,6 @@ public class GameManager : MonoBehaviour
 
     private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
-        gameOver = true;
         OpenTutoiralPanel();
     }
 
@@ -273,8 +270,6 @@ public class GameManager : MonoBehaviour
     public void QuitButton()
     {
         OpenGameOverPanel();
-
-        gameOver = true;
 
         if (score < 0)
         {
