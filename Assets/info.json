@@ -1,0 +1,64 @@
+
+{
+	"cats": [{
+		"name": "Maxwell",
+		"imgPath": "...",
+		"rarity": "Commen"
+	},
+    {
+        "name": "Bumi",
+		"imgPath": "...",
+		"rarity": "Commen"
+    },
+    {
+        "name": "Grumpy Cat",
+		"imgPath": "...",
+		"rarity": "Commen"
+    },
+    {
+        "name": "Carl",
+		"imgPath": "...",
+		"rarity": "Commen"
+    },
+    {
+        "name": "Shiloh",
+		"imgPath": "...",
+		"rarity": "Commen"
+    },
+    {
+        "name": "Raymond",
+		"imgPath": "...",
+		"rarity": "Uncommen"
+    },
+    {
+        "name": "Bingus",
+		"imgPath": "...",
+		"rarity": "Uncommen"
+    },
+    {
+        "name": "Azia",
+		"imgPath": "...",
+		"rarity": "Uncommen"
+    },
+    {
+        "name": "Shelby",
+		"imgPath": "...",
+		"rarity": "Uncommen"
+    },
+    {
+        "name": "Carson",
+		"imgPath": "...",
+		"rarity": "Uncommen"
+    },
+    {
+        "name": "Casper",
+		"imgPath": "...",
+		"rarity": "Rare"
+    },
+    {
+        "name": "Teddy",
+		"imgPath": "...",
+		"rarity": "Rare"
+    }
+]
+}

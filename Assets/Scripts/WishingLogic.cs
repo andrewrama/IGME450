@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using System.IO;
 
 public class WishingLogic : MonoBehaviour
 {
@@ -11,6 +12,18 @@ public class WishingLogic : MonoBehaviour
     private GameObject catImage;
     private GameObject catName;
 
+    [SerializeField]
+    private string jsonPath;
+
+    private void LoadQuestions()
+    {
+        using (StreamReader stream = new StreamReader(jsonPath))
+        {
+            string json = stream.ReadToEnd();
+
+        }
+    }
+    /*
     // Common
     public Sprite[] catSpritesCommon;
     public string[] catNamesCommon;
@@ -22,6 +35,7 @@ public class WishingLogic : MonoBehaviour
     // Rare
     public Sprite[] catSpritesRare;
     public string[] catNamesRare;
+    */
 
     // Start is called before the first frame update
     void Start()
@@ -57,6 +71,7 @@ public class WishingLogic : MonoBehaviour
     /// </summary>
     private void Wish()
     {
+        /*
         CurrencyManager.currency -= 50;
         CurrencyManager.UpdateCurrency();
 
@@ -77,6 +92,7 @@ public class WishingLogic : MonoBehaviour
 
 
         wishResult.SetActive(true);
+        */
     }
 
     /// <summary>

@@ -15,6 +15,7 @@ public class DisplayInventory : MonoBehaviour
     void Start()
     {
         //contentContainer.GetComponent<VerticalLayoutGroup>().spacing = 5;
+
         for (int i = 0; i < CatInventory.Instance.ownedCats.Count; i++)
         {
             Cat currentCat = CatInventory.Instance.ownedCats[i];

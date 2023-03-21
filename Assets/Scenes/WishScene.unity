@@ -558,36 +558,7 @@ MonoBehaviour:
   wishResult: {fileID: 1861013853}
   wishButton: {fileID: 266833582}
   insufficientFunds: {fileID: 1363317481}
-  catSpritesCommon:
-  - {fileID: 21300000, guid: e0939bdd332298846ae08505293e3953, type: 3}
-  - {fileID: 21300000, guid: 7f90c00cb9409e34a8a9d620d6b40852, type: 3}
-  - {fileID: 21300000, guid: 5d2b1696cd9626e4fb9c268e02912f9d, type: 3}
-  - {fileID: 21300000, guid: 25f8eac6efecb094694dd44d17067812, type: 3}
-  - {fileID: 21300000, guid: 2547e3bc91f70ee4e8d03f97c70dd06d, type: 3}
-  catNamesCommon:
-  - Maxwell
-  - Bumi
-  - Grumpy Cat
-  - Carl
-  - Shiloh
-  catSpritesUncommon:
-  - {fileID: 21300000, guid: 94f0a77c311137f4fb2b0fd23c2f8007, type: 3}
-  - {fileID: 21300000, guid: 720608e7073f5dc4790dfd289c61e338, type: 3}
-  - {fileID: 21300000, guid: 8406f5eafd1d9ee4d975c927a273c7da, type: 3}
-  - {fileID: 21300000, guid: 7438c22cc70140a46a1908125a67c1ff, type: 3}
-  - {fileID: 21300000, guid: c72c134a035375b438c39b53e477b385, type: 3}
-  catNamesUncommon:
-  - Raymond
-  - Bingus
-  - Azia
-  - Shelby
-  - Carson
-  catSpritesRare:
-  - {fileID: 21300000, guid: bfa9a26c8895cde4297a6ff856d9cd95, type: 3}
-  - {fileID: 21300000, guid: fef5c50af0331094786a2dcd4cde9661, type: 3}
-  catNamesRare:
-  - Casper
-  - Teddy
+  jsonPath: 
 --- !u!4 &261636058
 Transform:
   m_ObjectHideFlags: 0
@@ -2175,6 +2146,53 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1142421815}
   m_CullTransparentMesh: 1
+--- !u!1 &1160888645
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1160888647}
+  - component: {fileID: 1160888646}
+  m_Layer: 0
+  m_Name: Reader
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1160888646
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1160888645}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9a34edf6c62483943b82efde3abf5f95, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  textJSON: {fileID: 4900000, guid: 8ad4a7572e729334bb48a2d47f56f1e7, type: 3}
+  catPool:
+    cats: []
+--- !u!4 &1160888647
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1160888645}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 111.5, y: 198.2, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 8
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1210083536
 GameObject:
   m_ObjectHideFlags: 0
