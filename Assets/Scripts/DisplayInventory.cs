@@ -11,14 +11,17 @@ public class DisplayInventory : MonoBehaviour
     public Transform contentContainer;
     public GameObject inventoryItem;
 
+    
+    private JSONReader jsonScript;
     // Start is called before the first frame update
     void Start()
     {
+        jsonScript = transform.Find("/Reader").gameObject.GetComponent<JSONReader>();
         //contentContainer.GetComponent<VerticalLayoutGroup>().spacing = 5;
 
-        for (int i = 0; i < CatInventory.Instance.ownedCats.Count; i++)
+        for (int i = 0; i < jsonScript.ownedCats.Count; i++)
         {
-            Cat currentCat = CatInventory.Instance.ownedCats[i];
+            Cat currentCat = jsonScript.ownedCats[i];
             var listItem = Instantiate(inventoryItem);
 
             listItem.GetComponentsInChildren<Image>()[1].sprite = currentCat.imageSprite;

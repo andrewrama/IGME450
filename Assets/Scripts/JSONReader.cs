@@ -2,8 +2,16 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEditor;
+using System.IO;
+using System.Linq;
+
 public class JSONReader : MonoBehaviour
 {
+    [SerializeField]
+    CatInventory catInventoryObject;
+
+    public int Currency;
+
     public TextAsset textJSON;
 
     //all of the cats in the game
@@ -12,12 +20,21 @@ public class JSONReader : MonoBehaviour
     //all of the cats the player owns
     public List<Cat> ownedCats;
 
+    private JsonData json;
+
     [System.Serializable]
     public class JsonCat
     {
         public string name;
         public string imgPath;
         public string rarity;
+
+        public JsonCat(string name, string imgPath, string rarity)
+        {
+            this.name = name;
+            this.imgPath = imgPath;
+            this.rarity = rarity;
+        }
     }
 
     [System.Serializable]
@@ -43,46 +60,81 @@ public class JSONReader : MonoBehaviour
         }
     }
 
-    // Start is called before the first frame update
-    void Start()
+    void Awake()
+    {
+        LoadData();
+
+        DontDestroyOnLoad(this.gameObject);
+
+    }
+
+    public void AddCat(Cat cat)
+    {
+        ownedCats.Add(cat);
+    }
+
+    public void SaveData()
+    {
+        json.currency = Currency;
+
+
+        //convert all cats
+        json.allCats.Clear();
+
+        json.allCats = catPool.Select(x => ConvertCatToJsonCat(x)).ToList();
+
+        //convert owned cats
+        json.ownedCats.Clear();
+
+        json.ownedCats = ownedCats.Select(x => ConvertCatToJsonCat(x)).ToList();
+
+        //convert currency
+        json.currency = Currency;
+        
+        string s = JsonUtility.ToJson(json);
+        File.WriteAllText(Application.dataPath + "/info.json", s);
+    }
+
+    private void LoadData()
     {
         Debug.Log(textJSON.text);
-        JsonData jsonCats = JsonUtility.FromJson<JsonData>(textJSON.text);
+        json = JsonUtility.FromJson<JsonData>(textJSON.text);
 
         catPool = new List<Cat>();
         ownedCats = new List<Cat>();
 
-        jsonCats.PrintCurrency();
-        jsonCats.PrintAllCatsCount();
-        jsonCats.PrintOwnedCatsCount();
+        json.PrintCurrency();
+        json.PrintAllCatsCount();
+        json.PrintOwnedCatsCount();
 
         //get all the possible cats
-        for (int i = 0; i < jsonCats.allCats.Count; i++)
+        for (int i = 0; i < json.allCats.Count; i++)
         {
-            Sprite image = LoadAllCatImage(i, jsonCats);
-            JsonCat a = jsonCats.allCats[i];
+            Sprite image = LoadAllCatImage(i, json);
+            JsonCat a = json.allCats[i];
 
-            Cat allCat = new Cat(image, a.name, a.rarity);
+            Cat allCat = new Cat(image, a.imgPath, a.name, a.rarity);
             catPool.Add(allCat);
 
         }
 
         //get a list of all the owned cats
-        for (int i = 0; i < jsonCats.ownedCats.Count; i++)
+        for (int i = 0; i < json.ownedCats.Count; i++)
         {
-            JsonCat o = jsonCats.ownedCats[i];
-            Sprite image = LoaOwnedCatImage(i, jsonCats);
+            JsonCat o = json.ownedCats[i];
+            Sprite image = LoaOwnedCatImage(i, json);
 
-            Cat ownedCat = new Cat(image, o.name, o.rarity);
+            Cat ownedCat = new Cat(image, o.imgPath, o.name, o.rarity);
             ownedCats.Add(ownedCat);
         }
+
+        //get the currecny
+        Currency = json.currency;
     }
 
     /// <summary>
     /// Helper method in order to get the images for the cats
     /// </summary>
-    /// <param name="index"></param>
-    /// <param name="catPool"></param>
     /// <returns></returns>
     private Sprite LoadAllCatImage(int index, JsonData catPool)
     {
@@ -98,9 +150,8 @@ public class JSONReader : MonoBehaviour
         return (Sprite)AssetDatabase.LoadAssetAtPath(imageURL, typeof(Sprite));
     }
 
-    // Update is called once per frame
-    void Update()
+    private JsonCat ConvertCatToJsonCat(Cat cat)
     {
-        
+        return new JsonCat(cat.catName, cat.imgURl, cat.rarity);
     }
 }

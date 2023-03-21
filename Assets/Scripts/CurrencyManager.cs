@@ -10,11 +10,13 @@ public class CurrencyManager : MonoBehaviour
 
     public const string  showBaristaGameTutorial =  "BaristaTutorial";
     public static int showBaristaTuorial = 1;
+    private JSONReader jsonScript;
 
     // Start is called before the first frame update
     void Start()
     {
         currency = PlayerPrefs.GetInt(FishCurrency);
+        jsonScript = transform.Find("/Reader").gameObject.GetComponent<JSONReader>();
     }
     void Update()
     {
@@ -30,7 +32,7 @@ public class CurrencyManager : MonoBehaviour
         showBaristaTuorial = 1;
         UpdateBaristaGameTutoiral();
 
-        CatInventory.Instance.ownedCats.Clear();
+        jsonScript.ownedCats.Clear();
     }
 
     public void GiveCurrency(InputAction.CallbackContext context)
