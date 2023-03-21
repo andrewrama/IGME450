@@ -23,6 +23,7 @@ public class JSONReader : MonoBehaviour
     [System.Serializable]
     public class JsonData
     {
+        public int currency;
         public List<JsonCat> allCats;
         public List<JsonCat> ownedCats;
 
@@ -35,6 +36,11 @@ public class JSONReader : MonoBehaviour
         {
             Debug.Log(ownedCats.Count);
         }
+
+        public void PrintCurrency()
+        {
+            Debug.Log(currency);
+        }
     }
 
     // Start is called before the first frame update
@@ -46,6 +52,7 @@ public class JSONReader : MonoBehaviour
         catPool = new List<Cat>();
         ownedCats = new List<Cat>();
 
+        jsonCats.PrintCurrency();
         jsonCats.PrintAllCatsCount();
         jsonCats.PrintOwnedCatsCount();
 
