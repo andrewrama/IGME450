@@ -2,62 +2,62 @@
 {
 	"cats": [{
 		"name": "Maxwell",
-		"imgPath": "Assets/Sprites/maxwell.png",
+		"imgPath": "/Sprites/maxwell.png",
 		"rarity": "Commen"
 	},
     {
         "name": "Bumi",
-		"imgPath": "Assets/Sprites/Bumi.png",
+		"imgPath": "/Sprites/Bumi.png",
 		"rarity": "Commen"
     },
     {
         "name": "Grumpy Cat",
-		"imgPath": "Assets/Sprites/GrumpyCat.jpg",
+		"imgPath": "/Sprites/GrumpyCat.jpg",
 		"rarity": "Commen"
     },
     {
         "name": "Carl",
-		"imgPath": "Assets/Sprites/Carl.jpg",
+		"imgPath": "/Sprites/Carl.jpg",
 		"rarity": "Commen"
     },
     {
         "name": "Shiloh",
-		"imgPath": "Assets/Sprites/Shiloh.jpg",
+		"imgPath": "/Sprites/Shiloh.jpg",
 		"rarity": "Commen"
     },
     {
         "name": "Raymond",
-		"imgPath": "Assets/Sprites/raymond.png",
+		"imgPath": "/Sprites/raymond.png",
 		"rarity": "Uncommen"
     },
     {
         "name": "Bingus",
-		"imgPath": "Assets/Sprites/Hi_Bingus.png",
+		"imgPath": "/Sprites/Hi_Bingus.png",
 		"rarity": "Uncommen"
     },
     {
         "name": "Azia",
-		"imgPath": "Assets/Sprites/Azia.jpg",
+		"imgPath": "/Sprites/Azia.jpg",
 		"rarity": "Uncommen"
     },
     {
         "name": "Shelby",
-		"imgPath": "Assets/Sprites/Shelby.jpg",
+		"imgPath": "/Sprites/Shelby.jpg",
 		"rarity": "Uncommen"
     },
     {
         "name": "Carson",
-		"imgPath": "Assets/Sprites/Carson.jpg",
+		"imgPath": "/Sprites/Carson.jpg",
 		"rarity": "Uncommen"
     },
     {
         "name": "Casper",
-		"imgPath": "Assets/Sprites/huh.jpg",
+		"imgPath": "/Sprites/huh.jpg",
 		"rarity": "Rare"
     },
     {
         "name": "Teddy",
-		"imgPath": "Assets/Sprites/Teddy.jpg",
+		"imgPath": "/Sprites/Teddy.jpg",
 		"rarity": "Rare"
     }
 ]

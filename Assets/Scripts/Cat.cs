@@ -22,4 +22,11 @@ public class Cat
         catName = newName;
         this.rarity = rarity;
     }
+
+    public Cat(Sprite image, string newName, string rarity)
+    {
+        imageSprite = image;
+        catName = newName;
+        this.rarity = rarity;
+    }
 }
