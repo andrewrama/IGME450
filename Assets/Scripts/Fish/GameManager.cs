@@ -75,6 +75,8 @@ public class GameManager : MonoBehaviour
 
     private float currentFishTimer;
 
+    private JSONReader jsonScript;
+
     //the score of the player
     int score;
 
@@ -85,6 +87,8 @@ public class GameManager : MonoBehaviour
     void Start()
     {
         progressBarRectTransform = filledProgressBar.rectTransform;
+
+        jsonScript = transform.Find("/Reader").gameObject.GetComponent<JSONReader>();
     }
 
     // Update is called once per frame
@@ -277,7 +281,9 @@ public class GameManager : MonoBehaviour
             score = 0;
         }
 
-        int fishEarned = CurrencyManager.ScoreToCurrency(score, 3);
+        int fishEarned = score * 3;
+
+        jsonScript.Currency += fishEarned;
 
         gameOverLabel.text = $"Game Over\nYou earned {fishEarned} fish";
     }

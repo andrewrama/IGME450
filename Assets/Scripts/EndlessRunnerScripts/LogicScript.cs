@@ -28,12 +28,14 @@ public class LogicScript : MonoBehaviour
     public float[] posOptions;
     #endregion
 
+    private JSONReader jsonScript;
     void Start()
     {
         centerPoint = player.transform.position.x;
         leftEdge = centerPoint - 54;
         rightEdge = centerPoint + 54;
         posOptions = new float[3] { centerPoint, leftEdge, rightEdge };
+        jsonScript = transform.Find("/Reader").gameObject.GetComponent<JSONReader>();
     }
 
     /// <summary>
@@ -65,7 +67,8 @@ public class LogicScript : MonoBehaviour
         finalScoreText.GetComponent<TMPro.TextMeshProUGUI>().text = (treatsCollected * 2).ToString(); ;
 
         // add to currency
-        CurrencyManager.ScoreToCurrency(treatsCollected, 2);
+        treatsCollected *= 2;
+        jsonScript.Currency += treatsCollected;
     }
 
     /// <summary>
