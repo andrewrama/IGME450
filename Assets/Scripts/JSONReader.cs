@@ -7,9 +7,6 @@ using System.Linq;
 
 public class JSONReader : MonoBehaviour
 {
-    [SerializeField]
-    CatInventory catInventoryObject;
-
     public int Currency;
 
     public TextAsset textJSON;
@@ -129,8 +126,6 @@ public class JSONReader : MonoBehaviour
             catPool.Add(allCat);
 
         }
-
-
 
         //get a list of all the owned cats
         for (int i = 0; i < json.ownedCats.Count; i++)

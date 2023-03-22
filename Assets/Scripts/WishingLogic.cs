@@ -1,8 +1,10 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
 using System.Linq;
+using UnityEngine.UI;
+using TMPro;
+using UnityEngine.SceneManagement;
 
 public class WishingLogic : MonoBehaviour
 {
@@ -62,6 +64,8 @@ public class WishingLogic : MonoBehaviour
 
         jsonScript.AddCat(catPulled);
 
+        catImage.GetComponent<Image>().sprite = catPulled.imageSprite;
+        catName.GetComponent<TMP_Text>().text = catPulled.catName;
 
         wishResult.SetActive(true);
     }
@@ -76,5 +80,21 @@ public class WishingLogic : MonoBehaviour
     {
         insufficientFunds.SetActive(false);
         wishButton.SetActive(true);
+    }
+
+    void OnEnable()
+    {
+        SceneManager.sceneLoaded += OnSceneLoaded;
+    }
+
+    private void OnDisable()
+    {
+        SceneManager.sceneLoaded -= OnSceneLoaded;
+    }
+
+    void OnSceneLoaded(Scene scene, LoadSceneMode mode)
+    {
+        if(jsonScript != null)
+            jsonScript.SaveData();
     }
 }
