@@ -8,7 +8,7 @@ public class Cat
     public Sprite drawnSprite;
     public string catName;
     public string rarity;
-    public string imgURl;
+    public string imgUrl;
 
 
     public Cat()
@@ -28,6 +28,7 @@ public class Cat
     public Cat(Sprite image, string imgUrl, string newName, string rarity)
     {
         imageSprite = image;
+        this.imgUrl = imgUrl;
         catName = newName;
         this.rarity = rarity;
     }

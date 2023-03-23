@@ -1853,9 +1853,9 @@ MonoBehaviour:
   gamePanel: {fileID: 556724831}
   gameOverPanel: {fileID: 1187155380}
   tutorialPanel: {fileID: 169561234}
-  easyStrength: 10
-  mediumStrength: 5
-  hardStrength: 2
+  easyStrength: 100
+  mediumStrength: 100
+  hardStrength: 100
   easyFishAmount: 1
   mediumFishAmount: 3
   hardFishAmount: 5

@@ -7,6 +7,8 @@ using System.Linq;
 
 public class JSONReader : MonoBehaviour
 {
+
+    private PlayerControls inputActions;
     public int Currency;
 
     public TextAsset textJSON;
@@ -27,7 +29,6 @@ public class JSONReader : MonoBehaviour
         public string name;
         public string imgPath;
         public string rarity;
-        public bool showBaristaTuorial;
 
         public JsonCat(string name, string imgPath, string rarity)
         {
@@ -66,12 +67,37 @@ public class JSONReader : MonoBehaviour
         }
     }
 
+    private void Update()
+    {
+        if (inputActions.DevTools.GiveCurrency.triggered)
+        {
+            Currency = 1000;
+        }
+
+        if (inputActions.DevTools.Reset.triggered)
+        {
+            ResetData();
+        }
+    }
+
     void Awake()
     {
         LoadData();
 
         DontDestroyOnLoad(this.gameObject);
 
+        inputActions = new PlayerControls();
+    }
+
+    private void OnEnable()
+    {
+        inputActions.Enable();
+        
+    }
+
+    private void OnDisable()
+    {
+        inputActions.Disable();
     }
 
     public void AddCat(Cat cat)
@@ -111,11 +137,6 @@ public class JSONReader : MonoBehaviour
         catPool = new List<Cat>();
         ownedCats = new List<Cat>();
 
-        json.PrintCurrency();
-        json.PrintAllCatsCount();
-        json.PrintOwnedCatsCount();
-        json.PrintShowBaristaTutorial();
-
         //get all the possible cats
         for (int i = 0; i < json.allCats.Count; i++)
         {
@@ -131,7 +152,7 @@ public class JSONReader : MonoBehaviour
         for (int i = 0; i < json.ownedCats.Count; i++)
         {
             JsonCat o = json.ownedCats[i];
-            Sprite image = LoaOwnedCatImage(i, json);
+            Sprite image = LoadOwnedCatImage(i, json);
 
             Cat ownedCat = new Cat(image, o.imgPath, o.name, o.rarity);
             ownedCats.Add(ownedCat);
@@ -144,26 +165,38 @@ public class JSONReader : MonoBehaviour
         Currency = json.currency;
     }
 
+    public void ResetData()
+    {
+        ShowBaristaTutorial = true;
+        ownedCats.Clear();
+        Currency = 0;
+        SaveData();
+    }
+
     /// <summary>
     /// Helper method in order to get the images for the cats
     /// </summary>
     /// <returns></returns>
     private Sprite LoadAllCatImage(int index, JsonData catPool)
     {
-        string imageURL = Application.dataPath + catPool.allCats[index].imgPath;
+        string imageURL = "Assets/Sprites/" + catPool.allCats[index].imgPath;
 
         return (Sprite)AssetDatabase.LoadAssetAtPath(imageURL, typeof(Sprite));
     }
 
-    private Sprite LoaOwnedCatImage(int index, JsonData catPool)
+    private Sprite LoadOwnedCatImage(int index, JsonData catPool)
     {
-        string imageURL = Application.dataPath + catPool.ownedCats[index].imgPath;
+        //string imageURL = Application.dataPath + catPool.ownedCats[index].imgPath;
+
+        string imageURL = "Assets/Sprites/" + catPool.ownedCats[index].imgPath;
+
+        Debug.Log(imageURL);
 
         return (Sprite)AssetDatabase.LoadAssetAtPath(imageURL, typeof(Sprite));
     }
 
     private JsonCat ConvertCatToJsonCat(Cat cat)
     {
-        return new JsonCat(cat.catName, cat.imgURl, cat.rarity);
+        return new JsonCat(cat.catName, cat.imgUrl, cat.rarity);
     }
 }

@@ -63,6 +63,7 @@ public class WishingLogic : MonoBehaviour
         Cat catPulled = catPool[Random.Range(0, catPool.Count)];
 
         jsonScript.AddCat(catPulled);
+        jsonScript.SaveData();
 
         catImage.GetComponent<Image>().sprite = catPulled.imageSprite;
         catName.GetComponent<TMP_Text>().text = catPulled.catName;
