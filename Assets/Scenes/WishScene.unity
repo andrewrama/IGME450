@@ -558,6 +558,8 @@ MonoBehaviour:
   wishResult: {fileID: 1861013853}
   wishButton: {fileID: 266833582}
   insufficientFunds: {fileID: 1363317481}
+  jsonScript: {fileID: 0}
+  saveData: {fileID: 0}
 --- !u!4 &261636058
 Transform:
   m_ObjectHideFlags: 0
@@ -2174,9 +2176,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9a34edf6c62483943b82efde3abf5f95, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Currency: 0
+  saveData: {fileID: 11400000, guid: 135fff205c1e0fe4981f2356b830e0ae, type: 2}
   textJSON: {fileID: 4900000, guid: 8ad4a7572e729334bb48a2d47f56f1e7, type: 3}
-  ShowBaristaTutorial: 0
 --- !u!4 &1160888647
 Transform:
   m_ObjectHideFlags: 0
@@ -3017,7 +3018,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 00d842886eab82749a605db0ec4ae2cb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  jsonScript: {fileID: 0}
 --- !u!4 &1595883905
 Transform:
   m_ObjectHideFlags: 0
@@ -3747,6 +3747,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fce2083ba807e4f43aacf1c8d2205495, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  saveData: {fileID: 0}
 --- !u!114 &2008100678
 MonoBehaviour:
   m_ObjectHideFlags: 0

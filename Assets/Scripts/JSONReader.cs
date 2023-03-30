@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEditor;
 using System.IO;
 using System.Linq;
+using UnityEngine.SceneManagement;
 
 public class JSONReader : MonoBehaviour
 {
@@ -80,18 +81,25 @@ public class JSONReader : MonoBehaviour
     {
         LoadData();
 
-        inputActions = new PlayerControls();
     }
 
     private void OnEnable()
     {
+        if (inputActions == null)
+        {
+            inputActions = new PlayerControls();
+        }
+
         inputActions.Enable();
-        
+
+        SceneManager.sceneLoaded += OnSceneLoaded;
     }
 
     private void OnDisable()
     {
         inputActions.Disable();
+
+        SceneManager.sceneLoaded -= OnSceneLoaded;
     }
 
     public void AddCat(Cat cat)
@@ -191,5 +199,10 @@ public class JSONReader : MonoBehaviour
     private JsonCat ConvertCatToJsonCat(Cat cat)
     {
         return new JsonCat(cat.catName, cat.imgUrl, cat.rarity);
+    }
+
+    void OnSceneLoaded(Scene scene, LoadSceneMode mode)
+    {
+        SaveData();
     }
 }

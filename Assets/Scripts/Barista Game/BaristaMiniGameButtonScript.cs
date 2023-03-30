@@ -145,7 +145,6 @@ public class BaristaMiniGameButtonScript : MonoBehaviour
 
     void Awake()
     {
-        jsonScript = transform.Find("/Reader").GetComponent<JSONReader>();
         gamePanel.SetActive(true);
         recipePanel.SetActive(false);
         sceneChanger = transform.GetComponent<GameSceneChanger>();

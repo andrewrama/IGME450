@@ -69,7 +69,7 @@ public class WishingLogic : MonoBehaviour
 
         Cat catPulled = catPool[Random.Range(0, catPool.Count)];
 
-        //jsonScript.AddCat(catPulled);
+        jsonScript.AddCat(catPulled);
         jsonScript.SaveData();
 
         catImage.GetComponent<Image>().sprite = catPulled.imageSprite;
@@ -88,20 +88,5 @@ public class WishingLogic : MonoBehaviour
     {
         insufficientFunds.SetActive(false);
         wishButton.SetActive(true);
-    }
-
-    void OnEnable()
-    {
-        SceneManager.sceneLoaded += OnSceneLoaded;
-    }
-
-    private void OnDisable()
-    {
-        SceneManager.sceneLoaded -= OnSceneLoaded;
-    }
-
-    void OnSceneLoaded(Scene scene, LoadSceneMode mode)
-    {
-        jsonScript.SaveData();
     }
 }

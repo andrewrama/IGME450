@@ -79,7 +79,6 @@ public class GameManager : MonoBehaviour
 
     private float currentFishTimer;
 
-    private JSONReader jsonScript;
 
     //the score of the player
     int score;
@@ -90,7 +89,6 @@ public class GameManager : MonoBehaviour
     {
         progressBarRectTransform = filledProgressBar.rectTransform;
 
-        jsonScript = transform.Find("/Reader").gameObject.GetComponent<JSONReader>();
     }
 
     // Update is called once per frame
