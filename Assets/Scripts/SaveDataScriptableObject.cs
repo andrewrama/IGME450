@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System.Linq;
 
 [CreateAssetMenu(fileName = "SaveDataScriptableObject", menuName ="ScriptableObjects/SaveData")]
 public class SaveDataScriptableObject : ScriptableObject
@@ -16,4 +17,11 @@ public class SaveDataScriptableObject : ScriptableObject
 
     //if the player will see the long tutoiral for the barista game
     public bool ShowBaristaTutorial;
+
+    private void OnEnable() => hideFlags = HideFlags.DontUnloadUnusedAsset;
+
+    public void Print()
+    {
+        Debug.Log($"Currency: {Currency}\nShowBaristaTutorial: {ShowBaristaTutorial}\nOwned Cats: {string.Join(", ", ownedCats.Select(x => x.catName))}");
+    }
 }

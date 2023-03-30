@@ -20,6 +20,8 @@ public class JSONReader : MonoBehaviour
 
     private JsonData json;
 
+    private static bool init = true;
+
     [System.Serializable]
     public class JsonCat
     {
@@ -69,18 +71,28 @@ public class JSONReader : MonoBehaviour
         if (inputActions.DevTools.GiveCurrency.triggered)
         {
             saveData.Currency = 1000;
+            SaveData();
         }
 
         if (inputActions.DevTools.Reset.triggered)
         {
             ResetData();
+            
         }
     }
 
     void Awake()
     {
-        LoadData();
+        if (init)
+        {
+            init = false;
+            LoadData();
+        }
 
+        else
+        { 
+            SaveData();
+        }
     }
 
     private void OnEnable()
@@ -92,14 +104,11 @@ public class JSONReader : MonoBehaviour
 
         inputActions.Enable();
 
-        SceneManager.sceneLoaded += OnSceneLoaded;
     }
 
     private void OnDisable()
     {
         inputActions.Disable();
-
-        SceneManager.sceneLoaded -= OnSceneLoaded;
     }
 
     public void AddCat(Cat cat)
@@ -109,7 +118,17 @@ public class JSONReader : MonoBehaviour
 
     public void SaveData()
     {
-        json.currency = saveData.Currency;
+        if (saveData.allCats == null || saveData.ownedCats == null)
+        {
+            saveData.allCats = new List<Cat>();
+            saveData.ownedCats = new List<Cat>();
+            return;
+        }
+
+        if (json == null)
+        {
+            json = JsonUtility.FromJson<JsonData>(textJSON.text);
+        }
 
         //convert all cats
         json.allCats.Clear();
@@ -129,11 +148,13 @@ public class JSONReader : MonoBehaviour
 
         string s = JsonUtility.ToJson(json);
         File.WriteAllText(Application.dataPath + "/info.json", s);
+
+        Debug.Log("Saving data...\n" + s);
     }
 
     private void LoadData()
     {
-        Debug.Log(textJSON.text);
+        Debug.Log("Loading data...\n" + textJSON.text);
         json = JsonUtility.FromJson<JsonData>(textJSON.text);
 
         saveData.allCats = new List<Cat>();
@@ -199,10 +220,5 @@ public class JSONReader : MonoBehaviour
     private JsonCat ConvertCatToJsonCat(Cat cat)
     {
         return new JsonCat(cat.catName, cat.imgUrl, cat.rarity);
-    }
-
-    void OnSceneLoaded(Scene scene, LoadSceneMode mode)
-    {
-        SaveData();
     }
 }

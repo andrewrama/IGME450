@@ -13024,10 +13024,10 @@ MonoBehaviour:
   defaultImage: {fileID: 21300000, guid: b0fa21c003254324f92e293de2f88ead, type: 3}
   blackCoffeeImage: {fileID: 21300000, guid: b916c60579cd8e546bd63ca38873fbb8, type: 3}
   coffeeImage: {fileID: 21300000, guid: edd7f739790e72a419e79778566daef9, type: 3}
-  coldCupWithMilkImage: {fileID: 21300000, guid: a67dc33aa8cc2f24aa22523cc811da82,
+  coldCupWithMilkImage: {fileID: 21300000, guid: ec49ed06074700041a8d19c7d73e533f,
     type: 3}
   coldCupImage: {fileID: 21300000, guid: 7e524765775432b43ac6dcc55f394074, type: 3}
-  hotCupWithMilkImage: {fileID: 21300000, guid: 3ee1fbdffee63b844bc42986dda8b999,
+  hotCupWithMilkImage: {fileID: 21300000, guid: d267ec4fab0037f44a4462a8530498e8,
     type: 3}
   hotCupImage: {fileID: 21300000, guid: 02bc7977b3eb42d4697291c770ed2ceb, type: 3}
   icedCoffeeImage: {fileID: 21300000, guid: 960cfa396cd420c4490d9c1206190f8b, type: 3}
