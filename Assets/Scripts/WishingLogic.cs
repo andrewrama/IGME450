@@ -14,13 +14,18 @@ public class WishingLogic : MonoBehaviour
     private GameObject catImage;
     private GameObject catName;
 
-    private JSONReader jsonScript;
+    [SerializeField]
+    public JSONReader jsonScript;
+
+    [SerializeField]
+    private SaveDataScriptableObject saveData;
+
 
 
     // Start is called before the first frame update
     void Start()
     {
-        jsonScript = transform.Find("/Reader").gameObject.GetComponent<JSONReader>();
+
         wishResult.SetActive(false);
         insufficientFunds.SetActive(false);
         catImage = wishResult.transform.GetChild(0).gameObject;
@@ -34,7 +39,8 @@ public class WishingLogic : MonoBehaviour
     public void WishButton()
     {
         wishButton.SetActive(false);
-        if (jsonScript.Currency >= 50)
+        
+        if (saveData.Currency >= 50)
         {
             Wish();
         }
@@ -42,6 +48,7 @@ public class WishingLogic : MonoBehaviour
         {
             insufficientFunds.SetActive(true);
         }
+        
 
     }
 
@@ -52,17 +59,17 @@ public class WishingLogic : MonoBehaviour
     /// </summary>
     private void Wish()
     {
-        jsonScript.Currency -= 50;
+        saveData.Currency -= 50;
 
         int random = Random.Range(0, 100);
 
         string rarity = random < 50 ? "Common" : random >= 50 && random < 90 ? "Uncommon" : "Rare";
 
-        List<Cat> catPool = jsonScript.catPool.Where(x => x.rarity == rarity).ToList();
+       List<Cat> catPool = saveData.allCats.Where(x => x.rarity == rarity).ToList();
 
         Cat catPulled = catPool[Random.Range(0, catPool.Count)];
 
-        jsonScript.AddCat(catPulled);
+        //jsonScript.AddCat(catPulled);
         jsonScript.SaveData();
 
         catImage.GetComponent<Image>().sprite = catPulled.imageSprite;
@@ -95,7 +102,6 @@ public class WishingLogic : MonoBehaviour
 
     void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
-        if(jsonScript != null)
-            jsonScript.SaveData();
+        jsonScript.SaveData();
     }
 }

@@ -13047,6 +13047,7 @@ MonoBehaviour:
   - {fileID: 158642214}
   - {fileID: 888706756}
   gameOverPanel: {fileID: 2018537738}
+  saveData: {fileID: 11400000, guid: 135fff205c1e0fe4981f2356b830e0ae, type: 2}
   recipeTimerLabel: {fileID: 776085055}
   recipeScoreLabel: {fileID: 567339293}
   customerStartingTime: 5

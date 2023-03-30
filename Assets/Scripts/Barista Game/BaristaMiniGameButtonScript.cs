@@ -91,7 +91,9 @@ public class BaristaMiniGameButtonScript : MonoBehaviour
 
     private GameSceneChanger sceneChanger;
 
-    private JSONReader jsonScript;
+    [SerializeField]
+    private SaveDataScriptableObject saveData;
+
 
     public enum Ingrediant
     {
@@ -168,9 +170,9 @@ public class BaristaMiniGameButtonScript : MonoBehaviour
 
     void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
-        if (jsonScript.ShowBaristaTutorial)
+        if (saveData.ShowBaristaTutorial)
         {
-            jsonScript.ShowBaristaTutorial = false;
+            saveData.ShowBaristaTutorial = false;
 
             OpenFirstTutorial();
         }
@@ -626,6 +628,7 @@ public class BaristaMiniGameButtonScript : MonoBehaviour
 
         gameOver = true;
         gameOverPanel.SetActive(true);
+
         if (score < 0)
         {
             score = 0;
@@ -633,7 +636,7 @@ public class BaristaMiniGameButtonScript : MonoBehaviour
 
         int fishEarned = score * 3;
 
-        jsonScript.Currency += fishEarned;
+        saveData.Currency += fishEarned;
 
         gameOverLabel.text = $"Game Over\nYou earned {fishEarned} fish";
 

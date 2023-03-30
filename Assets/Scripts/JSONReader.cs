@@ -8,18 +8,14 @@ using System.Linq;
 public class JSONReader : MonoBehaviour
 {
 
+    [SerializeField]
+    private SaveDataScriptableObject saveData;
+
     private PlayerControls inputActions;
-    public int Currency;
+
+    //object used in order to read/write data from json
 
     public TextAsset textJSON;
-
-    //all of the cats in the game
-    public List<Cat> catPool;
-
-    //all of the cats the player owns
-    public List<Cat> ownedCats;
-
-    public bool ShowBaristaTutorial;
 
     private JsonData json;
 
@@ -71,7 +67,7 @@ public class JSONReader : MonoBehaviour
     {
         if (inputActions.DevTools.GiveCurrency.triggered)
         {
-            Currency = 1000;
+            saveData.Currency = 1000;
         }
 
         if (inputActions.DevTools.Reset.triggered)
@@ -83,8 +79,6 @@ public class JSONReader : MonoBehaviour
     void Awake()
     {
         LoadData();
-
-        DontDestroyOnLoad(this.gameObject);
 
         inputActions = new PlayerControls();
     }
@@ -102,28 +96,28 @@ public class JSONReader : MonoBehaviour
 
     public void AddCat(Cat cat)
     {
-        ownedCats.Add(cat);
+        saveData.ownedCats.Add(cat);
     }
 
     public void SaveData()
     {
-        json.currency = Currency;
+        json.currency = saveData.Currency;
 
         //convert all cats
         json.allCats.Clear();
 
-        json.allCats = catPool.Select(x => ConvertCatToJsonCat(x)).ToList();
+        json.allCats = saveData.allCats.Select(x => ConvertCatToJsonCat(x)).ToList();
 
         //convert owned cats
         json.ownedCats.Clear();
 
-        json.ownedCats = ownedCats.Select(x => ConvertCatToJsonCat(x)).ToList();
+        json.ownedCats = saveData.ownedCats.Select(x => ConvertCatToJsonCat(x)).ToList();
 
         //convert currency
-        json.currency = Currency;
+        json.currency = saveData.Currency;
 
         //show barista tutorial
-        json.showBaristaTutorial = ShowBaristaTutorial;
+        json.showBaristaTutorial = saveData.ShowBaristaTutorial;
 
         string s = JsonUtility.ToJson(json);
         File.WriteAllText(Application.dataPath + "/info.json", s);
@@ -134,8 +128,8 @@ public class JSONReader : MonoBehaviour
         Debug.Log(textJSON.text);
         json = JsonUtility.FromJson<JsonData>(textJSON.text);
 
-        catPool = new List<Cat>();
-        ownedCats = new List<Cat>();
+        saveData.allCats = new List<Cat>();
+        saveData.ownedCats = new List<Cat>();
 
         //get all the possible cats
         for (int i = 0; i < json.allCats.Count; i++)
@@ -144,8 +138,7 @@ public class JSONReader : MonoBehaviour
             JsonCat a = json.allCats[i];
 
             Cat allCat = new Cat(image, a.imgPath, a.name, a.rarity);
-            catPool.Add(allCat);
-
+            saveData.allCats.Add(allCat);
         }
 
         //get a list of all the owned cats
@@ -155,21 +148,21 @@ public class JSONReader : MonoBehaviour
             Sprite image = LoadOwnedCatImage(i, json);
 
             Cat ownedCat = new Cat(image, o.imgPath, o.name, o.rarity);
-            ownedCats.Add(ownedCat);
+            saveData.ownedCats.Add(ownedCat);
         }
 
         //showBarsitaTutorial
-        ShowBaristaTutorial = json.showBaristaTutorial;
+        saveData.ShowBaristaTutorial = json.showBaristaTutorial;
 
         //get the currecny
-        Currency = json.currency;
+        saveData.Currency = json.currency;
     }
 
     public void ResetData()
     {
-        ShowBaristaTutorial = true;
-        ownedCats.Clear();
-        Currency = 0;
+        saveData.ShowBaristaTutorial = true;
+        saveData.ownedCats.Clear();
+        saveData.Currency = 0;
         SaveData();
     }
 

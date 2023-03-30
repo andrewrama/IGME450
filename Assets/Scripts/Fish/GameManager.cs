@@ -6,6 +6,10 @@ using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
 {
+
+    [SerializeField]
+    private SaveDataScriptableObject saveData;
+
     [SerializeField]
     private Text gameOverLabel;
 
@@ -278,7 +282,7 @@ public class GameManager : MonoBehaviour
 
         int fishEarned = score * 3;
 
-        jsonScript.Currency += fishEarned;
+        saveData.Currency += fishEarned;
 
         gameOverLabel.text = $"Game Over\nYou earned {fishEarned} fish";
     }

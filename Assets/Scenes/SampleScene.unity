@@ -511,9 +511,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9a34edf6c62483943b82efde3abf5f95, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Currency: 0
+  saveData: {fileID: 11400000, guid: 135fff205c1e0fe4981f2356b830e0ae, type: 2}
   textJSON: {fileID: 4900000, guid: 8ad4a7572e729334bb48a2d47f56f1e7, type: 3}
-  ShowBaristaTutorial: 0
 --- !u!4 &1283515389
 Transform:
   m_ObjectHideFlags: 0
@@ -822,6 +821,18 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1249166374162914990, guid: a9598ac18e0d35c43b68565d2d9c97c3,
+        type: 3}
+      propertyPath: saveData
+      value: 
+      objectReference: {fileID: 11400000, guid: 135fff205c1e0fe4981f2356b830e0ae,
+        type: 2}
+    - target: {fileID: 7396929859434067182, guid: a9598ac18e0d35c43b68565d2d9c97c3,
+        type: 3}
+      propertyPath: saveData
+      value: 
+      objectReference: {fileID: 11400000, guid: 135fff205c1e0fe4981f2356b830e0ae,
+        type: 2}
     - target: {fileID: 9074932306394636497, guid: a9598ac18e0d35c43b68565d2d9c97c3,
         type: 3}
       propertyPath: m_IsActive
@@ -845,7 +856,7 @@ PrefabInstance:
     - target: {fileID: 9074932306565574399, guid: a9598ac18e0d35c43b68565d2d9c97c3,
         type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -0.7000122
+      value: -0.6999512
       objectReference: {fileID: 0}
     - target: {fileID: 9074932306638821634, guid: a9598ac18e0d35c43b68565d2d9c97c3,
         type: 3}
