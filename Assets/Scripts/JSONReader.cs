@@ -111,10 +111,7 @@ public class JSONReader : MonoBehaviour
         inputActions.Disable();
     }
 
-    public void AddCat(Cat cat)
-    {
-        saveData.ownedCats.Add(cat);
-    }
+
 
     public void SaveData()
     {

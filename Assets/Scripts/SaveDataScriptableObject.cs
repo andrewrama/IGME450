@@ -24,4 +24,9 @@ public class SaveDataScriptableObject : ScriptableObject
     {
         Debug.Log($"Currency: {Currency}\nShowBaristaTutorial: {ShowBaristaTutorial}\nOwned Cats: {string.Join(", ", ownedCats.Select(x => x.catName))}");
     }
+
+    public void AddCat(Cat cat)
+    {
+        ownedCats.Add(cat);
+    }
 }
