@@ -198,20 +198,20 @@ public class JSONReader : MonoBehaviour
     /// <returns></returns>
     private Sprite LoadAllCatImage(int index, JsonData catPool)
     {
-        string imageURL = "Assets/Sprites/" + catPool.allCats[index].imgPath;
+        string imageURL = "Sprites/" + catPool.allCats[index].imgPath;
 
-        return (Sprite)AssetDatabase.LoadAssetAtPath(imageURL, typeof(Sprite));
+        return Resources.Load<Sprite>(imageURL);
     }
 
     private Sprite LoadOwnedCatImage(int index, JsonData catPool)
     {
         //string imageURL = Application.dataPath + catPool.ownedCats[index].imgPath;
 
-        string imageURL = "Assets/Sprites/" + catPool.ownedCats[index].imgPath;
+        string imageURL = "Sprites/" + catPool.ownedCats[index].imgPath;
 
         Debug.Log(imageURL);
 
-        return (Sprite)AssetDatabase.LoadAssetAtPath(imageURL, typeof(Sprite));
+        return Resources.Load<Sprite>(imageURL);
     }
 
     private JsonCat ConvertCatToJsonCat(Cat cat)
