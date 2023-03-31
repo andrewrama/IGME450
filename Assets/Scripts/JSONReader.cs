@@ -45,6 +45,7 @@ public class JSONReader : MonoBehaviour
         public List<JsonCat> ownedCats;
         public bool showBaristaTutorial;
         public bool showFishingTutoiral;
+        public int refundPercentage;
     }
 
     private void Update()
@@ -165,6 +166,9 @@ public class JSONReader : MonoBehaviour
 
         //get the currecny
         saveData.Currency = json.currency;
+
+        //refund amount
+        saveData.RefundPercentage = json.refundPercentage;
     }
 
     public void ResetData()

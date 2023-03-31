@@ -21,6 +21,9 @@ public class SaveDataScriptableObject : ScriptableObject
     //if the player will see the tutoiral for the fishing game
     public bool ShowFishingTutoiral;
 
+    //the percentage of money the player will recieve if they get a duplicate cat
+    public int RefundPercentage;
+
     private void OnEnable() => hideFlags = HideFlags.DontUnloadUnusedAsset;
 
     public void Print()
