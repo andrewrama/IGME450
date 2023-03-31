@@ -1,7 +1,10 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System.Linq;
 using UnityEngine.UI;
+using TMPro;
+using UnityEngine.SceneManagement;
 
 public class WishingLogic : MonoBehaviour
 {
@@ -11,21 +14,18 @@ public class WishingLogic : MonoBehaviour
     private GameObject catImage;
     private GameObject catName;
 
-    // Common
-    public Sprite[] catSpritesCommon;
-    public string[] catNamesCommon;
+    [SerializeField]
+    public JSONReader jsonScript;
 
-    // Uncommon
-    public Sprite[] catSpritesUncommon;
-    public string[] catNamesUncommon;
+    [SerializeField]
+    private SaveDataScriptableObject saveData;
 
-    // Rare
-    public Sprite[] catSpritesRare;
-    public string[] catNamesRare;
+
 
     // Start is called before the first frame update
     void Start()
     {
+
         wishResult.SetActive(false);
         insufficientFunds.SetActive(false);
         catImage = wishResult.transform.GetChild(0).gameObject;
@@ -39,7 +39,8 @@ public class WishingLogic : MonoBehaviour
     public void WishButton()
     {
         wishButton.SetActive(false);
-        if (CurrencyManager.currency >= 50)
+        
+        if (saveData.Currency >= 50)
         {
             Wish();
         }
@@ -47,6 +48,7 @@ public class WishingLogic : MonoBehaviour
         {
             insufficientFunds.SetActive(true);
         }
+        
 
     }
 
@@ -57,43 +59,27 @@ public class WishingLogic : MonoBehaviour
     /// </summary>
     private void Wish()
     {
-        CurrencyManager.currency -= 50;
-        CurrencyManager.UpdateCurrency();
+        saveData.Currency -= 50;
 
         int random = Random.Range(0, 100);
 
-        if (random < 50)
-        {
-            GetCatOfRarity(catSpritesCommon, catNamesCommon, "Common");
-        }
-        else if (random >= 50 && random < 90)
-        {
-            GetCatOfRarity(catSpritesUncommon, catNamesUncommon, "Uncommon");
-        }
-        else
-        {
-            GetCatOfRarity(catSpritesRare, catNamesRare, "Rare");
+        string rarity = random < 50 ? "Common" : random >= 50 && random < 90 ? "Uncommon" : "Rare";
+
+       List<Cat> catPool = saveData.allCats.Where(x => x.rarity == rarity).ToList();
+
+        Cat catPulled = catPool[Random.Range(0, catPool.Count)];
+
+        if (!saveData.ownedCats.Contains(catPulled))
+        { 
+            saveData.AddCat(catPulled);
         }
 
+        jsonScript.SaveData();
+
+        catImage.GetComponent<Image>().sprite = catPulled.imageSprite;
+        catName.GetComponent<TMP_Text>().text = catPulled.catName;
 
         wishResult.SetActive(true);
-    }
-
-    /// <summary>
-    /// Gets a cat using the arrays of the random rarity chosen
-    /// </summary>
-    /// <param name="spriteArr">the array of sprites for the cats of that rarity</param>
-    /// <param name="nameArr">the array of names of cats of that rarity</param>
-    private void GetCatOfRarity(Sprite[] spriteArr, string[] nameArr, string rarity)
-    {
-        int random = Random.Range(0, spriteArr.Length);
-
-        Image sprite = catImage.GetComponent<Image>();
-        sprite.sprite = spriteArr[random];
-
-        catName.GetComponent<TMPro.TextMeshProUGUI>().text = nameArr[random];
-
-        CatInventory.Instance.AddCatToList(new Cat(sprite.sprite, sprite.sprite, nameArr[random], rarity));
     }
 
     public void WishAccepted()

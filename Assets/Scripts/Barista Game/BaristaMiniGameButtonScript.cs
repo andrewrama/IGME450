@@ -91,6 +91,10 @@ public class BaristaMiniGameButtonScript : MonoBehaviour
 
     private GameSceneChanger sceneChanger;
 
+    [SerializeField]
+    private SaveDataScriptableObject saveData;
+
+
     public enum Ingrediant
     {
         HotCup,
@@ -150,7 +154,7 @@ public class BaristaMiniGameButtonScript : MonoBehaviour
 
     void Start()
     {
-
+        
     }
 
     void OnEnable()
@@ -165,10 +169,9 @@ public class BaristaMiniGameButtonScript : MonoBehaviour
 
     void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
-        if (CurrencyManager.showBaristaTuorial == 1)
+        if (saveData.ShowBaristaTutorial)
         {
-            CurrencyManager.showBaristaTuorial = 0;
-            CurrencyManager.UpdateBaristaGameTutoiral();
+            saveData.ShowBaristaTutorial = false;
 
             OpenFirstTutorial();
         }
@@ -624,14 +627,18 @@ public class BaristaMiniGameButtonScript : MonoBehaviour
 
         gameOver = true;
         gameOverPanel.SetActive(true);
+
         if (score < 0)
         {
             score = 0;
         }
 
-        int fishEarned = CurrencyManager.ScoreToCurrency(score, 3);
+        int fishEarned = score * 3;
+
+        saveData.Currency += fishEarned;
 
         gameOverLabel.text = $"Game Over\nYou earned {fishEarned} fish";
+
     }
 
     public void GoToMainMenu()

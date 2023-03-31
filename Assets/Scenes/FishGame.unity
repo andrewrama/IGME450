@@ -1849,13 +1849,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9a84aef5afe6e7540975725b184148c4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  saveData: {fileID: 11400000, guid: 135fff205c1e0fe4981f2356b830e0ae, type: 2}
   gameOverLabel: {fileID: 727334573}
   gamePanel: {fileID: 556724831}
   gameOverPanel: {fileID: 1187155380}
   tutorialPanel: {fileID: 169561234}
-  easyStrength: 10
-  mediumStrength: 5
-  hardStrength: 2
+  easyStrength: 20
+  mediumStrength: 15
+  hardStrength: 10
   easyFishAmount: 1
   mediumFishAmount: 3
   hardFishAmount: 5

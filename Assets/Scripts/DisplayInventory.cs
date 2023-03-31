@@ -6,18 +6,25 @@ using UnityEngine.SceneManagement;
 
 public class DisplayInventory : MonoBehaviour
 {
+
     public GameObject inventoryDisplay;
 
     public Transform contentContainer;
     public GameObject inventoryItem;
 
+    [SerializeField]
+    private SaveDataScriptableObject saveData;
+
+
     // Start is called before the first frame update
     void Start()
     {
         //contentContainer.GetComponent<VerticalLayoutGroup>().spacing = 5;
-        for (int i = 0; i < CatInventory.Instance.ownedCats.Count; i++)
+
+        
+        for (int i = 0; i < saveData.ownedCats.Count; i++)
         {
-            Cat currentCat = CatInventory.Instance.ownedCats[i];
+            Cat currentCat = saveData.ownedCats[i];
             var listItem = Instantiate(inventoryItem);
 
             listItem.GetComponentsInChildren<Image>()[1].sprite = currentCat.imageSprite;
@@ -29,6 +36,7 @@ public class DisplayInventory : MonoBehaviour
 
             //listItem.transform.localScale = Vector2.one;
         }
+        
 
     }
 

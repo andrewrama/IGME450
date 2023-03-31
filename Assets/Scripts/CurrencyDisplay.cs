@@ -7,6 +7,9 @@ public class CurrencyDisplay : MonoBehaviour
 {
     private Text text;
 
+    [SerializeField]
+    private SaveDataScriptableObject saveData;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -17,6 +20,6 @@ public class CurrencyDisplay : MonoBehaviour
     void Update()
     {
         string[] temp = text.text.Split(' ');
-        text.text = temp[0] + "  " + CurrencyManager.currency;
+        text.text = temp[0] + "  " + saveData.Currency;
     }
 }

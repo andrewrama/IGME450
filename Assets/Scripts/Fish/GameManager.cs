@@ -6,6 +6,10 @@ using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
 {
+
+    [SerializeField]
+    private SaveDataScriptableObject saveData;
+
     [SerializeField]
     private Text gameOverLabel;
 
@@ -75,16 +79,16 @@ public class GameManager : MonoBehaviour
 
     private float currentFishTimer;
 
+
     //the score of the player
     int score;
 
     bool fishCaught = false;
 
-    bool gameOver;
-
     void Start()
     {
         progressBarRectTransform = filledProgressBar.rectTransform;
+
     }
 
     // Update is called once per frame
@@ -127,7 +131,6 @@ public class GameManager : MonoBehaviour
 
     private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
-        gameOver = true;
         OpenTutoiralPanel();
     }
 
@@ -270,14 +273,14 @@ public class GameManager : MonoBehaviour
     {
         OpenGameOverPanel();
 
-        gameOver = true;
-
         if (score < 0)
         {
             score = 0;
         }
 
-        int fishEarned = CurrencyManager.ScoreToCurrency(score, 3);
+        int fishEarned = score * 3;
+
+        saveData.Currency += fishEarned;
 
         gameOverLabel.text = $"Game Over\nYou earned {fishEarned} fish";
     }

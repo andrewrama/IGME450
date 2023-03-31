@@ -8,6 +8,7 @@ public class Cat
     public Sprite drawnSprite;
     public string catName;
     public string rarity;
+    public string imgUrl;
 
 
     public Cat()
@@ -21,5 +22,20 @@ public class Cat
         drawnSprite = drawn;
         catName = newName;
         this.rarity = rarity;
+
     }
+
+    public Cat(Sprite image, string imgUrl, string newName, string rarity)
+    {
+        imageSprite = image;
+        this.imgUrl = imgUrl;
+        catName = newName;
+        this.rarity = rarity;
+    }
+
+    public void Print()
+    {
+        Debug.Log($"Name: {catName}, Rarirty: {rarity}");
+    }
+
 }

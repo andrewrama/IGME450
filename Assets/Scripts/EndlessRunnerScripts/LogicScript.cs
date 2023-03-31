@@ -25,7 +25,11 @@ public class LogicScript : MonoBehaviour
     public float leftEdge;
     public float rightEdge;
 
+    [SerializeField]
+    private SaveDataScriptableObject saveData;
+
     public float[] posOptions;
+
     #endregion
 
     void Start()
@@ -65,7 +69,8 @@ public class LogicScript : MonoBehaviour
         finalScoreText.GetComponent<TMPro.TextMeshProUGUI>().text = (treatsCollected * 2).ToString(); ;
 
         // add to currency
-        CurrencyManager.ScoreToCurrency(treatsCollected, 2);
+        treatsCollected *= 2;
+        saveData.Currency += treatsCollected;
     }
 
     /// <summary>
