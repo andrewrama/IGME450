@@ -26,7 +26,7 @@ public class LoadCafe : MonoBehaviour
             {
                 rowCounter = 0;
                 x = -85.0f;
-                z -= 30;
+                z -= 60;
             }
             else
             {
