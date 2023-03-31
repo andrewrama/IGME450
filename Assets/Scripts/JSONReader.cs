@@ -44,26 +44,7 @@ public class JSONReader : MonoBehaviour
         public List<JsonCat> allCats;
         public List<JsonCat> ownedCats;
         public bool showBaristaTutorial;
-
-        public void PrintAllCatsCount()
-        {
-            Debug.Log(allCats.Count);
-        }
-
-        public void PrintOwnedCatsCount()
-        {
-            Debug.Log(ownedCats.Count);
-        }
-
-        public void PrintCurrency()
-        {
-            Debug.Log(currency);
-        }
-
-        public void PrintShowBaristaTutorial()
-        {
-            Debug.Log(showBaristaTutorial);
-        }
+        public bool showFishingTutoiral;
     }
 
     private void Update()
@@ -140,8 +121,9 @@ public class JSONReader : MonoBehaviour
         //convert currency
         json.currency = saveData.Currency;
 
-        //show barista tutorial
+        //tutorials
         json.showBaristaTutorial = saveData.ShowBaristaTutorial;
+        json.showFishingTutoiral = saveData.ShowFishingTutoiral;
 
         string s = JsonUtility.ToJson(json);
         File.WriteAllText(Application.dataPath + "/info.json", s);
@@ -177,8 +159,9 @@ public class JSONReader : MonoBehaviour
             saveData.ownedCats.Add(ownedCat);
         }
 
-        //showBarsitaTutorial
+        //tutorials
         saveData.ShowBaristaTutorial = json.showBaristaTutorial;
+        saveData.ShowFishingTutoiral = json.showFishingTutoiral;
 
         //get the currecny
         saveData.Currency = json.currency;
@@ -187,6 +170,7 @@ public class JSONReader : MonoBehaviour
     public void ResetData()
     {
         saveData.ShowBaristaTutorial = true;
+        saveData.ShowFishingTutoiral = true;
         saveData.ownedCats.Clear();
         saveData.Currency = 0;
         SaveData();
@@ -205,11 +189,7 @@ public class JSONReader : MonoBehaviour
 
     private Sprite LoadOwnedCatImage(int index, JsonData catPool)
     {
-        //string imageURL = Application.dataPath + catPool.ownedCats[index].imgPath;
-
         string imageURL = "Sprites/" + catPool.ownedCats[index].imgPath;
-
-        Debug.Log(imageURL);
 
         return Resources.Load<Sprite>(imageURL);
     }

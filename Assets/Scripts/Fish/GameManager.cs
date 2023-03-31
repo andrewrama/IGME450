@@ -131,7 +131,16 @@ public class GameManager : MonoBehaviour
 
     private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
-        OpenTutoiralPanel();
+        if (saveData.ShowFishingTutoiral)
+        {
+            OpenTutoiralPanel();
+            saveData.ShowFishingTutoiral = false;
+        }
+
+        else
+        {
+            StartGame();
+        }
     }
 
 
