@@ -500,7 +500,10 @@ public class BaristaMiniGameButtonScript : MonoBehaviour
         tutorialActive = false;
 
         //hide tutorial object
-        firstTutorialPages[5].SetActive(false);
+        foreach (GameObject panel in firstTutorialPages)
+        {
+            panel.SetActive(false);
+        }
 
         gamePanel.SetActive(true);
     }
