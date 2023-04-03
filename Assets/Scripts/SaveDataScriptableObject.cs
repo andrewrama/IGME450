@@ -24,6 +24,9 @@ public class SaveDataScriptableObject : ScriptableObject
     //the percentage of money the player will recieve if they get a duplicate cat
     public int RefundPercentage;
 
+    //the high score for the barista game
+    public int BaristaHighScore;
+
     private void OnEnable() => hideFlags = HideFlags.DontUnloadUnusedAsset;
 
     public void Print()

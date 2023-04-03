@@ -640,8 +640,15 @@ public class BaristaMiniGameButtonScript : MonoBehaviour
 
         saveData.Currency += fishEarned;
 
-        gameOverLabel.text = $"Game Over\nYou earned {fishEarned} fish";
+        gameOverLabel.text = $"Game Over\n";
 
+        if (score > saveData.BaristaHighScore)
+        {
+            gameOverLabel.text += "\nYou earned a new high score!!!\n";
+            saveData.BaristaHighScore = score;
+        }
+
+        gameOverLabel.text += $"\nHighscore: {saveData.BaristaHighScore}\n\nYou earned {fishEarned} fish";
     }
 
     public void GoToMainMenu()

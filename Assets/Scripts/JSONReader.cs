@@ -46,6 +46,7 @@ public class JSONReader : MonoBehaviour
         public bool showBaristaTutorial;
         public bool showFishingTutoiral;
         public int refundPercentage;
+        public int baristaHighScore;
     }
 
     private void Update()
@@ -126,6 +127,9 @@ public class JSONReader : MonoBehaviour
         json.showBaristaTutorial = saveData.ShowBaristaTutorial;
         json.showFishingTutoiral = saveData.ShowFishingTutoiral;
 
+        //high scores
+        json.baristaHighScore = saveData.BaristaHighScore; 
+
         string s = JsonUtility.ToJson(json);
         File.WriteAllText(Application.dataPath + "/info.json", s);
 
@@ -169,6 +173,9 @@ public class JSONReader : MonoBehaviour
 
         //refund amount
         saveData.RefundPercentage = json.refundPercentage;
+
+        //high scores
+        saveData.BaristaHighScore = json.baristaHighScore;
     }
 
     public void ResetData()
@@ -177,6 +184,7 @@ public class JSONReader : MonoBehaviour
         saveData.ShowFishingTutoiral = true;
         saveData.ownedCats.Clear();
         saveData.Currency = 0;
+        saveData.BaristaHighScore = 0;
         SaveData();
     }
 
