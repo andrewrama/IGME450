@@ -12,6 +12,9 @@ public class SaveDataScriptableObject : ScriptableObject
     //all the cats in the game
     public List<Cat> allCats;
 
+    public List<Cat> ownedCats { get { return allCats.Where(x => x.Owned).ToList(); } }
+
+
     //if the player will see the long tutoiral for the barista game
     public bool ShowBaristaTutorial;
 
@@ -23,6 +26,7 @@ public class SaveDataScriptableObject : ScriptableObject
 
     //the high score for the barista game
     public int BaristaHighScore;
+
 
     private void OnEnable() => hideFlags = HideFlags.DontUnloadUnusedAsset;
 

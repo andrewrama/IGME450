@@ -22,11 +22,10 @@ public class DisplayInventory : MonoBehaviour
     {
         //contentContainer.GetComponent<VerticalLayoutGroup>().spacing = 5;
 
-        List<Cat> ownedCats = saveData.allCats.Where(x => x.Owned).ToList();
         
-        for (int i = 0; i < ownedCats.Count; i++)
+        for (int i = 0; i < saveData.ownedCats.Count; i++)
         {
-            Cat currentCat = ownedCats[i];
+            Cat currentCat = saveData.ownedCats[i];
             var listItem = Instantiate(inventoryItem);
 
             listItem.GetComponentsInChildren<Image>()[1].sprite = currentCat.imageSprite;
