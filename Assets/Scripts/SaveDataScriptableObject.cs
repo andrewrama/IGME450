@@ -12,9 +12,6 @@ public class SaveDataScriptableObject : ScriptableObject
     //all the cats in the game
     public List<Cat> allCats;
 
-    //all the cats the player owns
-    public List<Cat> ownedCats;
-
     //if the player will see the long tutoiral for the barista game
     public bool ShowBaristaTutorial;
 
@@ -31,11 +28,11 @@ public class SaveDataScriptableObject : ScriptableObject
 
     public void Print()
     {
-        Debug.Log($"Currency: {Currency}\nShowBaristaTutorial: {ShowBaristaTutorial}\nShowFishingTutoiral: {ShowFishingTutoiral}\nOwned Cats: {string.Join(", ", ownedCats.Select(x => x.catName))}");
+        Debug.Log($"Currency: {Currency}\nShowBaristaTutorial: {ShowBaristaTutorial}\nShowFishingTutoiral: {ShowFishingTutoiral}");
     }
 
     public void AddCat(Cat cat)
     {
-        ownedCats.Add(cat);
+        cat.ownedNum++;
     }
 }

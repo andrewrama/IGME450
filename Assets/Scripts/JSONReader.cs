@@ -28,12 +28,14 @@ public class JSONReader : MonoBehaviour
         public string name;
         public string imgPath;
         public string rarity;
+        public int ownedNum;
 
-        public JsonCat(string name, string imgPath, string rarity)
+        public JsonCat(string name, string imgPath, string rarity, int ownedNum)
         {
             this.name = name;
             this.imgPath = imgPath;
             this.rarity = rarity;
+            this.ownedNum = ownedNum;
         }
     }
 
@@ -42,7 +44,6 @@ public class JSONReader : MonoBehaviour
     {
         public int currency;
         public List<JsonCat> allCats;
-        public List<JsonCat> ownedCats;
         public bool showBaristaTutorial;
         public bool showFishingTutoiral;
         public int refundPercentage;
@@ -98,10 +99,9 @@ public class JSONReader : MonoBehaviour
 
     public void SaveData()
     {
-        if (saveData.allCats == null || saveData.ownedCats == null)
+        if (saveData.allCats == null)
         {
             saveData.allCats = new List<Cat>();
-            saveData.ownedCats = new List<Cat>();
             return;
         }
 
@@ -114,11 +114,6 @@ public class JSONReader : MonoBehaviour
         json.allCats.Clear();
 
         json.allCats = saveData.allCats.Select(x => ConvertCatToJsonCat(x)).ToList();
-
-        //convert owned cats
-        json.ownedCats.Clear();
-
-        json.ownedCats = saveData.ownedCats.Select(x => ConvertCatToJsonCat(x)).ToList();
 
         //convert currency
         json.currency = saveData.Currency;
@@ -142,26 +137,15 @@ public class JSONReader : MonoBehaviour
         json = JsonUtility.FromJson<JsonData>(textJSON.text);
 
         saveData.allCats = new List<Cat>();
-        saveData.ownedCats = new List<Cat>();
-
+        
         //get all the possible cats
         for (int i = 0; i < json.allCats.Count; i++)
         {
             Sprite image = LoadAllCatImage(i, json);
-            JsonCat a = json.allCats[i];
+            JsonCat c = json.allCats[i];
 
-            Cat allCat = new Cat(image, a.imgPath, a.name, a.rarity);
+            Cat allCat = new Cat(image, c.imgPath, c.name, c.rarity, c.ownedNum);
             saveData.allCats.Add(allCat);
-        }
-
-        //get a list of all the owned cats
-        for (int i = 0; i < json.ownedCats.Count; i++)
-        {
-            JsonCat o = json.ownedCats[i];
-            Sprite image = LoadOwnedCatImage(i, json);
-
-            Cat ownedCat = new Cat(image, o.imgPath, o.name, o.rarity);
-            saveData.ownedCats.Add(ownedCat);
         }
 
         //tutorials
@@ -182,7 +166,6 @@ public class JSONReader : MonoBehaviour
     {
         saveData.ShowBaristaTutorial = true;
         saveData.ShowFishingTutoiral = true;
-        saveData.ownedCats.Clear();
         saveData.Currency = 0;
         saveData.BaristaHighScore = 0;
         SaveData();
@@ -199,15 +182,8 @@ public class JSONReader : MonoBehaviour
         return Resources.Load<Sprite>(imageURL);
     }
 
-    private Sprite LoadOwnedCatImage(int index, JsonData catPool)
-    {
-        string imageURL = "Sprites/" + catPool.ownedCats[index].imgPath;
-
-        return Resources.Load<Sprite>(imageURL);
-    }
-
     private JsonCat ConvertCatToJsonCat(Cat cat)
     {
-        return new JsonCat(cat.catName, cat.imgUrl, cat.rarity);
+        return new JsonCat(cat.catName, cat.imgUrl, cat.rarity, cat.ownedNum);
     }
 }

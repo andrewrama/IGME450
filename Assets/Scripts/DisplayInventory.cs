@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
+using System.Linq;
 
 public class DisplayInventory : MonoBehaviour
 {
@@ -21,10 +22,11 @@ public class DisplayInventory : MonoBehaviour
     {
         //contentContainer.GetComponent<VerticalLayoutGroup>().spacing = 5;
 
+        List<Cat> ownedCats = saveData.allCats.Where(x => x.Owned).ToList();
         
-        for (int i = 0; i < saveData.ownedCats.Count; i++)
+        for (int i = 0; i < ownedCats.Count; i++)
         {
-            Cat currentCat = saveData.ownedCats[i];
+            Cat currentCat = ownedCats[i];
             var listItem = Instantiate(inventoryItem);
 
             listItem.GetComponentsInChildren<Image>()[1].sprite = currentCat.imageSprite;
