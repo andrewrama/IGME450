@@ -168,6 +168,7 @@ public class JSONReader : MonoBehaviour
         saveData.ShowFishingTutoiral = true;
         saveData.Currency = 0;
         saveData.BaristaHighScore = 0;
+        saveData.allCats.ForEach(c => c.ownedNum = 0);
         SaveData();
     }
 
