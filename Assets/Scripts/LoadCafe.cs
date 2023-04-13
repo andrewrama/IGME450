@@ -10,13 +10,24 @@ public class LoadCafe : MonoBehaviour
     [SerializeField] private SaveDataScriptableObject saveData;
     private List<GameObject> cats = new List<GameObject>();
 
+    private GameObject floor;
+
+
+    //TODO Fix the bounds so the cat can't go out of view of the camera
+    //ToDo Have the cats wait a few seconds before they move to another location
+
     // Start is called before the first frame update
     void Start()
     {
+        //get the floor 
+
         int rowCounter = 0;
         float x = -85.0f;
         float y = 71.0f;
         float z = 35.0f;
+
+
+        floor = GameObject.Find("CafeFloor");
 
         for (int i=0; i< saveData.ownedCats.Count; i++)
         {
@@ -55,15 +66,49 @@ public class LoadCafe : MonoBehaviour
     {
         foreach(GameObject cat in cats)
         {
-            
             Move(cat);
         }
     }
 
+    private IEnumerator WaitSeconds(int seconds)
+    {
+        yield return new WaitForSeconds(seconds);
+    }
 
     private void Move(GameObject cat)
     {
-        cat.GetComponent<NavMeshAgent>().SetDestination(new Vector3(0, 0, 0));
+        //if the cat has reaced its destination, find a new destination
+        NavMeshAgent navMesh = cat.GetComponent<NavMeshAgent>();
+
+        bool atDestination = cat.transform.position.x == navMesh.destination.x && cat.transform.position.z == navMesh.destination.z;
+
+
+
+        if (atDestination)
+        {
+            StartCoroutine(WaitSeconds(3));
+            GetNewDestionation(cat);
+        }
+    }
+
+    /// <summary>
+    /// Used to tell the cat where to go
+    /// </summary>
+    private void GetNewDestionation(GameObject cat)
+    {
+
+        Renderer renderScript = floor.GetComponent<Renderer>();
+        NavMeshAgent navMesh = cat.GetComponent<NavMeshAgent>();
+
+        Vector3 floorMinBounds = renderScript.bounds.min;
+        Vector3 floorMaxBounds = renderScript.bounds.max;
+
+        float x = Random.Range(floorMinBounds.x, floorMaxBounds.x);
+        float z = Random.Range(floorMinBounds.z, floorMaxBounds.z);
+
+        navMesh.SetDestination(new Vector3(x, 0, z));
+
+        Debug.Log($"Destnation: {navMesh.destination}");
     }
 
 }
