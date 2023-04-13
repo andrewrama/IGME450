@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System.Linq;
 
 public class LoadCafe : MonoBehaviour
 {
@@ -15,7 +16,8 @@ public class LoadCafe : MonoBehaviour
         float x = -85.0f;
         float y = 71.0f;
         float z = 35.0f;
-        for(int i=0; i<saveData.ownedCats.Count; i++)
+
+        for (int i=0; i< saveData.ownedCats.Count; i++)
         {
             GameObject newCat = Instantiate(catPrefab);
             //newCat.GetComponent<MeshRenderer>().material = saveData.ownedCats[i].material;

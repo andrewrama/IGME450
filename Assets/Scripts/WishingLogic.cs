@@ -69,10 +69,14 @@ public class WishingLogic : MonoBehaviour
 
         Cat catPulled = catPool[Random.Range(0, catPool.Count)];
 
-        if (!saveData.ownedCats.Contains(catPulled))
-        { 
-            saveData.AddCat(catPulled);
+        if(catPulled.Owned)
+        {
+            int refund = Mathf.FloorToInt(50f * (saveData.RefundPercentage * .01f));
+            saveData.Currency += refund;
         }
+
+        catPulled.ownedNum++;
+
 
         jsonScript.SaveData();
 

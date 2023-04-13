@@ -143,6 +143,8 @@ public class BaristaMiniGameButtonScript : MonoBehaviour
     private GameObject servingTable;
     private Image servingTableImage;
 
+    private bool highScoreEligiable;
+
     void Awake()
     {
         gamePanel.SetActive(true);
@@ -150,6 +152,7 @@ public class BaristaMiniGameButtonScript : MonoBehaviour
         sceneChanger = transform.GetComponent<GameSceneChanger>();
         servingTableImage = servingTable.GetComponent<Image>();
         StartGame();
+        highScoreEligiable = true;
     }
 
     void Start()
@@ -500,7 +503,10 @@ public class BaristaMiniGameButtonScript : MonoBehaviour
         tutorialActive = false;
 
         //hide tutorial object
-        firstTutorialPages[5].SetActive(false);
+        foreach (GameObject panel in firstTutorialPages)
+        {
+            panel.SetActive(false);
+        }
 
         gamePanel.SetActive(true);
     }
@@ -615,7 +621,7 @@ public class BaristaMiniGameButtonScript : MonoBehaviour
 
     public void QuitGame()
     {
-        score = 0;
+        highScoreEligiable = false;
         SetGameOver();
     }
 
@@ -637,8 +643,15 @@ public class BaristaMiniGameButtonScript : MonoBehaviour
 
         saveData.Currency += fishEarned;
 
-        gameOverLabel.text = $"Game Over\nYou earned {fishEarned} fish";
+        gameOverLabel.text = $"Game Over\n";
 
+        if (highScoreEligiable && score > saveData.BaristaHighScore)
+        {
+            gameOverLabel.text += "\nYou earned a new high score!!!\n";
+            saveData.BaristaHighScore = score;
+        }
+
+        gameOverLabel.text += $"\nHighscore: {saveData.BaristaHighScore}\n\nYou earned {fishEarned} fish";
     }
 
     public void GoToMainMenu()
