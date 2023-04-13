@@ -6,6 +6,7 @@ public class LoadCafe : MonoBehaviour
 {
     public GameObject catPrefab;
     [SerializeField] private SaveDataScriptableObject saveData;
+    private List<GameObject> cats = new List<GameObject>();
 
     // Start is called before the first frame update
     void Start()
@@ -32,8 +33,22 @@ public class LoadCafe : MonoBehaviour
             {
                 x += 35;
             }
+            cats.Add(newCat);
         }
     }
 
+    private void Update()
+    {
+        foreach(GameObject cat in cats)
+        {
+            Move(cat);
+        }
+    }
+
+
+    private void Move(GameObject cat)
+    {
+        
+    }
 
 }
