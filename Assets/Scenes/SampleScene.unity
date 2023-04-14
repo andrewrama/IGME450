@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 0.18028378, g: 0.22571412, b: 0.30692285, a: 1}
+  m_IndirectSpecularColor: {r: 0.18028334, g: 0.22571328, b: 0.3069217, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -1443,6 +1443,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1889134575}
     m_Modifications:
+    - target: {fileID: 4853209560087628215, guid: 59a4a643474e1f24b9abc98a8c6d9b2c,
+        type: 3}
+      propertyPath: m_text
+      value: WIP
+      objectReference: {fileID: 0}
     - target: {fileID: 4853209560561411500, guid: 59a4a643474e1f24b9abc98a8c6d9b2c,
         type: 3}
       propertyPath: m_Pivot.x
@@ -1553,6 +1558,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: GamePanel
       objectReference: {fileID: 0}
+    - target: {fileID: 4853209560561411501, guid: 59a4a643474e1f24b9abc98a8c6d9b2c,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4853209560561411505, guid: 59a4a643474e1f24b9abc98a8c6d9b2c,
         type: 3}
       propertyPath: menuPanel
@@ -1567,6 +1577,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
       value: BaristaScene
+      objectReference: {fileID: 0}
+    - target: {fileID: 4853209560642966104, guid: 59a4a643474e1f24b9abc98a8c6d9b2c,
+        type: 3}
+      propertyPath: m_Interactable
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4853209560642966104, guid: 59a4a643474e1f24b9abc98a8c6d9b2c,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4853209560642966104, guid: 59a4a643474e1f24b9abc98a8c6d9b2c,
         type: 3}
