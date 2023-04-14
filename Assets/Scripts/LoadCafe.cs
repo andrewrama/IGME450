@@ -35,16 +35,17 @@ public class LoadCafe : MonoBehaviour
             GameObject newCat = Instantiate(catPrefab);
             //newCat.GetComponent<MeshRenderer>().material = saveData.ownedCats[i].material;
             //newCat.transform.position = new Vector3(x,y,z);
-            newCat.transform.Rotate(newCat.transform.forward, 270f);
+            //newCat.transform.Rotate(newCat.transform.forward, 270f);
             newCat.transform.position = new Vector3(newCat.transform.position.x, 0, newCat.transform.position.z);
 
             NavMeshTriangulation triangulation = NavMesh.CalculateTriangulation();
             int vertexIndex = Random.Range(0, triangulation.vertices.Length);
 
             NavMeshHit hit;
+            
             if(NavMesh.SamplePosition(triangulation.vertices[vertexIndex], out hit, 2f, 1))
             {
-                newCat.GetComponent<NavMeshAgent>().Warp(new Vector3(hit.position.x, -50, hit.position.z));
+                newCat.GetComponent<NavMeshAgent>().Warp(new Vector3(hit.position.x, hit.position.y + 12, hit.position.z));
                 newCat.GetComponent<NavMeshAgent>().enabled = true;
             }
 
@@ -98,18 +99,28 @@ public class LoadCafe : MonoBehaviour
     private void GetNewDestination(GameObject cat)
     {
 
-        Renderer renderScript = floor.GetComponent<Renderer>();
-        NavMeshAgent navMesh = cat.GetComponent<NavMeshAgent>();
+        //Renderer renderScript = floor.GetComponent<Renderer>();
+        //NavMeshAgent navMesh = cat.GetComponent<NavMeshAgent>();
+        //
+        //Vector3 floorMinBounds = renderScript.bounds.min;
+        //Vector3 floorMaxBounds = renderScript.bounds.max;
+        //
+        //float x = Random.Range(floorMinBounds.x, floorMaxBounds.x);
+        //float z = Random.Range(floorMinBounds.z, floorMaxBounds.z);
+        //
+        //navMesh.SetDestination(new Vector3(x, 0, z));
 
-        Vector3 floorMinBounds = renderScript.bounds.min;
-        Vector3 floorMaxBounds = renderScript.bounds.max;
+        NavMeshTriangulation triangulation = NavMesh.CalculateTriangulation();
+        int vertexIndex = Random.Range(0, triangulation.vertices.Length);
 
-        float x = Random.Range(floorMinBounds.x, floorMaxBounds.x);
-        float z = Random.Range(floorMinBounds.z, floorMaxBounds.z);
+        NavMeshHit hit;
+        if (NavMesh.SamplePosition(triangulation.vertices[vertexIndex], out hit, 2f, 1))
+        {
+            cat.GetComponent<NavMeshAgent>().SetDestination(new Vector3(hit.position.x, hit.position.y + 12, hit.position.z));
+            cat.GetComponent<NavMeshAgent>().enabled = true;
+        }
 
-        navMesh.SetDestination(new Vector3(x, 0, z));
-
-        Debug.Log($"Destnation: {navMesh.destination}");
+        //Debug.Log($"Destnation: {navMesh.destination}");
     }
 
 }
