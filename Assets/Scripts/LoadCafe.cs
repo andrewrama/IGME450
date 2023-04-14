@@ -19,12 +19,13 @@ public class LoadCafe : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+
         //get the floor 
 
-        int rowCounter = 0;
-        float x = -85.0f;
-        float y = 71.0f;
-        float z = 35.0f;
+        //int rowCounter = 0;
+        //float x = -85.0f;
+        //float y = 71.0f;
+        //float z = 35.0f;
 
 
         floor = GameObject.Find("CafeFloor");
@@ -86,15 +87,15 @@ public class LoadCafe : MonoBehaviour
 
         if (atDestination)
         {
-            StartCoroutine(WaitSeconds(3));
-            GetNewDestionation(cat);
+            StartCoroutine(WaitSeconds(15));
+            GetNewDestination(cat);
         }
     }
 
     /// <summary>
     /// Used to tell the cat where to go
     /// </summary>
-    private void GetNewDestionation(GameObject cat)
+    private void GetNewDestination(GameObject cat)
     {
 
         Renderer renderScript = floor.GetComponent<Renderer>();

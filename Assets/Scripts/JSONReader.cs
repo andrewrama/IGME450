@@ -14,6 +14,7 @@ public class JSONReader : MonoBehaviour
 
     private PlayerControls inputActions;
 
+
     //object used in order to read/write data from json
 
     public TextAsset textJSON;
