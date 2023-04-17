@@ -122,6 +122,7 @@ public class BaristaCustomerScript : MonoBehaviour
     {
         float progressVal = timer / ((float)startingTime);
         progressBarRectTransform.anchorMax = new Vector2(progressVal, 1);
+        filledProgressBar.color = new Color(1 - progressVal, progressVal, 0);
     }
 
 
