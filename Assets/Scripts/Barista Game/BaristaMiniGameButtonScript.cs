@@ -1,8 +1,10 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
+using System.Linq;
 
 public class BaristaMiniGameButtonScript : MonoBehaviour
 {
@@ -112,7 +114,7 @@ public class BaristaMiniGameButtonScript : MonoBehaviour
     private Text recipeScoreLabel;
 
     [SerializeField]
-    private int customerStartingTime;
+    private int customerPatienceTime;
 
     [SerializeField]
     private int gameStartingTime;
@@ -138,6 +140,9 @@ public class BaristaMiniGameButtonScript : MonoBehaviour
 
     [SerializeField]
     private Text gameOverLabel;
+
+    [SerializeField]
+    private int multiplier;
 
     [SerializeField]
     private GameObject servingTable;
@@ -611,7 +616,7 @@ public class BaristaMiniGameButtonScript : MonoBehaviour
         for (int i = 0; i < customerObjectList.Count; i++)
         {
             customerScriptList.Add(customerObjectList[i].GetComponent<BaristaCustomerScript>());
-            customerScriptList[i].SetStartingTime(customerStartingTime);
+            customerScriptList[i].SetStartingTime(customerPatienceTime);
             customerScriptList[i].SetImages(blackCoffeeImage, icedCoffeeImage, icedLatteImage, latteImage);
         }
 
@@ -634,24 +639,25 @@ public class BaristaMiniGameButtonScript : MonoBehaviour
         gameOver = true;
         gameOverPanel.SetActive(true);
 
-        if (score < 0)
-        {
-            score = 0;
-        }
-
-        int fishEarned = score * 3;
-
-        saveData.Currency += fishEarned;
+        int penalty = customerScriptList.Sum(c => c.penatlyScore);
 
         gameOverLabel.text = $"Game Over\n";
+
+        gameOverLabel.text = $"\nYou servered {score} customers, missed {penalty}, giving you a score of {Math.Max(score - penalty, 0)}\n";
+
+        score = Math.Max(score - penalty, 0);
+
+        int fishEarned = score * multiplier;
 
         if (highScoreEligiable && score > saveData.BaristaHighScore)
         {
             gameOverLabel.text += "\nYou earned a new high score!!!\n";
-            saveData.BaristaHighScore = score;
+            saveData.BaristaHighScore = fishEarned;
         }
 
         gameOverLabel.text += $"\nHighscore: {saveData.BaristaHighScore}\n\nYou earned {fishEarned} fish";
+
+        saveData.Currency += fishEarned;
     }
 
     public void GoToMainMenu()

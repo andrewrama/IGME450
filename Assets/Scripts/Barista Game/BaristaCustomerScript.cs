@@ -15,58 +15,60 @@ public class BaristaCustomerScript : MonoBehaviour
 
     private int startingTime;
 
+    public int penatlyScore;
+
     private Image customerImage;
 
-    private Button customerButton;
-    private Text timerText;
+    private Image filledProgressBar;
+
     private float timer;
-    private bool customerEnabled;
     private bool gamePaused;
+    private RectTransform progressBarRectTransform;
+
+    SaveDataScriptableObject saveData;
+
+
+
 
     // Start is called before the first frame update
     void Start()
     {
-        customerImage = transform.GetChild(1).gameObject.GetComponent<Image>();
-        customerButton = transform.gameObject.GetComponent<Button>();
-        timerText = transform.GetChild(0).GetComponent<Text>();
+        customerImage = transform.GetChild(0).gameObject.GetComponent<Image>();
 
+        
+        GameObject baseProgressBar = transform.GetChild(1).gameObject;
+        filledProgressBar = baseProgressBar.transform.GetChild(0).gameObject.GetComponent<Image>();
+        progressBarRectTransform = filledProgressBar.rectTransform;
+        
         IniitalizeCustomer();
     }
 
     public void IniitalizeCustomer()
     {
-        customerEnabled = true;
         gamePaused = false;
-
-        timerText.color = Color.black;
-        timerText.gameObject.SetActive(false);
-
-        GetRandomOrder();
+        penatlyScore = 0;
+        GetNewCustomer();
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (!customerEnabled && !gamePaused)
-        {
-            timerText.text = "" + (int)timer;
+        if (!gamePaused)
+        { 
             timer -= Time.deltaTime;
+            UpdateBar();
 
             if (timer <= 0)
             {
-                //get a new customer
-                GetRandomOrder();
-
-                //enable button agian
-                ToggleImageAplha(true);
-                customerButton.enabled = true;
-                customerEnabled = true;
-                timerText.gameObject.SetActive(false);
+                //todo decrease score by one
+                penatlyScore++;
+                GetNewCustomer();
             }
         }
     }
 
-    private void GetRandomOrder()
+
+    public void GetNewCustomer()
     {
         List<Sprite> orderList = new List<Sprite>()
         {
@@ -79,36 +81,14 @@ public class BaristaCustomerScript : MonoBehaviour
         int index = Random.Range(0, orderList.Count);
         Sprite order = orderList[index];
         customerImage.sprite = order;
-    }
 
-    public void GetNewCustomer()
-    {
-        //disable the customer's button
         timer = startingTime;
-        customerButton.enabled = false;
-
-        ToggleImageAplha(false);
-
-        customerEnabled = false;
-
-        
-        timerText.gameObject.SetActive(true);
+        UpdateBar();
     }
 
-    public void ToggleImageAplha(bool on)
+    public void SetSaveData(SaveDataScriptableObject saveData)
     {
-        Color oldColor = customerImage.color;
-
-        float a = on ? 1f : 0f;
-
-        oldColor.a = a;
-
-        customerImage.color = oldColor;
-    }
-
-    public Color GetCustomerColor()
-    {
-        return customerImage.color;
+        this.saveData = saveData;
     }
 
     public void SetGamePaused(bool b)
@@ -135,6 +115,13 @@ public class BaristaCustomerScript : MonoBehaviour
     public Image GetCustomerImage()
     {
         return customerImage;
+    }
+
+
+    private void UpdateBar()
+    {
+        float progressVal = timer / ((float)startingTime);
+        progressBarRectTransform.anchorMax = new Vector2(progressVal, 1);
     }
 
 
