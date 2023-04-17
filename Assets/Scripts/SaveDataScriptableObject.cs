@@ -13,6 +13,7 @@ public class SaveDataScriptableObject : ScriptableObject
     public List<Cat> allCats;
 
     public List<Cat> ownedCats { get { return allCats.Where(x => x.Owned).ToList(); } }
+    public List<Cat> unownedCats { get { return allCats.Where(x => !x.Owned).ToList(); } }
 
 
     //if the player will see the long tutoiral for the barista game
