@@ -37,8 +37,23 @@ public class DisplayInventory : MonoBehaviour
 
             //listItem.transform.localScale = Vector2.one;
         }
-        
 
+        string imageURL = "Sprites/questionmark";
+
+        for (int i = 0; i < saveData.unownedCats.Count; i++)
+        {
+            Cat currentCat = saveData.unownedCats[i];
+            var listItem = Instantiate(inventoryItem);
+
+            listItem.GetComponentsInChildren<Image>()[1].sprite = Resources.Load<Sprite>(imageURL);
+            listItem.GetComponentsInChildren<TMPro.TextMeshProUGUI>()[0].text = "???";
+            listItem.GetComponentsInChildren<TMPro.TextMeshProUGUI>()[1].text = currentCat.rarity;
+
+            listItem.transform.SetParent(contentContainer);
+            //listItem.GetComponent<LayoutElement>().preferredWidth = Screen.width / 2;
+
+            //listItem.transform.localScale = Vector2.one;
+        }
     }
 
     public void ToggleVisibility()
