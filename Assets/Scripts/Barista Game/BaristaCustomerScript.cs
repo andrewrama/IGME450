@@ -25,11 +25,6 @@ public class BaristaCustomerScript : MonoBehaviour
     private bool gamePaused;
     private RectTransform progressBarRectTransform;
 
-    SaveDataScriptableObject saveData;
-
-
-
-
     // Start is called before the first frame update
     void Start()
     {
@@ -60,7 +55,6 @@ public class BaristaCustomerScript : MonoBehaviour
 
             if (timer <= 0)
             {
-                //todo decrease score by one
                 penatlyScore++;
                 GetNewCustomer();
             }
@@ -84,11 +78,6 @@ public class BaristaCustomerScript : MonoBehaviour
 
         timer = startingTime;
         UpdateBar();
-    }
-
-    public void SetSaveData(SaveDataScriptableObject saveData)
-    {
-        this.saveData = saveData;
     }
 
     public void SetGamePaused(bool b)
@@ -120,7 +109,7 @@ public class BaristaCustomerScript : MonoBehaviour
 
     private void UpdateBar()
     {
-        float progressVal = timer / ((float)startingTime);
+        float progressVal = timer / startingTime;
         progressBarRectTransform.anchorMax = new Vector2(progressVal, 1);
         filledProgressBar.color = new Color(1 - progressVal, progressVal, 0);
     }
