@@ -12,6 +12,15 @@ public class LoadCafe : MonoBehaviour
 
     private GameObject floor;
 
+    //how many seconds the cat can stay "stuck" unti it finds another place to walk
+    private int stayStillThreshold = 5;
+
+    //where the cat was 
+    private Vector3 oldPosition;
+
+    //the radius of checking if the cat is stuck or not
+    private float radius = 5;
+
 
     //TODO Fix the bounds so the cat can't go out of view of the camera
     //ToDo Have the cats wait a few seconds before they move to another location
@@ -90,6 +99,11 @@ public class LoadCafe : MonoBehaviour
         {
             StartCoroutine(WaitSeconds(15));
             GetNewDestination(cat);
+        }
+
+        else
+        { 
+            
         }
     }
 
