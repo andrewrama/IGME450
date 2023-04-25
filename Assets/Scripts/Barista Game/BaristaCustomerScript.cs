@@ -114,5 +114,15 @@ public class BaristaCustomerScript : MonoBehaviour
         filledProgressBar.color = new Color(1 - progressVal, progressVal, 0);
     }
 
+    public float GetCurrentTimer()
+    {
+        return timer;
+    }
+
+    public float GetStartingTime()
+    {
+        return startingTime;
+    }
+
 
 }

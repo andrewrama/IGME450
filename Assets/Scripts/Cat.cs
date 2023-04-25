@@ -12,7 +12,6 @@ public class Cat
     public string imgUrl;
     public int ownedNum;
 
-
     public bool Owned { get { return ownedNum > 0; } }
 
 

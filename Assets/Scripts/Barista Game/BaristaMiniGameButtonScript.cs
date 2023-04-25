@@ -436,7 +436,26 @@ public class BaristaMiniGameButtonScript : MonoBehaviour
 
         if (customerImageSprite == servingTableImage.sprite)
         {
-            score++;
+            float ratio = customerScript.GetCurrentTimer() / customerScript.GetStartingTime();
+
+            int points;
+
+            if (ratio >= .6f)
+            {
+                points = 3;
+            }
+
+            else if (ratio < .6f && ratio >= .3)
+            {
+                points = 2;
+            }
+
+            else
+            {
+                points = 1;
+            }
+
+            score += points;
         }
         else
         {
