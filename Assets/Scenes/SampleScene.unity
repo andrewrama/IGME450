@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 0.18028378, g: 0.22571412, b: 0.30692285, a: 1}
+  m_IndirectSpecularColor: {r: 0.18028334, g: 0.22571328, b: 0.3069217, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -346,7 +346,7 @@ RectTransform:
   m_GameObject: {fileID: 207799645}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 2.3322325, y: 0.6399171, z: 0.6399171}
+  m_LocalScale: {x: 2.8716679, y: 0.6003254, z: 0.6003254}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1889134577}
@@ -1144,7 +1144,7 @@ RectTransform:
   m_GameObject: {fileID: 900098372}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.91246, y: 1, z: 1}
+  m_LocalScale: {x: 1.0287504, y: 1.1274471, z: 1.1274471}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1049158076}
@@ -1152,7 +1152,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 30.5, y: -89}
+  m_AnchoredPosition: {x: -10.8, y: -89}
   m_SizeDelta: {x: 200, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &900098374
@@ -1209,7 +1209,7 @@ MonoBehaviour:
   m_fontSizeMin: 18
   m_fontSizeMax: 72
   m_fontStyle: 0
-  m_HorizontalAlignment: 1
+  m_HorizontalAlignment: 2
   m_VerticalAlignment: 256
   m_textAlignment: 65535
   m_characterSpacing: 0
@@ -2104,7 +2104,7 @@ PrefabInstance:
     - target: {fileID: 7284247961033836762, guid: a9598ac18e0d35c43b68565d2d9c97c3,
         type: 3}
       propertyPath: m_LocalScale.x
-      value: 2.34373
+      value: 2.958959
       objectReference: {fileID: 0}
     - target: {fileID: 7284247961033836762, guid: a9598ac18e0d35c43b68565d2d9c97c3,
         type: 3}
@@ -2185,7 +2185,7 @@ PrefabInstance:
     - target: {fileID: 7284247961552057323, guid: a9598ac18e0d35c43b68565d2d9c97c3,
         type: 3}
       propertyPath: m_LocalScale.x
-      value: 2.558622
+      value: 3.102329
       objectReference: {fileID: 0}
     - target: {fileID: 7284247961552057323, guid: a9598ac18e0d35c43b68565d2d9c97c3,
         type: 3}
