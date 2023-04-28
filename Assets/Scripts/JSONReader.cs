@@ -30,13 +30,15 @@ public class JSONReader : MonoBehaviour
         public string imgPath;
         public string rarity;
         public int ownedNum;
+        public string texturePath;
 
-        public JsonCat(string name, string imgPath, string rarity, int ownedNum)
+        public JsonCat(string name, string imgPath, string rarity, int ownedNum, string texturePath)
         {
             this.name = name;
             this.imgPath = imgPath;
             this.rarity = rarity;
             this.ownedNum = ownedNum;
+            this.texturePath = texturePath;
         }
     }
 
@@ -145,7 +147,7 @@ public class JSONReader : MonoBehaviour
             Sprite image = LoadAllCatImage(i, json);
             JsonCat c = json.allCats[i];
 
-            Cat allCat = new Cat(image, c.imgPath, c.name, c.rarity, c.ownedNum);
+            Cat allCat = new Cat(image, c.imgPath, c.name, c.texturePath, c.rarity, c.ownedNum);
             saveData.allCats.Add(allCat);
         }
 
@@ -186,6 +188,6 @@ public class JSONReader : MonoBehaviour
 
     private JsonCat ConvertCatToJsonCat(Cat cat)
     {
-        return new JsonCat(cat.catName, cat.imgUrl, cat.rarity, cat.ownedNum);
+        return new JsonCat(cat.catName, cat.imgUrl,  cat.rarity, cat.ownedNum, cat.texture);
     }
 }
