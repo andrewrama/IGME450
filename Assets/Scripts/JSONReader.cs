@@ -145,9 +145,10 @@ public class JSONReader : MonoBehaviour
         for (int i = 0; i < json.allCats.Count; i++)
         {
             Sprite image = LoadAllCatImage(i, json);
+            Material texture = LoadAllCatTexture(i, json);
             JsonCat c = json.allCats[i];
 
-            Cat allCat = new Cat(image, c.imgPath, c.name, c.texturePath, c.rarity, c.ownedNum);
+            Cat allCat = new Cat(image, c.imgPath, texture, c.texturePath, c.name, c.rarity, c.ownedNum);
             saveData.allCats.Add(allCat);
         }
 
@@ -186,8 +187,19 @@ public class JSONReader : MonoBehaviour
         return Resources.Load<Sprite>(imageURL);
     }
 
+    /// <summary>
+    /// Helper method in order to get the textures for the cats
+    /// </summary>
+    /// <returns></returns>
+    private Material LoadAllCatTexture(int index, JsonData catPool)
+    {
+        string textureURL = "Materials/" + catPool.allCats[index].texturePath;
+
+        return Resources.Load<Material>(textureURL);
+    }
+
     private JsonCat ConvertCatToJsonCat(Cat cat)
     {
-        return new JsonCat(cat.catName, cat.imgUrl,  cat.rarity, cat.ownedNum, cat.texture);
+        return new JsonCat(cat.catName, cat.imgUrl,  cat.rarity, cat.ownedNum, cat.textureUrl);
     }
 }

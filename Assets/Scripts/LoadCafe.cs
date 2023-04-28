@@ -42,6 +42,7 @@ public class LoadCafe : MonoBehaviour
         for (int i=0; i< saveData.ownedCats.Count; i++)
         {
             GameObject newCat = Instantiate(catPrefab);
+            newCat.GetComponent<MeshRenderer>().material = saveData.ownedCats[i].texture;
             //newCat.GetComponent<MeshRenderer>().material = saveData.ownedCats[i].material;
             //newCat.transform.position = new Vector3(x,y,z);
             //newCat.transform.Rotate(newCat.transform.forward, 270f);

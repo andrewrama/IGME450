@@ -11,7 +11,8 @@ public class Cat
     public string rarity;
     public string imgUrl;
     public int ownedNum;
-    public string texture;
+    public Material texture;
+    public string textureUrl;
 
     public bool Owned { get { return ownedNum > 0; } }
 
@@ -30,7 +31,7 @@ public class Cat
         this.rarity = rarity;
     }
 
-    public Cat(Sprite image, string imgUrl, string texture, string newName, string rarity, int ownedNum)
+    public Cat(Sprite image, string imgUrl, Material texture, string textureUrl, string newName, string rarity, int ownedNum)
     {
         imageSprite = image;
         this.imgUrl = imgUrl;
@@ -38,6 +39,7 @@ public class Cat
         this.rarity = rarity;
         this.ownedNum = ownedNum;
         this.texture = texture;
+        this.textureUrl = textureUrl;
     }
 
     public void Print()
